@@ -1,110 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!--
-    Microsoft ResX Schema
-
-    Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
-    associated with the data types.
-
-    Example:
-
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-
-    There are any number of "resheader" rows that contain simple
-    name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
-    mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
-    extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
-    read any of the formats listed below.
-
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -3888,5 +3830,1406 @@
   </data>
   <data name="plugin_pixelart_schematic_saved" xml:space="preserve">
     <value>已保存示意图。</value>
+  </data>
+  <data name="common_error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="common_delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="common_yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="sprite_coords_format" xml:space="preserve">
+    <value>像素: ({0}, {1})  图格: [{2}, {3}]</value>
+  </data>
+  <data name="common_no" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="drawing_mode_wire" xml:space="preserve">
+    <value>电线</value>
+  </data>
+  <data name="drawing_mode_bus" xml:space="preserve">
+    <value>总线</value>
+  </data>
+  <data name="plugin_ore_none" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="dialog_save_world_as" xml:space="preserve">
+    <value>世界另存为</value>
+  </data>
+  <data name="dialog_save_world_analysis" xml:space="preserve">
+    <value>保存世界分析报告</value>
+  </data>
+  <data name="dialog_import_bestiary" xml:space="preserve">
+    <value>从世界文件导入图鉴与击杀数</value>
+  </data>
+  <data name="dialog_import_schematic" xml:space="preserve">
+    <value>导入 TEdit 蓝图文件</value>
+  </data>
+  <data name="dialog_export_schematic" xml:space="preserve">
+    <value>导出蓝图文件</value>
+  </data>
+  <data name="dialog_import_banners" xml:space="preserve">
+    <value>从世界文件导入旗帜</value>
+  </data>
+  <data name="dialog_import_housegen_schematic" xml:space="preserve">
+    <value>导入 TEdit 房屋生成蓝图文件</value>
+  </data>
+  <data name="dialog_save_pixelart" xml:space="preserve">
+    <value>保存生成的像素画</value>
+  </data>
+  <data name="dialog_select_player_file" xml:space="preserve">
+    <value>选择玩家文件</value>
+  </data>
+  <data name="dialog_open_world_file" xml:space="preserve">
+    <value>打开世界文件</value>
+  </data>
+  <data name="dialog_unsaved_title" xml:space="preserve">
+    <value>未保存的更改</value>
+  </data>
+  <data name="dialog_unsaved_content" xml:space="preserve">
+    <value>关闭 TEdit 前是否保存更改？</value>
+  </data>
+  <data name="dialog_dont_save" xml:space="preserve">
+    <value>不保存</value>
+  </data>
+  <data name="dialog_confirm_delete_title" xml:space="preserve">
+    <value>确认删除</value>
+  </data>
+  <data name="dialog_delete_backup_prompt" xml:space="preserve">
+    <value>是否删除备份？
+{0}</value>
+  </data>
+  <data name="dialog_clear_cache_title" xml:space="preserve">
+    <value>清除 TEdit 缓存</value>
+  </data>
+  <data name="dialog_clear_cache_prompt" xml:space="preserve">
+    <value>是否删除 {0:N0} 个缓存文件（{1}）？
+
+此操作将移除 TEdit 备份、自动保存文件以及所有撤销/重做历史记录。泰拉瑞亚世界文件及 .bak 文件不受影响。</value>
+  </data>
+  <data name="dialog_clear_cache_button" xml:space="preserve">
+    <value>清除缓存</value>
+  </data>
+  <data name="dialog_cache_cleared_title" xml:space="preserve">
+    <value>缓存已清除</value>
+  </data>
+  <data name="dialog_cache_cleared_result" xml:space="preserve">
+    <value>已删除 {0:N0} 个文件，释放了 {1} 空间。</value>
+  </data>
+  <data name="dialog_cache_cleared_failed" xml:space="preserve">
+    <value>{0:N0} 个文件无法删除；详情请查看日志。</value>
+  </data>
+  <data name="plugin_blockshuffle_entity_info" xml:space="preserve">
+    <value>部分特殊的图格实体（如宝箱或标牌）仍受保护，无法进行打乱。</value>
+  </data>
+  <data name="plugin_blockshuffle_entity_info_title" xml:space="preserve">
+    <value>包含实体说明</value>
+  </data>
+  <data name="plugin_housegen_json_entry_error" xml:space="preserve">
+    <value>{0} 请检查 {1} 的 JSON 数据</value>
+  </data>
+  <data name="plugin_housegen_json_count_error" xml:space="preserve">
+    <value>{0} 请检查 JSON 数据中的“Count”值以确保其与关联蓝图一致。</value>
+  </data>
+  <data name="plugin_replay_no_world" xml:space="preserve">
+    <value>请先打开一个世界。</value>
+  </data>
+  <data name="plugin_replay_open_failed" xml:space="preserve">
+    <value>打开回放文件失败。
+
+{0}</value>
+  </data>
+  <data name="error_texture_load" xml:space="preserve">
+    <value>从 {0} 加载纹理出错。
+请检查该文件夹是否存在且 TEdit 具有读取权限。
+
+{1}</value>
+  </data>
+  <data name="error_texture_load_title" xml:space="preserve">
+    <value>加载纹理出错</value>
+  </data>
+  <data name="error_log_open_failed" xml:space="preserve">
+    <value>打开日志文件失败：{0}</value>
+  </data>
+  <data name="error_log_folder_exit" xml:space="preserve">
+    <value>无法创建日志文件夹。程序将退出。
+{0}
+{1}</value>
+  </data>
+  <data name="error_log_folder_title" xml:space="preserve">
+    <value>无法创建日志文件夹</value>
+  </data>
+  <data name="error_undo_folder_exit" xml:space="preserve">
+    <value>无法创建撤销临时文件夹。程序将退出。
+{0}
+{1}</value>
+  </data>
+  <data name="error_undo_folder_title" xml:space="preserve">
+    <value>无法创建撤销文件夹</value>
+  </data>
+  <data name="error_unhandled" xml:space="preserve">
+    <value>发生了未处理的异常。您可以继续使用 TEdit，但在重启应用程序之前运行可能不稳定。</value>
+  </data>
+  <data name="error_unhandled_title" xml:space="preserve">
+    <value>未处理的异常</value>
+  </data>
+  <data name="settings_brush_preview" xml:space="preserve">
+    <value>高质量笔刷预览</value>
+  </data>
+  <data name="settings_brush_preview_desc" xml:space="preserve">
+    <value>在 Shift+画线预览时显示完整的笔刷形状。禁用后显示单像素线条预览。</value>
+  </data>
+  <data name="settings_filter_mode" xml:space="preserve">
+    <value>筛选模式</value>
+  </data>
+  <data name="settings_filter_mode_desc" xml:space="preserve">
+    <value>应用物块/墙壁/液体/电线筛选时的默认筛选模式</value>
+  </data>
+  <data name="settings_darken_amount" xml:space="preserve">
+    <value>变暗程度</value>
+  </data>
+  <data name="settings_darken_amount_desc" xml:space="preserve">
+    <value>未选中图格的变暗遮罩不透明度（0–100%）</value>
+  </data>
+  <data name="spriteeditor_status_ready" xml:space="preserve">
+    <value>就绪</value>
+  </data>
+  <data name="spriteeditor_status_override_loaded" xml:space="preserve">
+    <value>已从用户自定义项加载</value>
+  </data>
+  <data name="spriteeditor_status_reset_default" xml:space="preserve">
+    <value>已重置为默认图格数据</value>
+  </data>
+  <data name="spriteeditor_status_no_texture_detect" xml:space="preserve">
+    <value>未加载纹理 — 无法自动检测</value>
+  </data>
+  <data name="spriteeditor_status_no_texture" xml:space="preserve">
+    <value>未加载纹理</value>
+  </data>
+  <data name="spriteeditor_frame_default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="spriteeditor_frame_format" xml:space="preserve">
+    <value>帧 {0}</value>
+  </data>
+  <data name="player_editor_save_canceled" xml:space="preserve">
+    <value>保存已取消：玩家文件在外部被修改。</value>
+  </data>
+  <data name="dialog_select_output_folder" xml:space="preserve">
+    <value>选择地图图格输出文件夹</value>
+  </data>
+  <data name="input_file_new" xml:space="preserve">
+    <value>新建世界</value>
+  </data>
+  <data name="input_file_open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="input_file_save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="input_file_saveas" xml:space="preserve">
+    <value>另存为</value>
+  </data>
+  <data name="input_file_saveasversion" xml:space="preserve">
+    <value>另存为版本</value>
+  </data>
+  <data name="input_file_reload" xml:space="preserve">
+    <value>重新加载世界</value>
+  </data>
+  <data name="input_edit_copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="input_edit_cut" xml:space="preserve">
+    <value>剪切</value>
+  </data>
+  <data name="input_edit_paste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="input_edit_undo" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="input_edit_redo" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="input_paste_accept" xml:space="preserve">
+    <value>确认粘贴</value>
+  </data>
+  <data name="input_paste_rotate_cw" xml:space="preserve">
+    <value>顺时针旋转粘贴内容</value>
+  </data>
+  <data name="input_paste_rotate_ccw" xml:space="preserve">
+    <value>逆时针旋转粘贴内容</value>
+  </data>
+  <data name="input_paste_flip_h" xml:space="preserve">
+    <value>水平翻转粘贴内容</value>
+  </data>
+  <data name="input_paste_flip_v" xml:space="preserve">
+    <value>垂直翻转粘贴内容</value>
+  </data>
+  <data name="input_selection_all" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="input_selection_none" xml:space="preserve">
+    <value>取消选择</value>
+  </data>
+  <data name="input_selection_delete" xml:space="preserve">
+    <value>删除选区</value>
+  </data>
+  <data name="input_selection_move_up" xml:space="preserve">
+    <value>向上移动选区</value>
+  </data>
+  <data name="input_selection_move_down" xml:space="preserve">
+    <value>向下移动选区</value>
+  </data>
+  <data name="input_selection_move_left" xml:space="preserve">
+    <value>向左移动选区</value>
+  </data>
+  <data name="input_selection_move_right" xml:space="preserve">
+    <value>向右移动选区</value>
+  </data>
+  <data name="input_selection_move_up_fast" xml:space="preserve">
+    <value>向上快速移动选区</value>
+  </data>
+  <data name="input_selection_move_down_fast" xml:space="preserve">
+    <value>向下快速移动选区</value>
+  </data>
+  <data name="input_selection_move_left_fast" xml:space="preserve">
+    <value>向左快速移动选区</value>
+  </data>
+  <data name="input_selection_move_right_fast" xml:space="preserve">
+    <value>向右快速移动选区</value>
+  </data>
+  <data name="input_selection_resize_up" xml:space="preserve">
+    <value>减小选区高度</value>
+  </data>
+  <data name="input_selection_resize_down" xml:space="preserve">
+    <value>增加选区高度</value>
+  </data>
+  <data name="input_selection_resize_left" xml:space="preserve">
+    <value>减小选区宽度</value>
+  </data>
+  <data name="input_selection_resize_right" xml:space="preserve">
+    <value>增加选区宽度</value>
+  </data>
+  <data name="input_selection_resize_up_fast" xml:space="preserve">
+    <value>快速减小选区高度</value>
+  </data>
+  <data name="input_selection_resize_down_fast" xml:space="preserve">
+    <value>快速增加选区高度</value>
+  </data>
+  <data name="input_selection_resize_left_fast" xml:space="preserve">
+    <value>快速减小选区宽度</value>
+  </data>
+  <data name="input_selection_resize_right_fast" xml:space="preserve">
+    <value>快速增加选区宽度</value>
+  </data>
+  <data name="input_selection_adjust_startpoint" xml:space="preserve">
+    <value>移动选区起点</value>
+  </data>
+  <data name="input_selection_adjust_startpoint_desc" xml:space="preserve">
+    <value>Ctrl+点击/拖动以移动选区左上角</value>
+  </data>
+  <data name="input_selection_adjust_endpoint" xml:space="preserve">
+    <value>移动选区终点</value>
+  </data>
+  <data name="input_selection_adjust_endpoint_desc" xml:space="preserve">
+    <value>Shift+点击/拖动以移动选区右下角</value>
+  </data>
+  <data name="input_edit_crop" xml:space="preserve">
+    <value>裁剪世界</value>
+  </data>
+  <data name="input_edit_expand" xml:space="preserve">
+    <value>拓展世界</value>
+  </data>
+  <data name="input_app_settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="input_nav_scroll_up" xml:space="preserve">
+    <value>向上滚动</value>
+  </data>
+  <data name="input_nav_scroll_down" xml:space="preserve">
+    <value>向下滚动</value>
+  </data>
+  <data name="input_nav_scroll_left" xml:space="preserve">
+    <value>向左滚动</value>
+  </data>
+  <data name="input_nav_scroll_right" xml:space="preserve">
+    <value>向右滚动</value>
+  </data>
+  <data name="input_nav_scroll_up_fast" xml:space="preserve">
+    <value>向上快速滚动</value>
+  </data>
+  <data name="input_nav_scroll_down_fast" xml:space="preserve">
+    <value>向下快速滚动</value>
+  </data>
+  <data name="input_nav_scroll_left_fast" xml:space="preserve">
+    <value>向左快速滚动</value>
+  </data>
+  <data name="input_nav_scroll_right_fast" xml:space="preserve">
+    <value>向右快速滚动</value>
+  </data>
+  <data name="input_nav_pan" xml:space="preserve">
+    <value>平移模式</value>
+  </data>
+  <data name="input_nav_zoom_in" xml:space="preserve">
+    <value>放大</value>
+  </data>
+  <data name="input_nav_zoom_out" xml:space="preserve">
+    <value>缩小</value>
+  </data>
+  <data name="input_nav_reset" xml:space="preserve">
+    <value>重置工具 / 取消选择</value>
+  </data>
+  <data name="input_tool_arrow" xml:space="preserve">
+    <value>箭头工具</value>
+  </data>
+  <data name="input_tool_brush" xml:space="preserve">
+    <value>笔刷工具</value>
+  </data>
+  <data name="input_tool_pencil" xml:space="preserve">
+    <value>铅笔工具</value>
+  </data>
+  <data name="input_tool_fill" xml:space="preserve">
+    <value>填充工具</value>
+  </data>
+  <data name="input_tool_picker" xml:space="preserve">
+    <value>吸管工具</value>
+  </data>
+  <data name="input_tool_point" xml:space="preserve">
+    <value>地点工具</value>
+  </data>
+  <data name="input_tool_selection" xml:space="preserve">
+    <value>选区工具</value>
+  </data>
+  <data name="input_tool_sprite" xml:space="preserve">
+    <value>物体工具</value>
+  </data>
+  <data name="input_tool_hammer" xml:space="preserve">
+    <value>锤子工具</value>
+  </data>
+  <data name="input_tool_morph" xml:space="preserve">
+    <value>生物群系转换工具</value>
+  </data>
+  <data name="input_toggle_eraser" xml:space="preserve">
+    <value>切换橡皮擦</value>
+  </data>
+  <data name="input_toggle_swap" xml:space="preserve">
+    <value>交换颜色</value>
+  </data>
+  <data name="input_editor_wire_modecycle" xml:space="preserve">
+    <value>循环切换电线绘制模式</value>
+  </data>
+  <data name="input_editor_wire_modecycle_desc" xml:space="preserve">
+    <value>循环切换电线绘制模式：关 → 电线90° → 电线45° → 关</value>
+  </data>
+  <data name="input_editor_wire_togglehv" xml:space="preserve">
+    <value>切换电线水平/垂直方向</value>
+  </data>
+  <data name="input_editor_wire_togglehv_desc" xml:space="preserve">
+    <value>在水平优先、垂直优先和自动检测电线布线之间切换</value>
+  </data>
+  <data name="input_editor_wire_color1" xml:space="preserve">
+    <value>切换红电线</value>
+  </data>
+  <data name="input_editor_wire_color1_desc" xml:space="preserve">
+    <value>切换红电线激活状态</value>
+  </data>
+  <data name="input_editor_wire_color2" xml:space="preserve">
+    <value>切换蓝电线</value>
+  </data>
+  <data name="input_editor_wire_color2_desc" xml:space="preserve">
+    <value>切换蓝电线激活状态</value>
+  </data>
+  <data name="input_editor_wire_color3" xml:space="preserve">
+    <value>切换绿电线</value>
+  </data>
+  <data name="input_editor_wire_color3_desc" xml:space="preserve">
+    <value>切换绿电线激活状态</value>
+  </data>
+  <data name="input_editor_wire_color4" xml:space="preserve">
+    <value>切换黄电线</value>
+  </data>
+  <data name="input_editor_wire_color4_desc" xml:space="preserve">
+    <value>切换黄电线激活状态</value>
+  </data>
+  <data name="input_editor_wire_trace" xml:space="preserve">
+    <value>高亮电线追踪</value>
+  </data>
+  <data name="input_editor_wire_trace_desc" xml:space="preserve">
+    <value>Alt+点击以高亮连接到所点击图格的所有电线</value>
+  </data>
+  <data name="input_toggle_tile" xml:space="preserve">
+    <value>切换物块样式</value>
+  </data>
+  <data name="input_toggle_wall" xml:space="preserve">
+    <value>切换墙壁样式</value>
+  </data>
+  <data name="input_editor_draw" xml:space="preserve">
+    <value>绘制 / 主操作</value>
+  </data>
+  <data name="input_editor_draw_desc" xml:space="preserve">
+    <value>工具的主绘制操作</value>
+  </data>
+  <data name="input_editor_secondary" xml:space="preserve">
+    <value>次要操作</value>
+  </data>
+  <data name="input_editor_secondary_desc" xml:space="preserve">
+    <value>工具的次要操作（检查、取消选择、拾取遮罩等）</value>
+  </data>
+  <data name="input_editor_draw_constrain" xml:space="preserve">
+    <value>约束绘制（水平/垂直/45°）</value>
+  </data>
+  <data name="input_editor_draw_constrain_desc" xml:space="preserve">
+    <value>将绘制约束为水平、垂直或 45° 对角线</value>
+  </data>
+  <data name="input_editor_draw_line" xml:space="preserve">
+    <value>绘制点对点直线</value>
+  </data>
+  <data name="input_editor_draw_line_desc" xml:space="preserve">
+    <value>在点击的点之间绘制直线</value>
+  </data>
+  <data name="input_editor_pan" xml:space="preserve">
+    <value>平移视口</value>
+  </data>
+  <data name="input_editor_pan_desc" xml:space="preserve">
+    <value>拖动以平移视口</value>
+  </data>
+  <data name="input_help_wiki" xml:space="preserve">
+    <value>Wiki / 帮助</value>
+  </data>
+  <data name="tool_hammer_title" xml:space="preserve">
+    <value>锤子</value>
+  </data>
+  <data name="tool_selection_title" xml:space="preserve">
+    <value>选区</value>
+  </data>
+  <data name="dialog_delete_chests_title" xml:space="preserve">
+    <value>删除宝箱</value>
+  </data>
+  <data name="dialog_delete_all_chests_prompt" xml:space="preserve">
+    <value>确定要删除所有宝箱吗？</value>
+  </data>
+  <data name="dialog_delete_all_unlocked_chests_prompt" xml:space="preserve">
+    <value>确定要删除所有未上锁的宝箱吗？</value>
+  </data>
+  <data name="plugin_playermap_title" xml:space="preserve">
+    <value>玩家地图</value>
+  </data>
+  <data name="plugin_playermap_no_file" xml:space="preserve">
+    <value>未选择玩家文件。</value>
+  </data>
+  <data name="plugin_playermap_completed" xml:space="preserve">
+    <value>地图已生成！</value>
+  </data>
+  <data name="dialog_removetile_prompt" xml:space="preserve">
+    <value>这将从您的世界中彻底移除所有找到的图块。是否继续？</value>
+  </data>
+  <data name="dialog_removetile_result" xml:space="preserve">
+    <value>已找到并移除了 {0:N0} 个图块。</value>
+  </data>
+  <data name="dialog_export_textures_title" xml:space="preserve">
+    <value>导出纹理</value>
+  </data>
+  <data name="dialog_export_textures_not_loaded" xml:space="preserve">
+    <value>纹理尚未加载完毕。请等待纹理加载完成。</value>
+  </data>
+  <data name="about_system" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="dialog_complete_bestiary_error" xml:space="preserve">
+    <value>补全图鉴数据时出错。已恢复当前的图鉴。
+{0}</value>
+  </data>
+  <data name="dialog_complete_bestiary_prompt" xml:space="preserve">
+    <value>这将使用已完成的图鉴完全替换当前加载世界的图鉴和击杀计数。是否继续？</value>
+  </data>
+  <data name="dialog_complete_bestiary_title" xml:space="preserve">
+    <value>补全图鉴？</value>
+  </data>
+  <data name="dialog_crop_world_borders_prompt" xml:space="preserve">
+    <value>是否添加“世界边缘”边界？</value>
+  </data>
+  <data name="dialog_crop_world_borders_title" xml:space="preserve">
+    <value>裁剪世界：</value>
+  </data>
+  <data name="dialog_crop_world_prompt" xml:space="preserve">
+    <value>裁剪区域之外的所有进度都将丢失。是否继续？</value>
+  </data>
+  <data name="dialog_crop_world_title" xml:space="preserve">
+    <value>裁剪世界？</value>
+  </data>
+  <data name="dialog_import_banners_error" xml:space="preserve">
+    <value>从 {0} 导入旗帜数据时出错。已恢复当前的旗帜。
+{1}</value>
+  </data>
+  <data name="dialog_import_banners_prompt" xml:space="preserve">
+    <value>这将使用所选世界文件的数据替换当前的旗帜计数。是否继续？</value>
+  </data>
+  <data name="dialog_import_banners_title" xml:space="preserve">
+    <value>导入旗帜？</value>
+  </data>
+  <data name="dialog_import_bestiary_error" xml:space="preserve">
+    <value>从 {0} 导入图鉴数据时出错。已恢复当前的图鉴。
+{1}</value>
+  </data>
+  <data name="dialog_import_error_title" xml:space="preserve">
+    <value>导入错误</value>
+  </data>
+  <data name="dialog_invalid_world_prompt" xml:space="preserve">
+    <value>读取世界文件时出错。
+这通常是由于存档文件损坏或世界版本高于支持版本引起的。
+
+TEdit 版本：v{0}
+TEdit 支持最高世界版本：{1}
+当前世界版本：{2}
+
+是否仍要强制加载？
+
+警告：这可能会产生意外后果，包括损坏世界文件和程序崩溃。
+
+错误详情：
+{3}</value>
+  </data>
+  <data name="dialog_invalid_world_title" xml:space="preserve">
+    <value>加载无效世界？</value>
+  </data>
+  <data name="dialog_language_restart_prompt" xml:space="preserve">
+    <value>语言更改将在重启 TEdit 后生效。是否立即重启？</value>
+  </data>
+  <data name="dialog_language_restart_title" xml:space="preserve">
+    <value>需要重启</value>
+  </data>
+  <data name="dialog_legacy_tmodloader_prompt" xml:space="preserve">
+    <value>您正在加载旧版 TModLoader 世界版本: {0}。
+1. 编辑旧版文件是一项测试功能 (BETA)。
+2. 不支持编辑模组世界。
+请先进行备份，因为您可能会遇到世界文件损坏的情况。
+是否仍要继续？</value>
+  </data>
+  <data name="dialog_legacy_tmodloader_title" xml:space="preserve">
+    <value>加载旧版 TModLoader 世界？</value>
+  </data>
+  <data name="dialog_legacy_world_prompt" xml:space="preserve">
+    <value>您正在加载旧版世界版本: {0}。
+编辑旧版文件可能会导致未知后果。
+请先进行备份，因为您可能会遇到世界文件损坏的情况。
+是否仍要继续？</value>
+  </data>
+  <data name="dialog_legacy_world_title" xml:space="preserve">
+    <value>加载旧版世界？</value>
+  </data>
+  <data name="dialog_link_error_message" xml:space="preserve">
+    <value>无法打开外部浏览器。是否复制链接到剪贴板？</value>
+  </data>
+  <data name="dialog_link_error_title" xml:space="preserve">
+    <value>链接错误</value>
+  </data>
+  <data name="dialog_load_bestiary_prompt" xml:space="preserve">
+    <value>这将使用来自 {0} 的数据完全替换当前加载世界的图鉴和击杀计数。是否继续？</value>
+  </data>
+  <data name="dialog_load_bestiary_title" xml:space="preserve">
+    <value>导入图鉴？</value>
+  </data>
+  <data name="dialog_locate_terraria_folder" xml:space="preserve">
+    <value>定位你的 Terraria 文件夹。</value>
+  </data>
+  <data name="dialog_max_banners_prompt" xml:space="preserve">
+    <value>这会将所有旗帜计数设为 9999。是否继续？</value>
+  </data>
+  <data name="dialog_max_banners_title" xml:space="preserve">
+    <value>全满旗帜？</value>
+  </data>
+  <data name="dialog_mod_world_prompt" xml:space="preserve">
+    <value>您正在加载 TModLoader 世界。不支持编辑模组世界。
+请先进行备份，因为您可能会遇到世界文件损坏的情况。
+是否仍要继续？</value>
+  </data>
+  <data name="dialog_mod_world_title" xml:space="preserve">
+    <value>加载模组世界？</value>
+  </data>
+  <data name="dialog_newer_version_prompt" xml:space="preserve">
+    <value>此世界版本高于 TEdit 配置支持的版本。
+
+世界版本: {0}
+最高支持: {1}
+
+TEdit 将回退到配置版本 {1}（缺少较新的物块/墙壁等可能会导致问题）。
+
+是否仍要尝试加载？</value>
+  </data>
+  <data name="dialog_newer_version_title" xml:space="preserve">
+    <value>较新的世界版本</value>
+  </data>
+  <data name="dialog_player_modified_prompt" xml:space="preserve">
+    <value>玩家文件 {0} 自加载以来已被外部修改。是否使用当前更改覆盖？</value>
+  </data>
+  <data name="dialog_player_modified_title" xml:space="preserve">
+    <value>玩家文件已修改</value>
+  </data>
+  <data name="dialog_reload_no_world" xml:space="preserve">
+    <value>没有已打开的世界可供重新载入。</value>
+  </data>
+  <data name="dialog_reload_world_prompt" xml:space="preserve">
+    <value>未保存的工作将会丢失！</value>
+  </data>
+  <data name="dialog_reload_world_title" xml:space="preserve">
+    <value>重新载入当前世界？</value>
+  </data>
+  <data name="dialog_replace_mask_warning" xml:space="preserve">
+    <value>遮罩模式当前设置为“替换”。物块将仅放置在所选遮罩物块所在的位置。如果您想自由放置物块，请将遮罩更改为“关”。</value>
+  </data>
+  <data name="dialog_replace_title" xml:space="preserve">
+    <value>替换遮罩已激活</value>
+  </data>
+  <data name="dialog_reset_banners_prompt" xml:space="preserve">
+    <value>这会将所有旗帜击杀计数清零为 0。是否继续？</value>
+  </data>
+  <data name="dialog_reset_banners_title" xml:space="preserve">
+    <value>重置旗帜？</value>
+  </data>
+  <data name="dialog_reset_bestiary_error" xml:space="preserve">
+    <value>重置图鉴数据时出错。已恢复当前的图鉴。
+{0}</value>
+  </data>
+  <data name="dialog_reset_bestiary_prompt" xml:space="preserve">
+    <value>这将使用重置的图鉴完全替换当前加载世界的图鉴和击杀计数。是否继续？</value>
+  </data>
+  <data name="dialog_reset_bestiary_title" xml:space="preserve">
+    <value>重置图鉴？</value>
+  </data>
+  <data name="dialog_save_banners_error" xml:space="preserve">
+    <value>将旗帜更改保存到世界时出错。
+{0}</value>
+  </data>
+  <data name="dialog_save_banners_prompt" xml:space="preserve">
+    <value>确定要保存旗帜更改吗？</value>
+  </data>
+  <data name="dialog_save_banners_title" xml:space="preserve">
+    <value>保存旗帜？</value>
+  </data>
+  <data name="dialog_save_bestiary_error" xml:space="preserve">
+    <value>将图鉴更改保存到世界时出错。
+{0}</value>
+  </data>
+  <data name="dialog_save_bestiary_prompt" xml:space="preserve">
+    <value>确定要保存图鉴更改吗？</value>
+  </data>
+  <data name="dialog_save_bestiary_title" xml:space="preserve">
+    <value>保存图鉴？</value>
+  </data>
+  <data name="dialog_world_corrupt_empty" xml:space="preserve">
+    <value>世界文件似乎为空或已损坏（所有字节均为零）。
+由于不存在任何数据，该文件无法恢复。
+
+您可以尝试以下操作：
+1. 还原先前创建的自动备份（.bak、.bak2）。
+2. 还原先前创建的纯手动备份。
+3. 还原之前创建的 TEdit 检查点存档（.TEdit）。
+4. 通过 Windows 文件历史记录还原备份（如果之前已启用）。</value>
+  </data>
+  <data name="dialog_world_modified_prompt" xml:space="preserve">
+    <value>“{0}”自上次保存后已被外部修改。
+是否仍要覆盖？</value>
+  </data>
+  <data name="dialog_world_modified_title" xml:space="preserve">
+    <value>世界已修改</value>
+  </data>
+  <data name="dialog_world_read_error" xml:space="preserve">
+    <value>读取世界文件时出错。
+这通常是由于存档文件损坏或世界版本高于支持版本引起的。
+
+TEdit 版本：v{0}
+TEdit 支持最高世界版本：{1}
+当前世界版本：{2}
+
+错误详情：
+{3}</value>
+  </data>
+  <data name="dialog_world_save_failed" xml:space="preserve">
+    <value>保存世界失败。当前已打开的世界已被恢复，您的编辑内容仍未保存。
+{0}</value>
+  </data>
+  <data name="input_category_editing" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="input_category_file" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="input_category_help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="input_category_navigation" xml:space="preserve">
+    <value>导航</value>
+  </data>
+  <data name="input_category_selection" xml:space="preserve">
+    <value>选区</value>
+  </data>
+  <data name="input_category_toggles" xml:space="preserve">
+    <value>开关</value>
+  </data>
+  <data name="input_category_tooldrawing" xml:space="preserve">
+    <value>工具/绘图</value>
+  </data>
+  <data name="input_category_tools" xml:space="preserve">
+    <value>工具</value>
+  </data>
+  <data name="input_category_view" xml:space="preserve">
+    <value>视图</value>
+  </data>
+  <data name="overflow_more_panels" xml:space="preserve">
+    <value>更多面板</value>
+  </data>
+  <data name="player_editor_error_load" xml:space="preserve">
+    <value>加载玩家失败：{0}</value>
+  </data>
+  <data name="player_editor_error_save" xml:space="preserve">
+    <value>保存玩家失败：{0}</value>
+  </data>
+  <data name="player_editor_status_loaded" xml:space="preserve">
+    <value>已加载玩家：{0}</value>
+  </data>
+  <data name="player_editor_status_saved" xml:space="preserve">
+    <value>已保存玩家：{0}</value>
+  </data>
+  <data name="settings_category_filter" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="settings_category_keybindings_format" xml:space="preserve">
+    <value>快捷键 - {0}</value>
+  </data>
+  <data name="common_not_determined" xml:space="preserve">
+    <value>未确定</value>
+  </data>
+  <data name="world_invasion_goblin" xml:space="preserve">
+    <value>哥布林军队</value>
+  </data>
+  <data name="world_moon_grey" xml:space="preserve">
+    <value>灰色</value>
+  </data>
+  <data name="world_moon_brown" xml:space="preserve">
+    <value>棕色</value>
+  </data>
+  <data name="world_moon_ringed" xml:space="preserve">
+    <value>环状</value>
+  </data>
+  <data name="world_moon_blue_marble" xml:space="preserve">
+    <value>蓝色大理石</value>
+  </data>
+  <data name="world_moon_white_ice" xml:space="preserve">
+    <value>白冰</value>
+  </data>
+  <data name="world_moon_green_gas" xml:space="preserve">
+    <value>绿气</value>
+  </data>
+  <data name="world_moon_pink" xml:space="preserve">
+    <value>粉红</value>
+  </data>
+  <data name="world_moon_orange_venus" xml:space="preserve">
+    <value>橙色金星</value>
+  </data>
+  <data name="world_moon_triple_purple" xml:space="preserve">
+    <value>三重紫</value>
+  </data>
+  <data name="world_gamemode_expert" xml:space="preserve">
+    <value>专家</value>
+  </data>
+  <data name="world_gamemode_master" xml:space="preserve">
+    <value>大师</value>
+  </data>
+  <data name="specialtile_xmas_star_topper_1" xml:space="preserve">
+    <value>星星树顶 1</value>
+  </data>
+  <data name="specialtile_xmas_star_topper_2" xml:space="preserve">
+    <value>星星树顶 2</value>
+  </data>
+  <data name="specialtile_xmas_star_topper_3" xml:space="preserve">
+    <value>星星树顶 3</value>
+  </data>
+  <data name="specialtile_xmas_bow_topper" xml:space="preserve">
+    <value>蝴蝶结树顶</value>
+  </data>
+  <data name="specialtile_xmas_white" xml:space="preserve">
+    <value>白色</value>
+  </data>
+  <data name="specialtile_xmas_white_red" xml:space="preserve">
+    <value>白与红</value>
+  </data>
+  <data name="specialtile_xmas_red" xml:space="preserve">
+    <value>红色</value>
+  </data>
+  <data name="specialtile_xmas_red_green" xml:space="preserve">
+    <value>红与绿</value>
+  </data>
+  <data name="specialtile_xmas_green" xml:space="preserve">
+    <value>绿色</value>
+  </data>
+  <data name="specialtile_xmas_green_white" xml:space="preserve">
+    <value>绿与白</value>
+  </data>
+  <data name="specialtile_xmas_multicolored" xml:space="preserve">
+    <value>五颜六色</value>
+  </data>
+  <data name="specialtile_xmas_yellow" xml:space="preserve">
+    <value>黄色</value>
+  </data>
+  <data name="specialtile_xmas_yellow_green" xml:space="preserve">
+    <value>黄与绿</value>
+  </data>
+  <data name="specialtile_xmas_red_yellow" xml:space="preserve">
+    <value>红与黄</value>
+  </data>
+  <data name="specialtile_xmas_white_yellow" xml:space="preserve">
+    <value>白与黄</value>
+  </data>
+  <data name="specialtile_xmas_white_green" xml:space="preserve">
+    <value>白与绿</value>
+  </data>
+  <data name="specialtile_xmas_blue" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="specialtile_xmas_blue_green" xml:space="preserve">
+    <value>蓝与绿</value>
+  </data>
+  <data name="specialtile_xmas_red_blue" xml:space="preserve">
+    <value>红与蓝</value>
+  </data>
+  <data name="specialtile_xmas_blue_yellow" xml:space="preserve">
+    <value>蓝与黄</value>
+  </data>
+  <data name="tool_wp_boss_brainofcthulhu" xml:space="preserve">
+    <value>克苏鲁之脑</value>
+  </data>
+  <data name="progress_world_save_complete" xml:space="preserve">
+    <value>世界保存完成。</value>
+  </data>
+  <data name="progress_save_complete" xml:space="preserve">
+    <value>保存完成。</value>
+  </data>
+  <data name="progress_saving_world" xml:space="preserve">
+    <value>正在保存世界...</value>
+  </data>
+  <data name="progress_save_headers" xml:space="preserve">
+    <value>正在保存文件头...</value>
+  </data>
+  <data name="progress_saving_tiles" xml:space="preserve">
+    <value>正在保存物块...</value>
+  </data>
+  <data name="progress_save_tiles" xml:space="preserve">
+    <value>正在保存物块...</value>
+  </data>
+  <data name="progress_saving_chests" xml:space="preserve">
+    <value>正在保存宝箱...</value>
+  </data>
+  <data name="progress_save_chests" xml:space="preserve">
+    <value>正在保存宝箱...</value>
+  </data>
+  <data name="progress_saving_signs" xml:space="preserve">
+    <value>正在保存标牌...</value>
+  </data>
+  <data name="progress_save_signs" xml:space="preserve">
+    <value>正在保存标牌...</value>
+  </data>
+  <data name="progress_save_npcs" xml:space="preserve">
+    <value>正在保存 NPC...</value>
+  </data>
+  <data name="progress_saving_npc_data" xml:space="preserve">
+    <value>正在保存 NPC 数据...</value>
+  </data>
+  <data name="progress_saving_npc_names" xml:space="preserve">
+    <value>正在保存 NPC 名字...</value>
+  </data>
+  <data name="progress_save_tile_entities_section" xml:space="preserve">
+    <value>正在保存实体物块数据...</value>
+  </data>
+  <data name="progress_save_weighted_pressure_plates" xml:space="preserve">
+    <value>正在保存加重压力板...</value>
+  </data>
+  <data name="progress_save_town_manager" xml:space="preserve">
+    <value>正在保存城镇管理器...</value>
+  </data>
+  <data name="progress_save_bestiary" xml:space="preserve">
+    <value>正在保存图鉴...</value>
+  </data>
+  <data name="progress_save_creative_powers" xml:space="preserve">
+    <value>正在保存旅行模式能力...</value>
+  </data>
+  <data name="progress_save_footers" xml:space="preserve">
+    <value>正在保存文件尾...</value>
+  </data>
+  <data name="progress_saving_validation_data" xml:space="preserve">
+    <value>正在保存校验数据...</value>
+  </data>
+  <data name="progress_validating_file" xml:space="preserve">
+    <value>正在校验文件...</value>
+  </data>
+  <data name="progress_world_load_complete" xml:space="preserve">
+    <value>世界加载完成。</value>
+  </data>
+  <data name="progress_loading_file_header" xml:space="preserve">
+    <value>正在加载文件头...</value>
+  </data>
+  <data name="progress_loading_tiles" xml:space="preserve">
+    <value>正在加载物块...</value>
+  </data>
+  <data name="progress_loading_chests" xml:space="preserve">
+    <value>正在加载宝箱...</value>
+  </data>
+  <data name="progress_loading_signs" xml:space="preserve">
+    <value>正在加载标牌...</value>
+  </data>
+  <data name="progress_loading_npcs" xml:space="preserve">
+    <value>正在加载 NPC...</value>
+  </data>
+  <data name="progress_loading_npc_data" xml:space="preserve">
+    <value>正在加载 NPC 数据...</value>
+  </data>
+  <data name="progress_loading_npc_names" xml:space="preserve">
+    <value>正在加载 NPC 名字...</value>
+  </data>
+  <data name="progress_loading_tile_entities_section" xml:space="preserve">
+    <value>正在加载实体物块数据...</value>
+  </data>
+  <data name="progress_render_complete" xml:space="preserve">
+    <value>渲染完成</value>
+  </data>
+  <data name="progress_calculating_colors" xml:space="preserve">
+    <value>正在计算颜色...</value>
+  </data>
+  <data name="progress_cloning_world" xml:space="preserve">
+    <value>正在克隆世界...</value>
+  </data>
+  <data name="progress_generating_world" xml:space="preserve">
+    <value>正在生成世界...</value>
+  </data>
+  <data name="progress_generating_hills" xml:space="preserve">
+    <value>正在生成山丘...</value>
+  </data>
+  <data name="progress_generating_caves" xml:space="preserve">
+    <value>正在生成洞穴...</value>
+  </data>
+  <data name="progress_generating_cave_noise" xml:space="preserve">
+    <value>正在生成洞穴噪波...</value>
+  </data>
+  <data name="progress_refining_caves" xml:space="preserve">
+    <value>正在修饰洞穴...</value>
+  </data>
+  <data name="progress_placing_caves" xml:space="preserve">
+    <value>正在放置洞穴...</value>
+  </data>
+  <data name="progress_generating_underworld" xml:space="preserve">
+    <value>正在生成地狱...</value>
+  </data>
+  <data name="progress_settling_sand" xml:space="preserve">
+    <value>正在沉降沙子...</value>
+  </data>
+  <data name="progress_removing_future_tiles" xml:space="preserve">
+    <value>正在移除未知版本物块...</value>
+  </data>
+  <data name="progress_world_loaded_in_seconds" xml:space="preserve">
+    <value>世界加载完成，耗时 {0} 秒。</value>
+  </data>
+  <data name="enum_LanguageSelection_Automatic" xml:space="preserve">
+    <value>自动 (跟随系统)</value>
+  </data>
+  <data name="enum_LanguageSelection_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="enum_LanguageSelection_Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="enum_LanguageSelection_Arabic" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+  <data name="enum_LanguageSelection_Chinese" xml:space="preserve">
+    <value>中文 (简体)</value>
+  </data>
+  <data name="enum_LanguageSelection_ChineseTraditional" xml:space="preserve">
+    <value>中文 (繁體)</value>
+  </data>
+  <data name="enum_LanguageSelection_Polish" xml:space="preserve">
+    <value>Polski</value>
+  </data>
+  <data name="enum_LanguageSelection_German" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="enum_LanguageSelection_French" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="enum_LanguageSelection_Italian" xml:space="preserve">
+    <value>Italiano</value>
+  </data>
+  <data name="enum_LanguageSelection_Japanese" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="enum_LanguageSelection_Korean" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="enum_LanguageSelection_Portuguese" xml:space="preserve">
+    <value>Português</value>
+  </data>
+  <data name="enum_LanguageSelection_Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="enum_UpdateMode_Disabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="enum_UpdateMode_NotifyOnly" xml:space="preserve">
+    <value>仅通知</value>
+  </data>
+  <data name="enum_UpdateMode_AutoDownload" xml:space="preserve">
+    <value>自动下载</value>
+  </data>
+  <data name="enum_UpdateMode_AutoInstall" xml:space="preserve">
+    <value>自动安装</value>
+  </data>
+  <data name="enum_UpdateChannel_Stable" xml:space="preserve">
+    <value>稳定版</value>
+  </data>
+  <data name="enum_UpdateChannel_Beta" xml:space="preserve">
+    <value>测试版 (Beta)</value>
+  </data>
+  <data name="enum_UpdateChannel_Alpha" xml:space="preserve">
+    <value>预览版 (Alpha)</value>
+  </data>
+  <data name="enum_WindowLaunchMode_Default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="enum_WindowLaunchMode_CenterScreen" xml:space="preserve">
+    <value>屏幕居中</value>
+  </data>
+  <data name="enum_WindowLaunchMode_Maximized" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="enum_PixelMapColorMode_Default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="enum_PixelMapColorMode_Realistic" xml:space="preserve">
+    <value>写实</value>
+  </data>
+  <data name="enum_PixelMapColorMode_Minimap" xml:space="preserve">
+    <value>小地图</value>
+  </data>
+  <data name="enum_FilterMode_Hide" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="enum_FilterMode_Darken" xml:space="preserve">
+    <value>变暗</value>
+  </data>
+  <data name="bestiary_cat_blood_moon" xml:space="preserve">
+    <value>血月</value>
+  </data>
+  <data name="bestiary_cat_cavern" xml:space="preserve">
+    <value>洞穴</value>
+  </data>
+  <data name="bestiary_cat_corruption" xml:space="preserve">
+    <value>腐化之地</value>
+  </data>
+  <data name="bestiary_cat_crimson" xml:space="preserve">
+    <value>猩红之地</value>
+  </data>
+  <data name="bestiary_cat_desert" xml:space="preserve">
+    <value>沙漠</value>
+  </data>
+  <data name="bestiary_cat_dungeon" xml:space="preserve">
+    <value>地牢</value>
+  </data>
+  <data name="bestiary_cat_frost_legion" xml:space="preserve">
+    <value>雪人军团</value>
+  </data>
+  <data name="bestiary_cat_frost_moon" xml:space="preserve">
+    <value>霜月</value>
+  </data>
+  <data name="bestiary_cat_goblin_army" xml:space="preserve">
+    <value>哥布林军队</value>
+  </data>
+  <data name="bestiary_cat_granite_cave" xml:space="preserve">
+    <value>花岗岩洞</value>
+  </data>
+  <data name="bestiary_cat_hallow" xml:space="preserve">
+    <value>神圣之地</value>
+  </data>
+  <data name="bestiary_cat_halloween" xml:space="preserve">
+    <value>万圣节</value>
+  </data>
+  <data name="bestiary_cat_jungle" xml:space="preserve">
+    <value>丛林</value>
+  </data>
+  <data name="bestiary_cat_lunar_event" xml:space="preserve">
+    <value>月亮事件</value>
+  </data>
+  <data name="bestiary_cat_marble_cave" xml:space="preserve">
+    <value>大理石洞</value>
+  </data>
+  <data name="bestiary_cat_martian_madness" xml:space="preserve">
+    <value>火星暴乱</value>
+  </data>
+  <data name="bestiary_cat_meteorite" xml:space="preserve">
+    <value>陨石</value>
+  </data>
+  <data name="bestiary_cat_mushroom" xml:space="preserve">
+    <value>发光蘑菇生物群落</value>
+  </data>
+  <data name="bestiary_cat_ocean" xml:space="preserve">
+    <value>海洋</value>
+  </data>
+  <data name="bestiary_cat_old_ones_army" xml:space="preserve">
+    <value>旧日军团</value>
+  </data>
+  <data name="bestiary_cat_pirate_invasion" xml:space="preserve">
+    <value>海盗入侵</value>
+  </data>
+  <data name="bestiary_cat_pumpkin_moon" xml:space="preserve">
+    <value>南瓜月</value>
+  </data>
+  <data name="bestiary_cat_rain" xml:space="preserve">
+    <value>雨</value>
+  </data>
+  <data name="bestiary_cat_sandstorm" xml:space="preserve">
+    <value>沙尘暴</value>
+  </data>
+  <data name="bestiary_cat_slime" xml:space="preserve">
+    <value>史莱姆</value>
+  </data>
+  <data name="bestiary_cat_snow" xml:space="preserve">
+    <value>雪原</value>
+  </data>
+  <data name="bestiary_cat_solar_eclipse" xml:space="preserve">
+    <value>日食</value>
+  </data>
+  <data name="bestiary_cat_spider_nest" xml:space="preserve">
+    <value>蜘蛛洞</value>
+  </data>
+  <data name="bestiary_cat_surface" xml:space="preserve">
+    <value>地表</value>
+  </data>
+  <data name="bestiary_cat_temple" xml:space="preserve">
+    <value>丛林神庙</value>
+  </data>
+  <data name="bestiary_cat_underworld" xml:space="preserve">
+    <value>地狱</value>
+  </data>
+  <data name="bestiary_cat_windy_day" xml:space="preserve">
+    <value>大风天</value>
+  </data>
+  <data name="common_other" xml:space="preserve">
+    <value>其它</value>
+  </data>
+  <data name="statusbar_tile_empty" xml:space="preserve">
+    <value>[空]</value>
+  </data>
+  <data name="statusbar_tile_invalid" xml:space="preserve">
+    <value>无效图元 ({0})</value>
+  </data>
+  <data name="statusbar_wall_invalid" xml:space="preserve">
+    <value>无效墙体 ({0})</value>
+  </data>
+  <data name="statusbar_paint_none" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="statusbar_paint_unknown" xml:space="preserve">
+    <value>未知 ({0})</value>
+  </data>
+  <data name="MorphBiome_Mushroom" xml:space="preserve">
+    <value>发光蘑菇</value>
+  </data>
+  <data name="MorphBiome_Forest" xml:space="preserve">
+    <value>森林</value>
+  </data>
+  <data name="MorphBiome_Snow" xml:space="preserve">
+    <value>雪原</value>
+  </data>
+  <data name="morph_moss_none" xml:space="preserve">
+    <value>无 (移除)</value>
+  </data>
+  <data name="morph_moss_grass" xml:space="preserve">
+    <value>普通草</value>
+  </data>
+  <data name="morph_moss_green" xml:space="preserve">
+    <value>绿色苔藓</value>
+  </data>
+  <data name="morph_moss_yellow" xml:space="preserve">
+    <value>黄色苔藓</value>
+  </data>
+  <data name="morph_moss_red" xml:space="preserve">
+    <value>红色苔藓</value>
+  </data>
+  <data name="morph_moss_blue" xml:space="preserve">
+    <value>蓝色苔藓</value>
+  </data>
+  <data name="morph_moss_purple" xml:space="preserve">
+    <value>紫色苔藓</value>
+  </data>
+  <data name="morph_moss_lava" xml:space="preserve">
+    <value>熔岩苔藓</value>
+  </data>
+  <data name="morph_moss_krypton" xml:space="preserve">
+    <value>氪苔藓</value>
+  </data>
+  <data name="morph_moss_xenon" xml:space="preserve">
+    <value>氙苔藓</value>
+  </data>
+  <data name="morph_moss_argon" xml:space="preserve">
+    <value>氩苔藓</value>
+  </data>
+  <data name="morph_moss_neon" xml:space="preserve">
+    <value>氖苔藓</value>
+  </data>
+  <data name="morph_moss_helium" xml:space="preserve">
+    <value>氦苔藓</value>
+  </data>
+  <data name="bg_tree_oak" xml:space="preserve">
+    <value>橡树</value>
+  </data>
+  <data name="bg_tree_boreal" xml:space="preserve">
+    <value>针叶木</value>
+  </data>
+  <data name="bg_tree_jungle" xml:space="preserve">
+    <value>类丛林</value>
+  </data>
+  <data name="bg_tree_sakura" xml:space="preserve">
+    <value>樱花</value>
+  </data>
+  <data name="bg_tree_willow" xml:space="preserve">
+    <value>柳树</value>
+  </data>
+  <data name="bg_tree_palm" xml:space="preserve">
+    <value>类棕榈</value>
+  </data>
+  <data name="bg_cave_stone" xml:space="preserve">
+    <value>石质</value>
+  </data>
+  <data name="bg_cave_gray" xml:space="preserve">
+    <value>灰色</value>
+  </data>
+  <data name="bg_cave_brown" xml:space="preserve">
+    <value>棕色</value>
+  </data>
+  <data name="bg_cave_blue" xml:space="preserve">
+    <value>蓝色</value>
+  </data>
+  <data name="bg_cave_blue_alt" xml:space="preserve">
+    <value>蓝色 备选</value>
+  </data>
+  <data name="bg_cave_green" xml:space="preserve">
+    <value>绿色</value>
+  </data>
+  <data name="bg_cave_green_alt" xml:space="preserve">
+    <value>绿色 备选</value>
+  </data>
+  <data name="bg_cave_purple" xml:space="preserve">
+    <value>紫色</value>
+  </data>
+  <data name="bg_default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="bg_mountains_only" xml:space="preserve">
+    <value>仅山脉</value>
+  </data>
+  <data name="bg_mountains_alt" xml:space="preserve">
+    <value>山脉 备选</value>
+  </data>
+  <data name="bg_mountains_tree" xml:space="preserve">
+    <value>山脉与树木</value>
+  </data>
+  <data name="bg_mountains_only_a" xml:space="preserve">
+    <value>仅山脉 A</value>
+  </data>
+  <data name="bg_mountains_only_b" xml:space="preserve">
+    <value>仅山脉 B</value>
+  </data>
+  <data name="bg_mountains_only_c" xml:space="preserve">
+    <value>仅山脉 C</value>
+  </data>
+  <data name="bg_trees_only_a" xml:space="preserve">
+    <value>仅树木 A</value>
+  </data>
+  <data name="bg_trees_only_b" xml:space="preserve">
+    <value>仅树木 B</value>
+  </data>
+  <data name="bg_variant_alt_letter" xml:space="preserve">
+    <value>变体 {0} 备选 {1}</value>
+  </data>
+  <data name="bg_variant_alt" xml:space="preserve">
+    <value>变体 {0} 备选</value>
+  </data>
+  <data name="bg_variant_format" xml:space="preserve">
+    <value>变体 {0}</value>
+  </data>
+  <data name="bg_remix_format" xml:space="preserve">
+    <value>混音 {0}</value>
+  </data>
+  <data name="bg_multibiome_format" xml:space="preserve">
+    <value>复合群落 {0}</value>
+  </data>
+  <data name="bg_mnt_default_trees" xml:space="preserve">
+    <value>山脉 {0} + 默认树木</value>
+  </data>
+  <data name="bg_mnt_trees" xml:space="preserve">
+    <value>山脉 {0} + 树木</value>
+  </data>
+  <data name="statusbar_tile_inactive" xml:space="preserve">
+    <value>虚化</value>
+  </data>
+  <data name="statusbar_tile_actuator" xml:space="preserve">
+    <value>促动器</value>
+  </data>
+  <data name="statusbar_tile_wire" xml:space="preserve">
+    <value>电线</value>
+  </data>
+  <data name="statusbar_paint_tile" xml:space="preserve">
+    <value>物块: {0}</value>
+  </data>
+  <data name="statusbar_paint_wall" xml:space="preserve">
+    <value>墙体: {0}</value>
+  </data>
+  <data name="statusbar_paint_both" xml:space="preserve">
+    <value>物块: {0}, 墙体: {1}</value>
+  </data>
+  <data name="progress_resetting_time" xml:space="preserve">
+    <value>正在重置时间...</value>
+  </data>
+  <data name="progress_tmodloader_preparing" xml:space="preserve">
+    <value>正在准备 tModLoader 数据...</value>
+  </data>
+  <data name="progress_tmodloader_saving" xml:space="preserve">
+    <value>正在保存 tModLoader 数据...</value>
+  </data>
+  <data name="progress_tmodloader_loading" xml:space="preserve">
+    <value>正在加载 tModLoader 数据...</value>
+  </data>
+  <data name="progress_validating_world" xml:space="preserve">
+    <value>正在校验世界...</value>
+  </data>
+  <data name="progress_validating_complete" xml:space="preserve">
+    <value>校验完成...</value>
+  </data>
+  <data name="progress_writing_support_files" xml:space="preserve">
+    <value>正在写入支持文件...</value>
+  </data>
+  <data name="progress_map_tiles_export_complete" xml:space="preserve">
+    <value>地图瓦片导出完成。</value>
+  </data>
+  <data name="progress_finalizing_png" xml:space="preserve">
+    <value>正在完成 PNG...</value>
+  </data>
+  <data name="progress_loaded_winphone_header" xml:space="preserve">
+    <value>已加载 Windows Phone 世界头信息。</value>
+  </data>
+  <data name="progress_converting_winphone" xml:space="preserve">
+    <value>正在转换为 Windows Phone 世界...</value>
+  </data>
+  <data name="world_size_small" xml:space="preserve">
+    <value>小</value>
+  </data>
+  <data name="world_size_medium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="world_size_large" xml:space="preserve">
+    <value>大</value>
+  </data>
+  <data name="world_size_custom" xml:space="preserve">
+    <value>自定义</value>
   </data>
 </root>
