@@ -16,7 +16,7 @@ public sealed class HammerAreaTool : BrushToolBase
     public HammerAreaTool(WorldViewModel worldViewModel) : base(worldViewModel)
     {
         Icon = new BitmapImage(new Uri(@"pack://application:,,,/TEdit;component/Images/Tools/hammer.png"));
-        VectorIcon = System.Windows.Application.Current.TryFindResource("HammerIcon") as ImageSource;
+        VectorIcon = System.Windows.Application.Current?.TryFindResource("HammerIcon") as ImageSource;
         Name = "Hammer";
     }
 
