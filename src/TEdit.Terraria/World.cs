@@ -81,7 +81,7 @@ public partial class World
 
                     if (resetTime)
                     {
-                        progress?.Report(new ProgressChangedEventArgs(0, "Resetting Time..."));
+                        progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.ResettingTime));
                     // world.ResetTime();
                     }
 
@@ -91,7 +91,7 @@ public partial class World
                     // Strip mod tile/wall data before vanilla save
                     if (world.IsTModLoader && world.TwldData != null)
                     {
-                        progress?.Report(new ProgressChangedEventArgs(0, "Preparing tModLoader data..."));
+                        progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.PreparingTModLoaderData));
                         modDataStripped = true;
                         TwldFile.StripFromWorld(world, world.TwldData);
                     }
@@ -143,7 +143,7 @@ public partial class World
                     // failed vanilla or sidecar write cannot erase mod tiles in memory.
                     if (world.IsTModLoader && world.TwldData != null)
                     {
-                        progress?.Report(new ProgressChangedEventArgs(0, "Saving tModLoader data..."));
+                        progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.SavingTModLoaderData));
                         // Rebuild mod chest/entity items from current World state so that
                         // edits (paste, delete, move) are reflected in the .twld sidecar.
                         TwldFile.RebuildModChestItems(world, world.TwldData);
@@ -189,7 +189,7 @@ public partial class World
 
                 if (resetTime)
                 {
-                    progress?.Report(new ProgressChangedEventArgs(0, "Resetting Time..."));
+                    progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.ResettingTime));
                     //world.ResetTime();
                 }
 
@@ -199,7 +199,7 @@ public partial class World
                 // Strip mod tile/wall data before vanilla save (writes air in .wld)
                 if (world.IsTModLoader && world.TwldData != null)
                 {
-                    progress?.Report(new ProgressChangedEventArgs(0, "Preparing tModLoader data..."));
+                    progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.PreparingTModLoaderData));
                     modDataStripped = true;
                     TwldFile.StripFromWorld(world, world.TwldData);
                 }
@@ -252,7 +252,7 @@ public partial class World
                 // failed vanilla or sidecar write cannot erase mod tiles in memory.
                 if (world.IsTModLoader && world.TwldData != null)
                 {
-                    progress?.Report(new ProgressChangedEventArgs(0, "Saving tModLoader data..."));
+                    progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.SavingTModLoaderData));
                     TwldFile.Save(filename, world.TwldData);
                 }
 
@@ -660,7 +660,7 @@ public partial class World
                 // Load .twld sidecar if this is a tModLoader world
                 if (w.IsTModLoader && !headersOnly)
                 {
-                    progress?.Report(new ProgressChangedEventArgs(0, "Loading tModLoader data..."));
+                    progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.LoadingTModLoaderData));
                     var twldData = TwldFile.Load(filename);
                     if (twldData != null)
                     {
@@ -1013,7 +1013,7 @@ public partial class World
             }
         }
 
-        progress?.Report(new ProgressChangedEventArgs(0, "Validating Complete..."));
+        progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.ValidatingComplete));
 
         if (Chests.Count > WorldConfiguration.MaxChests)
             throw new ArgumentOutOfRangeException($"Chest Count is {Chests.Count} which is greater than {WorldConfiguration.MaxChests}.");

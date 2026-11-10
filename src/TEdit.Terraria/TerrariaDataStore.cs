@@ -337,7 +337,7 @@ public class TerrariaDataStore
 
             if (!string.IsNullOrEmpty(item.Name) && !string.IsNullOrEmpty(item.Key))
             {
-                _itemKeyByName[item.Name] = item.Key;
+                _itemKeyByName.TryAdd(item.Name, item.Key);
             }
 
             if (item.Tally > 0) TallyNames[item.Tally] = item.Name;
@@ -501,20 +501,15 @@ public class TerrariaDataStore
         // Fallback for tiles not covered by data.Tiles
         foreach (var tile in Tiles)
         {
-            if (tile.Key != null && !data.Tiles.ContainsKey(tile.Key))
-            {
-                if (data.Items.TryGetValue(tile.Key, out var tileName))
-                    tile.Name = tileName;
-                else if (data.SpriteFrames.TryGetValue(tile.Key, out var frameTileName))
-                    tile.Name = frameTileName;
-                else if (TileItemLookup.TryGetValue(tile.Id, out var itemId) && ItemById.TryGetValue(itemId, out var item))
-                    tile.Name = item.Name;
-            }
-            else if (tile.Key == null)
-            {
-                if (TileItemLookup.TryGetValue(tile.Id, out var itemId) && ItemById.TryGetValue(itemId, out var item))
-                    tile.Name = item.Name;
-            }
+            if (tile.Key != null && data.Tiles.ContainsKey(tile.Key))
+                continue;
+
+            if (tile.Key != null && data.Items.TryGetValue(tile.Key, out var tileName))
+                tile.Name = tileName;
+            else if (tile.Key != null && data.SpriteFrames.TryGetValue(tile.Key, out var frameTileName))
+                tile.Name = frameTileName;
+            else if (GetPlacingItemName(TileItemLookup, tile.Id) is { } itemName)
+                tile.Name = itemName;
         }
 
         // Apply wall names
@@ -525,15 +520,15 @@ public class TerrariaDataStore
         // Fallback for walls not covered by data.Walls
         foreach (var wall in Walls)
         {
-            if (wall.Key != null && !data.Walls.ContainsKey(wall.Key))
-            {
-                if (data.Items.TryGetValue(wall.Key, out var wallName))
-                    wall.Name = wallName;
-                else if (data.Items.TryGetValue(wall.Key + "Wall", out var wallNameWall))
-                    wall.Name = wallNameWall;
-                else if (WallItemLookup.TryGetValue(wall.Id, out var itemId) && ItemById.TryGetValue(itemId, out var item))
-                    wall.Name = item.Name;
-            }
+            if (wall.Key == null || data.Walls.ContainsKey(wall.Key))
+                continue;
+
+            if (data.Items.TryGetValue(wall.Key, out var wallName))
+                wall.Name = wallName;
+            else if (data.Items.TryGetValue(wall.Key + "Wall", out var wallNameWall))
+                wall.Name = wallNameWall;
+            else if (GetPlacingItemName(WallItemLookup, wall.Id) is { } itemName)
+                wall.Name = itemName;
         }
 
         // Apply paint names
@@ -571,6 +566,12 @@ public class TerrariaDataStore
             if (prefixKeyToId.TryGetValue(kv.Key, out var id))
                 PrefixById[id] = kv.Value;
     }
+
+    /// <summary>Gets the display name of the item that places a tile or wall, if any.</summary>
+    private string? GetPlacingItemName(Dictionary<int, int> lookup, int tileOrWallId) =>
+        lookup.TryGetValue(tileOrWallId, out var itemId) && ItemById.TryGetValue(itemId, out var item)
+            ? item.Name
+            : null;
 
     private void RebuildFrameImportant()
     {
@@ -635,8 +636,10 @@ public class TerrariaDataStore
             // Banners / paintings: the variant is the item name (e.g. Blue Slime Banner).
             if (TryResolveItemName(frame.Variety, out var directItem))
             {
+                // Painting tiles (keys Painting3X3/4X3/6X4/2X3/3X2) use the variant's item name as the full display name.
+                bool isPaintingTile = tile.Key?.StartsWith("Painting", StringComparison.Ordinal) == true;
                 if (frame.Name.EndsWith("Banner", StringComparison.OrdinalIgnoreCase) ||
-                    frame.Name == "Painting" || tile.Id == 240 || tile.Id == 241 || tile.Id == 242 || tile.Id == 245 || tile.Id == 246)
+                    frame.Name == "Painting" || isPaintingTile)
                 {
                     return directItem!;
                 }
@@ -645,7 +648,7 @@ public class TerrariaDataStore
             // Boss trophies: the variant + " Trophy" is the item name (e.g. Eye of Cthulhu).
             else if (TryResolveItemName(frame.Variety + " Trophy", out var trophyItem))
             {
-                if (frame.Name == "Boss Trophy" || tile.Id == 89)
+                if (frame.Name == "Boss Trophy")
                     return trophyItem!;
                 localizedVariety = trophyItem;
             }

@@ -54,4 +54,16 @@ public static class ProgressKeys
     public const string WorldLoadComplete = "World Load Complete.";
     public const string WorldSaveComplete = "World Save Complete.";
     public const string SaveComplete = "Save Complete.";
+
+    // Additional file operations
+    public const string VerifyingFile = "Verifying File...";
+    public const string LoadComplete = "Load Complete.";
+    public const string ValidatingComplete = "Validating Complete...";
+    public const string ResettingTime = "Resetting Time...";
+    public const string PreparingTModLoaderData = "Preparing tModLoader data...";
+    public const string SavingTModLoaderData = "Saving tModLoader data...";
+    public const string LoadingTModLoaderData = "Loading tModLoader data...";
+    public const string LoadedWindowsPhoneHeader = "Loaded Windows Phone world header.";
+    public const string ConvertingToWindowsPhone = "Converting world to Windows Phone...";
+
 }

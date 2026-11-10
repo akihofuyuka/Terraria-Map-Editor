@@ -56,6 +56,16 @@ public static class ProgressLocalization
             ProgressKeys.WorldSaveComplete => Language.progress_world_save_complete,
             ProgressKeys.SaveComplete => Language.progress_save_complete,
 
+            ProgressKeys.VerifyingFile => Language.progress_verifying_file,
+            ProgressKeys.LoadComplete => Language.progress_load_complete,
+            ProgressKeys.ValidatingComplete => Language.progress_validating_complete,
+            ProgressKeys.ResettingTime => Language.progress_resetting_time,
+            ProgressKeys.PreparingTModLoaderData => Language.progress_preparing_tmodloader_data,
+            ProgressKeys.SavingTModLoaderData => Language.progress_saving_tmodloader_data,
+            ProgressKeys.LoadingTModLoaderData => Language.progress_loading_tmodloader_data,
+            ProgressKeys.LoadedWindowsPhoneHeader => Language.progress_loaded_windows_phone_header,
+            ProgressKeys.ConvertingToWindowsPhone => Language.progress_converting_to_windows_phone,
+
             _ => text,
         };
     }
