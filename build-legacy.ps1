@@ -39,6 +39,7 @@ $platforms | ForEach-Object {
         $_
         "--self-contained"
         "true"
+        "/p:ContinuousIntegrationBuild=true"
         "-o"
         ".\$velopackPublishPath\$_"
         "/p:VersionPrefix=""$VersionPrefix"""
@@ -61,6 +62,7 @@ $platforms | ForEach-Object {
         $_
         "--self-contained"
         "true"
+        "/p:ContinuousIntegrationBuild=true"
         "-p:PublishSingleFile=true"
         "-o"
         ".\$zipPublishPath\$_"

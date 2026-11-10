@@ -22,7 +22,10 @@ if ([String]::IsNullOrWhitespace($Version)) {
             $Version = "$tag-ci.$ahead"
         }
     } else {
-        $Version = "0.0.0-dev"
+        # No reachable tag (e.g. fork or rewritten history); Velopack requires >= 0.0.1
+        $build = $env:GITHUB_RUN_NUMBER
+        if ([String]::IsNullOrWhitespace($build)) { $build = Get-Date -Format 'yyyyMMddHHmmss' }
+        $Version = "0.0.1-ci.$build"
     }
     Write-Host "Derived version: $Version"
 }
