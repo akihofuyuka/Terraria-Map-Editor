@@ -13,6 +13,7 @@
         ResizeMode="CanResizeWithGrip"
         Topmost="False"
         ExtendsContentIntoTitleBar="True"
+        Background="{DynamicResource ControlBackgroundBrush}"
         WindowBackdropType="Mica"
         Width="1600"
         Height="800">
@@ -63,7 +64,7 @@
     <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="8" VerticalAlignment="Bottom">
 
       <!-- Basic Configurations GroupBox -->
-      <GroupBox x:Name="BasicConfigurationGroupBox" BorderBrush="White" Margin="0,0,8,0">
+      <GroupBox x:Name="BasicConfigurationGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="0,0,8,0">
         <GroupBox.Header>
           <TextBlock Text="{x:Static p:Language.plugin_pixelart_basic_config}" Foreground="White"/>
         </GroupBox.Header>
@@ -111,7 +112,7 @@
 
       <!-- Schematic Rotation + Color Filter Tools (stacked) -->
       <StackPanel Margin="0,0,8,0">
-        <GroupBox x:Name="SchematicRotationGroupBox" BorderBrush="White" Margin="0,0,0,8">
+        <GroupBox x:Name="SchematicRotationGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="0,0,0,8">
           <GroupBox.Header>
             <TextBlock Text="{x:Static p:Language.plugin_pixelart_schematic_rotation}" Foreground="White"/>
           </GroupBox.Header>
@@ -135,7 +136,7 @@
                            IsChecked="{Binding RotationAngle, Converter={StaticResource EnumToBoolConverter}, ConverterParameter={x:Static local:RotationAngle.Rotate270}}"/>
             </Grid>
 
-            <GroupBox BorderBrush="White" Margin="0,4,0,0">
+            <GroupBox BorderBrush="{DynamicResource NormalBorderBrush}" Margin="0,4,0,0">
               <GroupBox.Header>
                 <TextBlock Text="{x:Static p:Language.plugin_pixelart_world_axis}" Foreground="White"/>
               </GroupBox.Header>
@@ -149,7 +150,7 @@
           </StackPanel>
         </GroupBox>
 
-        <GroupBox x:Name="ColorFilterToolsGroupBox" BorderBrush="White">
+        <GroupBox x:Name="ColorFilterToolsGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}">
           <GroupBox.Header>
             <TextBlock Text="{x:Static p:Language.plugin_pixelart_color_filter_tools}" Foreground="White"/>
           </GroupBox.Header>
@@ -161,7 +162,7 @@
       </StackPanel>
 
       <!-- Grid Options GroupBox -->
-      <GroupBox x:Name="GridOptionsGroupBox" BorderBrush="White" Margin="0,0,8,0">
+      <GroupBox x:Name="GridOptionsGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="0,0,8,0">
         <GroupBox.Header>
           <TextBlock Text="{x:Static p:Language.plugin_pixelart_grid_options}" Foreground="White"/>
         </GroupBox.Header>
@@ -182,7 +183,7 @@
       </GroupBox>
 
       <!-- Scaling Mode GroupBox -->
-      <GroupBox x:Name="ScalingModeGroupBox" BorderBrush="White" Margin="0,0,8,0">
+      <GroupBox x:Name="ScalingModeGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="0,0,8,0">
         <GroupBox.Header>
           <TextBlock Text="{x:Static p:Language.plugin_pixelart_scaling_mode}" Foreground="White"/>
         </GroupBox.Header>
@@ -223,7 +224,7 @@
 
       <!-- Color Filter Settings + Data (stacked) -->
       <StackPanel Margin="0,0,8,0">
-        <GroupBox x:Name="ColorFilterSettingsGroupBox" BorderBrush="White" Margin="0,0,0,8">
+        <GroupBox x:Name="ColorFilterSettingsGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}" Margin="0,0,0,8">
           <GroupBox.Header>
             <TextBlock Text="{x:Static p:Language.plugin_pixelart_color_filter_settings}" Foreground="White"/>
           </GroupBox.Header>
@@ -235,7 +236,7 @@
           </StackPanel>
         </GroupBox>
 
-        <GroupBox x:Name="ColorFilterDataGroupBox" BorderBrush="White">
+        <GroupBox x:Name="ColorFilterDataGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}">
           <GroupBox.Header>
             <TextBlock Text="{x:Static p:Language.plugin_pixelart_color_filter_data}" Foreground="White"/>
           </GroupBox.Header>
@@ -258,7 +259,7 @@
       </StackPanel>
 
       <!-- Pixel Art Statistics GroupBox -->
-      <GroupBox x:Name="PixelArtStatisticsGroupBox" BorderBrush="White">
+      <GroupBox x:Name="PixelArtStatisticsGroupBox" BorderBrush="{DynamicResource NormalBorderBrush}">
         <GroupBox.Header>
           <TextBlock Text="{x:Static p:Language.plugin_pixelart_statistics}" Foreground="White"/>
         </GroupBox.Header>

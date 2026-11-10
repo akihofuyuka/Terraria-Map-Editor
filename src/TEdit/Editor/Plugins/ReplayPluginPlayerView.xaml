@@ -6,6 +6,7 @@
     ResizeMode="NoResize" MinWidth="0" MinHeight="0" Width="900" Height="120"
     WindowStartupLocation="CenterOwner" Icon="/TEdit;component/Images/tedit.ico" Topmost="True"
     ExtendsContentIntoTitleBar="True"
+    Background="{DynamicResource ControlBackgroundBrush}"
     WindowBackdropType="Mica"
     Title="{x:Static p:Language.plugin_replay_player_title}">
 

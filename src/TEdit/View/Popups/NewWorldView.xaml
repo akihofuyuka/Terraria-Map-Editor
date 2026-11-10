@@ -8,6 +8,7 @@
         Title="{x:Static p:Language.newworld_title}"
         WindowStartupLocation="CenterOwner"
         ExtendsContentIntoTitleBar="True"
+        Background="{DynamicResource SidebarBackgroundBrush}"
         WindowBackdropType="Mica"
         Icon="/TEdit;component/Images/tedit.ico"
         SizeToContent="Height"
