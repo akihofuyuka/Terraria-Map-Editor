@@ -1503,10 +1503,10 @@ public partial class World
                 throw new TEditFileFormatException("Unexpected Position: Invalid Creative Powers Section");
         }
 
-        progress?.Report(new ProgressChangedEventArgs(100, "Verifying File..."));
+        progress?.Report(new ProgressChangedEventArgs(100, ProgressKeys.VerifyingFile));
         LoadFooter(b, w);
 
-        progress?.Report(new ProgressChangedEventArgs(100, "Load Complete."));
+        progress?.Report(new ProgressChangedEventArgs(100, ProgressKeys.LoadComplete));
     }
 
     public static Tile[,] LoadTileData(BinaryReader r, int maxX, int maxY, int version, bool[] tileFrameImportant, IProgress<ProgressChangedEventArgs>? progress = null)

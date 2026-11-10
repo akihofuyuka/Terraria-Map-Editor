@@ -75,7 +75,7 @@ public partial class World
             world.GroundLevel = header.GroundLevel;
             world.RockLevel = header.RockLevel;
 
-            progress?.Report(new ProgressChangedEventArgs(0, "Loaded Windows Phone world header."));
+            progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.LoadedWindowsPhoneHeader));
 
             if (!headersOnly)
             {
@@ -1485,7 +1485,7 @@ public partial class World
             lock (_fileLock)
             {
                 string temp = filename + ".tmp";
-                progress?.Report(new ProgressChangedEventArgs(0, "Converting world to Windows Phone..."));
+                progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.ConvertingToWindowsPhone));
                 byte[] result;
                 if (world.IsWinPhone && world.Version == 60)
                 {
