@@ -1503,7 +1503,7 @@ public partial class World
                 File.Delete(temp);
                 AdoptWinPhoneContainerState(world, result);
                 world.LastSave = File.GetLastWriteTimeUtc(filename);
-                progress?.Report(new ProgressChangedEventArgs(100, "World Save Complete."));
+                progress?.Report(new ProgressChangedEventArgs(100, ProgressKeys.WorldSaveComplete));
             }
         });
     }

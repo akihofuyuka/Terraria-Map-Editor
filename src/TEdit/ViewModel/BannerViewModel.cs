@@ -23,7 +23,7 @@ public partial class BannerViewModel : ReactiveObject
         _wvm = ViewModelLocator.WorldViewModel;
 
         BannerData = new ObservableCollection<BannerItem>();
-        Categories = new ObservableCollection<string> { "All" };
+        Categories = new ObservableCollection<string> { Properties.Language.common_all };
 
         BannersView = CollectionViewSource.GetDefaultView(BannerData);
         BannersView.Filter = FilterBanners;
@@ -58,7 +58,7 @@ public partial class BannerViewModel : ReactiveObject
     private string _filterText = "";
 
     [Reactive]
-    private string _selectedCategory = "All";
+    private string _selectedCategory = Properties.Language.common_all;
 
     public ObservableCollection<string> Categories { get; }
 
@@ -69,8 +69,9 @@ public partial class BannerViewModel : ReactiveObject
         if (obj is not BannerItem item) return false;
 
         if (!string.IsNullOrEmpty(SelectedCategory) &&
-            SelectedCategory != "All" &&
-            !string.Equals(item.Category, SelectedCategory, StringComparison.OrdinalIgnoreCase))
+            SelectedCategory != Properties.Language.common_all &&
+            !string.Equals(item.Category, SelectedCategory, StringComparison.OrdinalIgnoreCase) &&
+            !string.Equals(item.RawCategory, SelectedCategory, StringComparison.OrdinalIgnoreCase))
         {
             return false;
         }
@@ -78,6 +79,7 @@ public partial class BannerViewModel : ReactiveObject
         if (!string.IsNullOrEmpty(FilterText) &&
             !item.Name.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
             !item.Category.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
+            !item.RawCategory.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
             !item.NpcId.ToString().Contains(FilterText, StringComparison.Ordinal) &&
             !item.BestiaryIndex.ToString().Contains(FilterText, StringComparison.Ordinal))
         {
@@ -113,7 +115,7 @@ public partial class BannerViewModel : ReactiveObject
 
         BannerData.Clear();
         Categories.Clear();
-        Categories.Add("All");
+        Categories.Add(Properties.Language.common_all);
 
         // Build lookup: bannerId -> first NPC data
         var npcByBanner = WorldConfiguration.BestiaryData.NpcById.Values
@@ -150,11 +152,13 @@ public partial class BannerViewModel : ReactiveObject
                 kills = _wvm.CurrentWorld.KilledMobs[tallyIndex];
             }
 
+            string rawCategory = string.IsNullOrEmpty(category) ? "Other" : category;
             BannerData.Add(new BannerItem
             {
                 TallyIndex = tallyIndex,
                 Name = bannerName,
-                Category = string.IsNullOrEmpty(category) ? "Other" : category,
+                Category = GetCategoryDisplayName(rawCategory),
+                RawCategory = rawCategory,
                 NpcId = npcId,
                 BestiaryIndex = bestiaryIndex,
                 Kills = kills,
@@ -181,8 +185,8 @@ public partial class BannerViewModel : ReactiveObject
         if (_wvm.CurrentWorld == null) return;
 
         var confirm = await App.DialogService.ShowConfirmationAsync(
-            "Import Banners?",
-            "This will replace your current banner counts with data from the selected world file. Continue?");
+            Properties.Language.dialog_import_banners_title,
+            Properties.Language.dialog_import_banners_prompt);
 
         if (!confirm)
             return;
@@ -191,7 +195,7 @@ public partial class BannerViewModel : ReactiveObject
         {
             Filter = "Terraria World File|*.wld",
             DefaultExt = "Terraria World File|*.wld",
-            Title = "Import Banners from World File",
+            Title = Properties.Language.dialog_import_banners,
             InitialDirectory = DependencyChecker.PathToWorlds,
             Multiselect = false,
         };
@@ -212,7 +216,7 @@ public partial class BannerViewModel : ReactiveObject
             {
                 _wvm.CurrentWorld.ClaimableBanners[i] = backup[i];
             }
-            await App.DialogService.ShowExceptionAsync($"Error importing banner data from {ofd.FileName}. Your current banners have been restored.\r\n{ex.Message}");
+            await App.DialogService.ShowExceptionAsync(string.Format(Properties.Language.dialog_import_banners_error, ofd.FileName, ex.Message));
         }
     }
 
@@ -222,8 +226,8 @@ public partial class BannerViewModel : ReactiveObject
         if (_wvm.CurrentWorld == null) return;
 
         var confirm = await App.DialogService.ShowConfirmationAsync(
-            "Save Banners?",
-            "Save banner changes back to the world?");
+            Properties.Language.dialog_save_banners_title,
+            Properties.Language.dialog_save_banners_prompt);
 
         if (!confirm)
             return;
@@ -247,7 +251,7 @@ public partial class BannerViewModel : ReactiveObject
             {
                 _wvm.CurrentWorld.ClaimableBanners[i] = backup[i];
             }
-            await App.DialogService.ShowExceptionAsync($"Error saving banner data. Changes have been restored.\r\n{ex.Message}");
+            await App.DialogService.ShowExceptionAsync(string.Format(Properties.Language.dialog_save_banners_error, ex.Message));
         }
     }
 
@@ -257,8 +261,8 @@ public partial class BannerViewModel : ReactiveObject
         if (_wvm.CurrentWorld == null) return;
 
         var confirm = await App.DialogService.ShowConfirmationAsync(
-            "Max Out Banners?",
-            "Set all banner counts to maximum (9999)?");
+            Properties.Language.dialog_max_banners_title,
+            Properties.Language.dialog_max_banners_prompt);
 
         if (!confirm)
             return;
@@ -275,8 +279,8 @@ public partial class BannerViewModel : ReactiveObject
         if (_wvm.CurrentWorld == null) return;
 
         var confirm = await App.DialogService.ShowConfirmationAsync(
-            "Reset Banners?",
-            "Reset all banner counts to zero?");
+            Properties.Language.dialog_reset_banners_title,
+            Properties.Language.dialog_reset_banners_prompt);
 
         if (!confirm)
             return;
@@ -286,4 +290,42 @@ public partial class BannerViewModel : ReactiveObject
             item.Count = 0;
         }
     }
+
+    private static string GetCategoryDisplayName(string category) => category switch
+    {
+        "Blood Moon" => Properties.Language.bestiary_cat_blood_moon,
+        "Cavern" => Properties.Language.bestiary_cat_cavern,
+        "Corruption" => Properties.Language.bestiary_cat_corruption,
+        "Crimson" => Properties.Language.bestiary_cat_crimson,
+        "Desert" => Properties.Language.bestiary_cat_desert,
+        "Dungeon" => Properties.Language.bestiary_cat_dungeon,
+        "Frost Legion" => Properties.Language.bestiary_cat_frost_legion,
+        "Frost Moon" => Properties.Language.bestiary_cat_frost_moon,
+        "Goblin Army" => Properties.Language.bestiary_cat_goblin_army,
+        "Granite Cave" => Properties.Language.bestiary_cat_granite_cave,
+        "Hallow" => Properties.Language.bestiary_cat_hallow,
+        "Halloween" => Properties.Language.bestiary_cat_halloween,
+        "Jungle" => Properties.Language.bestiary_cat_jungle,
+        "Lunar Event" => Properties.Language.bestiary_cat_lunar_event,
+        "Marble Cave" => Properties.Language.bestiary_cat_marble_cave,
+        "Martian Madness" => Properties.Language.bestiary_cat_martian_madness,
+        "Meteorite" => Properties.Language.bestiary_cat_meteorite,
+        "Mushroom" => Properties.Language.bestiary_cat_mushroom,
+        "Ocean" => Properties.Language.bestiary_cat_ocean,
+        "Old One's Army" => Properties.Language.bestiary_cat_old_ones_army,
+        "Pirate Invasion" => Properties.Language.bestiary_cat_pirate_invasion,
+        "Pumpkin Moon" => Properties.Language.bestiary_cat_pumpkin_moon,
+        "Rain" => Properties.Language.bestiary_cat_rain,
+        "Sandstorm" => Properties.Language.bestiary_cat_sandstorm,
+        "Slime" => Properties.Language.bestiary_cat_slime,
+        "Snow" => Properties.Language.bestiary_cat_snow,
+        "Solar Eclipse" => Properties.Language.bestiary_cat_solar_eclipse,
+        "Spider Nest" => Properties.Language.bestiary_cat_spider_nest,
+        "Surface" => Properties.Language.bestiary_cat_surface,
+        "Temple" => Properties.Language.bestiary_cat_temple,
+        "Underworld" => Properties.Language.bestiary_cat_underworld,
+        "Windy Day" => Properties.Language.bestiary_cat_windy_day,
+        "Other" => Properties.Language.common_other,
+        _ => category
+    };
 }

@@ -1,7 +1,9 @@
-﻿using Semver;
+using Semver;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
+using System.Threading;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -45,52 +47,39 @@ public partial class App : Application
         var settings = UserSettingsService.Current;
         Trace.WriteLine($"[Startup] static App: UserSettingsService.Current: {sw.ElapsedMilliseconds}ms");
 
-        switch (settings.Language)
-        {
-            case LanguageSelection.Automatic:
-                //System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.CurrentCulture;
-                break;
-            case LanguageSelection.English:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                break;
-            case LanguageSelection.Russian:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru-RU");
-                break;
-            case LanguageSelection.Arabic:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ar-BH");
-                break;
-            case LanguageSelection.Polish:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("pl-PL");
-                break;
-            case LanguageSelection.Chinese:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-Hans");
-                break;
-            case LanguageSelection.German:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("de-DE");
-                break;
-            case LanguageSelection.Portuguese:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("pt-BR");
-                break;
-            case LanguageSelection.Spanish:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("es-ES");
-                break;
-            case LanguageSelection.French:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr-FR");
-                break;
-            case LanguageSelection.Italian:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("it-IT");
-                break;
-            case LanguageSelection.Japanese:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ja-JP");
-                break;
-            case LanguageSelection.Korean:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ko-KR");
-                break;
-            case LanguageSelection.ChineseTraditional:
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("zh-Hant");
-                break;
+        ApplyLanguageCulture(settings.Language);
+    }
 
-        }
+    public static CultureInfo GetCultureForLanguage(LanguageSelection language)
+    {
+        return language switch
+        {
+            LanguageSelection.English => new CultureInfo("en"),
+            LanguageSelection.Russian => new CultureInfo("ru-RU"),
+            LanguageSelection.Arabic => new CultureInfo("ar-BH"),
+            LanguageSelection.Polish => new CultureInfo("pl-PL"),
+            LanguageSelection.Chinese => new CultureInfo("zh-Hans"),
+            LanguageSelection.German => new CultureInfo("de-DE"),
+            LanguageSelection.Portuguese => new CultureInfo("pt-BR"),
+            LanguageSelection.Spanish => new CultureInfo("es-ES"),
+            LanguageSelection.French => new CultureInfo("fr-FR"),
+            LanguageSelection.Italian => new CultureInfo("it-IT"),
+            LanguageSelection.Japanese => new CultureInfo("ja-JP"),
+            LanguageSelection.Korean => new CultureInfo("ko-KR"),
+            LanguageSelection.ChineseTraditional => new CultureInfo("zh-Hant"),
+            _ => CultureInfo.CurrentUICulture
+        };
+    }
+
+    public static void ApplyLanguageCulture(LanguageSelection language)
+    {
+        if (language == LanguageSelection.Automatic) return;
+
+        var culture = GetCultureForLanguage(language);
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
+        Thread.CurrentThread.CurrentCulture = culture;
     }
 
     public static SemVersion Version { get; set; }
@@ -116,6 +105,7 @@ public partial class App : Application
         sw.Restart();
         // Read settings immediately.
         LoadAppSettings();
+        ApplyLanguageCulture(UserSettingsService.Current.Language);
         ErrorLogging.LogDebug($"[Startup] LoadAppSettings: {sw.ElapsedMilliseconds}ms");
 
         if (AppDataPaths.IsPortable)
@@ -297,7 +287,7 @@ public partial class App : Application
         throw (Exception)e.ExceptionObject;
 #else
         ErrorLogging.LogException(e.ExceptionObject as Exception);
-        System.Windows.MessageBox.Show("An unhandled exception has occurred. You may continue using TEdit, but operation may be unstable until the application has been restarted." + e.ExceptionObject.ToString(), "Unhandled Exception");
+        System.Windows.MessageBox.Show(TEdit.Properties.Language.error_unhandled + e.ExceptionObject.ToString(), TEdit.Properties.Language.error_unhandled_title);
         // Current.Shutdown();
 #endif
     }

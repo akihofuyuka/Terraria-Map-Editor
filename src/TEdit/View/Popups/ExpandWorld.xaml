@@ -8,6 +8,7 @@
         Title="{x:Static p:Language.expand_title}"
         WindowStartupLocation="CenterOwner"
         ExtendsContentIntoTitleBar="True"
+        Background="{DynamicResource ControlBackgroundBrush}"
         WindowBackdropType="Mica"
         Icon="/TEdit;component/Images/tedit.ico"
         Height="140"

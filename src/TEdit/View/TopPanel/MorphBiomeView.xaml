@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="TEdit.View.MorphBiomeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:tedit="clr-namespace:TEdit.UI.Xaml"
              xmlns:Editor="clr-namespace:TEdit.Editor"
@@ -9,13 +9,18 @@
              xmlns:p="clr-namespace:TEdit.Properties"
              xmlns:Terraria="clr-namespace:TEdit.Terraria;assembly=TEdit.Terraria"
              xmlns:terrariaData="clr-namespace:TEdit.Terraria.DataModel;assembly=TEdit.Terraria"
+             xmlns:converters="clr-namespace:TEdit.Converters"
              d:DesignWidth="400"
              d:DesignHeight="150"
              Background="{StaticResource WindowBackgroundBrush}"
              Foreground="{StaticResource TextBrush}"
-             xmlns:viewModel="clr-namespace:TEdit.ViewModel"             
-             d:DataContext="{d:DesignInstance Type=viewModel:WorldViewModel}" 
+             xmlns:viewModel="clr-namespace:TEdit.ViewModel"
+             d:DataContext="{d:DesignInstance Type=viewModel:WorldViewModel}"
              mc:Ignorable="d" >
+    <UserControl.Resources>
+        <converters:MorphBiomeDisplayNameConverter x:Key="MorphBiomeDisplayNameConverter" />
+        <converters:MorphMossDisplayNameConverter x:Key="MorphMossDisplayNameConverter" />
+    </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <StackPanel Orientation="Vertical" Margin="2">
             <TextBlock Text="{x:Static p:Language.MorphBiome_Mode}" Margin="2" />
@@ -32,13 +37,24 @@
             <TextBlock Text="{x:Static p:Language.tool_morph_label}" Margin="2" />
             <ComboBox Width="200"
                   ItemsSource="{Binding MorphToolOptions.TargetBiomes}"
-                  SelectedValue="{Binding MorphToolOptions.TargetBiome}" />
+                  SelectedValue="{Binding MorphToolOptions.TargetBiome}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Converter={StaticResource MorphBiomeDisplayNameConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock Text="{x:Static p:Language.tool_morph_moss_type}" Margin="2" />
             <ComboBox Width="200"
-                  ItemsSource="{Binding Source={x:Static Terraria:WorldConfiguration.MossTypesWithNone}, Mode=OneTime}" 
-                      SelectedValuePath="Value" 
-                      DisplayMemberPath="Key"
-                  SelectedValue="{Binding MorphToolOptions.MossType}" />
+                  ItemsSource="{Binding Source={x:Static Terraria:WorldConfiguration.MossTypesWithNone}, Mode=OneTime}"
+                  SelectedValuePath="Value"
+                  SelectedValue="{Binding MorphToolOptions.MossType}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Key, Converter={StaticResource MorphMossDisplayNameConverter}}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Vertical" Margin="2">
             <TextBlock Text="{x:Static p:Language.tool_morph_options}" />
