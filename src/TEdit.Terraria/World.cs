@@ -152,7 +152,7 @@ public partial class World
                     }
 
                     world.LastSave = File.GetLastWriteTimeUtc(filename);
-                    progress?.Report(new ProgressChangedEventArgs(100, "World Save Complete."));
+                    progress?.Report(new ProgressChangedEventArgs(100, ProgressKeys.WorldSaveComplete));
                 }
                 finally
                 {
@@ -257,7 +257,7 @@ public partial class World
                 }
 
                 world.LastSave = File.GetLastWriteTimeUtc(filename);
-                progress?.Report(new ProgressChangedEventArgs(100, "World Save Complete."));
+                progress?.Report(new ProgressChangedEventArgs(100, ProgressKeys.WorldSaveComplete));
             }
             finally
             {
@@ -378,7 +378,7 @@ public partial class World
                         // reset the stream
                         b.BaseStream.Position = (long)0;
 
-                        progress?.Report(new ProgressChangedEventArgs(0, "Loading File Header..."));
+                        progress?.Report(new ProgressChangedEventArgs(0, ProgressKeys.LoadingFileHeader));
                         if (TryLoadWinPhone(b, w, headersOnly: true, progress))
                         {
                             status.LoaderVersion = 3;
