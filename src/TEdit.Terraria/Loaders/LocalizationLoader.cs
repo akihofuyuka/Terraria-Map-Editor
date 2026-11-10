@@ -70,20 +70,43 @@ public static class LocalizationLoader
     public static LocalizationData LoadLocalization(string locale, string? dataPath = null)
     {
         var resourceName = $"Localization.{locale}.json";
+        LocalizationData data;
 
         try
         {
             using var stream = JsonDataLoader.GetDataStream(resourceName, dataPath);
-            var data = JsonSerializer.Deserialize<LocalizationData>(stream)
+            data = JsonSerializer.Deserialize<LocalizationData>(stream)
                 ?? new LocalizationData();
 
             ResolveReferences(data);
-            return data;
         }
         catch (System.IO.FileNotFoundException)
         {
-            return new LocalizationData();
+            data = new LocalizationData();
         }
+
+        // Also load the split spriteFrames dictionary (silently ignored if the locale file is missing; the caller falls back to English).
+        LoadSpriteFrames(data, locale, dataPath);
+
+        return data;
+    }
+
+    /// <summary>
+    /// Loads the spriteFrames.{locale}.json dictionary from embedded resources and merges it into the data model.
+    /// </summary>
+    private static void LoadSpriteFrames(LocalizationData data, string locale, string? dataPath)
+    {
+        try
+        {
+            using var stream = JsonDataLoader.GetDataStream($"Localization.spriteFrames.{locale}.json", dataPath);
+            var frames = JsonSerializer.Deserialize<Dictionary<string, string>>(stream);
+            if (frames != null)
+            {
+                foreach (var kv in frames)
+                    data.SpriteFrames[kv.Key] = kv.Value;
+            }
+        }
+        catch (System.IO.FileNotFoundException) { }
     }
 
     private static readonly Regex ReferencePattern = new(@"\{\$([^.}]+)\.([^}]+)\}", RegexOptions.Compiled);

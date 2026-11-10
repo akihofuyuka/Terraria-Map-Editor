@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text;
 using TEdit.Common;
 using TEdit.Terraria.DataModel;
 using TEdit.Terraria.Loaders;
@@ -79,6 +80,7 @@ public class TerrariaDataStore
 
     // Prefix data for key resolution during localization
     private List<PrefixData> _prefixDataList = [];
+    private readonly Dictionary<string, string> _itemKeyByName = new(StringComparer.OrdinalIgnoreCase);
 
     // Bestiary-derived lookups
     public Dictionary<int, BestiaryNpcData> BestiaryNpcById { get; } = new();
@@ -326,11 +328,17 @@ public class TerrariaDataStore
         TallyNames.Clear();
         TileItemLookup.Clear();
         WallItemLookup.Clear();
+        _itemKeyByName.Clear();
 
         foreach (var item in items)
         {
             Items.Add(item);
             ItemById[item.Id] = item;
+
+            if (!string.IsNullOrEmpty(item.Name) && !string.IsNullOrEmpty(item.Key))
+            {
+                _itemKeyByName[item.Name] = item.Key;
+            }
 
             if (item.Tally > 0) TallyNames[item.Tally] = item.Name;
             if (item.Head.HasValue) ArmorHeadItems[item.Id] = item;
@@ -347,8 +355,8 @@ public class TerrariaDataStore
             // Build reverse lookups: tile/wall → first item that places it
             if (item.CreateTile.HasValue && !TileItemLookup.ContainsKey(item.CreateTile.Value))
                 TileItemLookup[item.CreateTile.Value] = item.Id;
-            if (item.CreateWall.HasValue && !WallItemLookup.ContainsKey(item.CreateWall.Value))
-                WallItemLookup[item.CreateWall.Value] = item.Id;
+            if (item.CreateWall.HasValue && !WallItemLookup.ContainsKey(item.CreateWall.Value))
+                WallItemLookup[item.CreateWall.Value] = item.Id;
         }
         PopulateAnglerQuests();
     }
@@ -481,10 +489,33 @@ public class TerrariaDataStore
             if (itemsByKey.TryGetValue(kv.Key, out var item))
                 item.Name = kv.Value;
 
+        // Preserve original tile names for bilingual search before localization overwrites them
+        foreach (var tile in Tiles)
+            tile.RawName ??= tile.Name;
+
         // Apply tile names
         foreach (var kv in data.Tiles)
             if (tilesByKey.TryGetValue(kv.Key, out var tile))
                 tile.Name = kv.Value;
+
+        // Fallback for tiles not covered by data.Tiles
+        foreach (var tile in Tiles)
+        {
+            if (tile.Key != null && !data.Tiles.ContainsKey(tile.Key))
+            {
+                if (data.Items.TryGetValue(tile.Key, out var tileName))
+                    tile.Name = tileName;
+                else if (data.SpriteFrames.TryGetValue(tile.Key, out var frameTileName))
+                    tile.Name = frameTileName;
+                else if (TileItemLookup.TryGetValue(tile.Id, out var itemId) && ItemById.TryGetValue(itemId, out var item))
+                    tile.Name = item.Name;
+            }
+            else if (tile.Key == null)
+            {
+                if (TileItemLookup.TryGetValue(tile.Id, out var itemId) && ItemById.TryGetValue(itemId, out var item))
+                    tile.Name = item.Name;
+            }
+        }
 
         // Apply wall names
         foreach (var kv in data.Walls)
@@ -508,7 +539,7 @@ public class TerrariaDataStore
         // Apply paint names
         foreach (var paint in Paints)
             if (paint.Key != null && data.Items.TryGetValue(paint.Key, out var paintName))
-                paint.Name = paintName;
+                paint.Name = paintName;
 
         // Apply bestiary NPC names
         if (Bestiary != null)
@@ -541,7 +572,7 @@ public class TerrariaDataStore
                 PrefixById[id] = kv.Value;
     }
 
-    private void RebuildFrameImportant()
+    private void RebuildFrameImportant()
     {
         var count = TileCount;
         var arr = new bool[count];
@@ -564,5 +595,145 @@ public class TerrariaDataStore
         WallCount = data.MaxWallId + 1;
         MaxNpcId = data.MaxNpcId + 1;
         RebuildFrameImportant();
+    }
+
+    /// <summary>Gets the localized suffix for a frame anchor (e.g. [Left], [Right], [Top], [Bottom]).</summary>
+    public string GetLocalizedAnchor(FrameAnchor anchor)
+    {
+        if (anchor == FrameAnchor.None)
+            return string.Empty;
+
+        var key = $"Anchor.{anchor}";
+        if (Localization?.SpriteFrames.TryGetValue(key, out var locAnchor) == true)
+            return locAnchor;
+
+        return $"[{anchor}]";
+    }
+
+    /// <summary>Builds the full localized name for a tile frame style (base name, variant and anchor suffix).</summary>
+    public string GetLocalizedFrameName(TileProperty tile, FrameProperty frame)
+    {
+        if (Localization == null)
+            return frame.ToString();
+
+        // 1. Resolve the base name (item name, tile name, spriteFrames style name, then tile default name).
+        string baseName = frame.Name;
+        if (TryResolveItemName(frame.Name, out var locItemName))
+            baseName = locItemName!;
+        else if (Localization.Tiles.TryGetValue(frame.Name, out var locTileName))
+            baseName = locTileName;
+        else if (Localization.SpriteFrames.TryGetValue(frame.Name, out var locStyleName))
+            baseName = locStyleName;
+        else if ((string.IsNullOrWhiteSpace(frame.Name) || frame.Name == "Default")
+                 && tile.Name != "Default" && !string.IsNullOrWhiteSpace(tile.Name))
+            baseName = tile.Name;
+
+        // 2. Resolve the variant/style name (banners, paintings, trophies, direct style lookup and suffix variants).
+        string? localizedVariety = null;
+        if (!string.IsNullOrWhiteSpace(frame.Variety) && frame.Variety != "None")
+        {
+            // Banners / paintings: the variant is the item name (e.g. Blue Slime Banner).
+            if (TryResolveItemName(frame.Variety, out var directItem))
+            {
+                if (frame.Name.EndsWith("Banner", StringComparison.OrdinalIgnoreCase) ||
+                    frame.Name == "Painting" || tile.Id == 240 || tile.Id == 241 || tile.Id == 242 || tile.Id == 245 || tile.Id == 246)
+                {
+                    return directItem!;
+                }
+                localizedVariety = directItem;
+            }
+            // Boss trophies: the variant + " Trophy" is the item name (e.g. Eye of Cthulhu).
+            else if (TryResolveItemName(frame.Variety + " Trophy", out var trophyItem))
+            {
+                if (frame.Name == "Boss Trophy" || tile.Id == 89)
+                    return trophyItem!;
+                localizedVariety = trophyItem;
+            }
+            // Look up the style name directly in the spriteFrames dictionary.
+            else if (Localization.SpriteFrames.TryGetValue(frame.Variety, out var styleVal))
+            {
+                localizedVariety = styleVal;
+            }
+            // Compound suffix pattern (e.g. split "Flat A" into "Flat" + " A").
+            else if (TryResolveVarietySuffix(frame.Variety, out var suffixVal))
+            {
+                localizedVariety = suffixVal;
+            }
+            else
+            {
+                localizedVariety = frame.Variety;
+            }
+        }
+
+        // 3. Compose the full name and append the anchor suffix.
+        var sb = new StringBuilder(baseName);
+        if (!string.IsNullOrWhiteSpace(localizedVariety))
+        {
+            sb.Append(": ");
+            sb.Append(localizedVariety);
+        }
+        if (frame.Anchor != FrameAnchor.None)
+        {
+            sb.Append(' ');
+            sb.Append(GetLocalizedAnchor(frame.Anchor));
+        }
+        return sb.ToString();
+    }
+
+    /// <summary>Tries to resolve a style/variant name to a localized item name (exact or direct lookup).</summary>
+    private bool TryResolveItemName(string name, out string? localizedName)
+    {
+        if (Localization == null)
+        {
+            localizedName = null;
+            return false;
+        }
+
+        if (_itemKeyByName.TryGetValue(name, out var key) && Localization.Items.TryGetValue(key, out var val))
+        {
+            localizedName = val;
+            return true;
+        }
+
+        if (Localization.Items.TryGetValue(name, out var directVal))
+        {
+            localizedName = directVal;
+            return true;
+        }
+
+        localizedName = null;
+        return false;
+    }
+
+    /// <summary>Tries to resolve by base name + variant suffix (e.g. split 'Flat A' into 'Flat' + ' A').</summary>
+    private bool TryResolveVarietySuffix(string variety, out string? result)
+    {
+        if (Localization == null)
+        {
+            result = null;
+            return false;
+        }
+
+        int lastSpace = variety.LastIndexOf(' ');
+        if (lastSpace > 0)
+        {
+            string basePart = variety[..lastSpace];
+            string suffixPart = variety[lastSpace..];
+
+            if (Localization.SpriteFrames.TryGetValue(basePart, out var baseVal))
+            {
+                result = $"{baseVal}{suffixPart}";
+                return true;
+            }
+
+            if (TryResolveItemName(basePart, out var baseItemVal))
+            {
+                result = $"{baseItemVal}{suffixPart}";
+                return true;
+            }
+        }
+
+        result = null;
+        return false;
     }
 }

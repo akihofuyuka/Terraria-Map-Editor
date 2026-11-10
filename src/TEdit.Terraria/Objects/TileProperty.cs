@@ -89,6 +89,10 @@ public class TileProperty : ITile
     [JsonPropertyOrder(2)]
     public string? Key { get; set; }
 
+    /// <summary>Original (unlocalized) display name, captured before localization is applied.</summary>
+    [JsonIgnore]
+    public string? RawName { get; set; }
+
     [JsonPropertyOrder(3)]
     public TEditColor Color { get; set; }
 

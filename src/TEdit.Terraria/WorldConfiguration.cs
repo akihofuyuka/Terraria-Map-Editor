@@ -112,7 +112,7 @@ public class WorldConfiguration
     /// Initialize WorldConfiguration from embedded JSON resources via TerrariaDataStore.
     /// Safe to call multiple times.
     /// </summary>
-    public static void Initialize()
+    public static void Initialize(string? locale = null)
     {
         if (_initialized) return;
 
@@ -122,8 +122,8 @@ public class WorldConfiguration
 
             try
             {
-                // Load data from TerrariaDataStore with locale from current UI culture
-                var locale = Loaders.LocalizationLoader.GetLocaleFromCurrentCulture();
+                // Load data from TerrariaDataStore with locale from explicit parameter or current UI culture
+                locale ??= Loaders.LocalizationLoader.GetLocaleFromCurrentCulture();
                 _store = TerrariaDataStore.Initialize(locale: locale);
                 PopulateFromStore(_store);
 
@@ -661,4 +661,7 @@ public class WorldConfiguration
     {
         return id + ":" + u + "," + v;
     }
+
+    /// <summary>Gets the localized display name for a tile frame style.</summary>
+    public static string GetLocalizedFrameName(TileProperty tile, FrameProperty frame) => _store?.GetLocalizedFrameName(tile, frame) ?? frame.ToString();
 }
