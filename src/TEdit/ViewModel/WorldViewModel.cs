@@ -279,6 +279,7 @@ public partial class WorldViewModel : ReactiveObject
                 {
                     Tile = (ushort)tile.Id,
                     Name = tile.Name,
+                    RawName = tile.RawName ?? tile.Name,
                     SizeTiles = tile.FrameSize,
                     SizePixelsRender = tile.TextureGrid,
                     SizePixelsInterval = tile.TextureGrid + tile.FrameGap,
@@ -293,7 +294,8 @@ public partial class WorldViewModel : ReactiveObject
                     {
                         Tile = sprite.Tile,
                         Style = styleIndex++,
-                        Name = frame.ToString(),
+                        Name = WorldConfiguration.GetLocalizedFrameName(tile, frame),
+                        RawName = frame.ToString(),
                         UV = frame.UV,
                         SizeTiles = frame.Size.X > 0 && frame.Size.Y > 0 ? frame.Size : tile.FrameSize[0],
                         SizePixelsInterval = sprite.SizePixelsInterval,
@@ -329,6 +331,7 @@ public partial class WorldViewModel : ReactiveObject
         {
             Tile = (ushort)tile.Id,
             Name = tile.Name,
+            RawName = tile.RawName ?? tile.Name,
             SizeTiles = tile.FrameSize,
             SizePixelsRender = tile.TextureGrid,
             SizePixelsInterval = tile.TextureGrid + tile.FrameGap,
@@ -342,7 +345,8 @@ public partial class WorldViewModel : ReactiveObject
             {
                 Tile = newSprite.Tile,
                 Style = styleIndex++,
-                Name = frame.ToString(),
+                Name = WorldConfiguration.GetLocalizedFrameName(tile, frame),
+                RawName = frame.ToString(),
                 UV = frame.UV,
                 SizeTiles = frame.Size.X > 0 && frame.Size.Y > 0 ? frame.Size : tile.FrameSize[0],
                 SizePixelsInterval = newSprite.SizePixelsInterval,
@@ -1666,13 +1670,15 @@ public partial class WorldViewModel : ReactiveObject
                 // Tile ID prefix match (for searching "5" to find 50, 51, etc.)
                 if (sprite.Tile.ToString().StartsWith(term)) return true;
 
-                // Case-insensitive name match
+                // Case-insensitive name and raw name match
                 if (sprite.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
+                if (sprite.RawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
 
-                // Match against any child style name
+                // Match against any child style name or raw name
                 foreach (var style in sprite.Styles)
                 {
                     if (style.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
+                    if (style.RawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
                 }
             }
             return false;
@@ -1708,8 +1714,10 @@ public partial class WorldViewModel : ReactiveObject
                     string[] filterTerms = _spriteFilter.Split(new char[] { '/', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     foreach (string term in filterTerms)
                     {
-                        // If parent name matches, show all its styles
+                        // If parent name or raw name matches, show all its styles
                         if (parentSheet.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+                            return true;
+                        if (parentSheet.RawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                             return true;
                         // Also check if tile ID matches
                         if (parentSheet.Tile.ToString() == term.Trim())
@@ -1717,12 +1725,12 @@ public partial class WorldViewModel : ReactiveObject
                     }
                 }
 
-                // Otherwise, filter by style's own name
-                return MatchesSpriteFilter(sprite.Name, _spriteFilter);
+                // Otherwise, filter by style's own name and raw name
+                return MatchesSpriteFilter(sprite.Name, _spriteFilter, sprite.RawName);
             }
 
-            // No tile filter - only show if text filter matches style name or tile ID
-            return MatchesSpriteFilter(sprite.Name, _spriteFilter) ||
+            // No tile filter - only show if text filter matches style name, raw name or tile ID
+            return MatchesSpriteFilter(sprite.Name, _spriteFilter, sprite.RawName) ||
                    sprite.Tile.ToString() == _spriteFilter.Trim();
         };
 
@@ -1734,15 +1742,17 @@ public partial class WorldViewModel : ReactiveObject
     /// <summary>
     /// Helper method to check if a name matches the sprite filter terms.
     /// </summary>
-    private bool MatchesSpriteFilter(string name, string filter)
+    private bool MatchesSpriteFilter(string? name, string filter, string? rawName = null)
     {
-        if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(filter))
+        if (string.IsNullOrWhiteSpace(filter))
             return false;
 
         string[] terms = filter.Split(new char[] { '/', ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
         foreach (string term in terms)
         {
-            if (name.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+            if (name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+                return true;
+            if (rawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                 return true;
         }
         return false;

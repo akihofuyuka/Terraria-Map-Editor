@@ -61,7 +61,7 @@ public partial class SpriteTreePickerViewModel
 
         foreach (var tile in framedTiles)
         {
-            var rootNode = new SpriteTreeNodeViewModel(tile.Id, tile.Name, tile.Color);
+            var rootNode = new SpriteTreeNodeViewModel(tile.Id, tile.Name, tile.Color, rawName: tile.RawName ?? tile.Name);
 
             // Add variant children from Frames
             if (tile.Frames != null)
@@ -70,9 +70,10 @@ public partial class SpriteTreePickerViewModel
                 {
                     var childNode = new SpriteTreeNodeViewModel(
                         tile.Id,
-                        frame.ToString(),
+                        WorldConfiguration.GetLocalizedFrameName(tile, frame),
                         tile.Color,
-                        frame.UV
+                        frame.UV,
+                        rawName: frame.ToString()
                     );
                     rootNode.Children.Add(childNode);
                 }
@@ -87,11 +88,16 @@ public partial class SpriteTreePickerViewModel
         if (obj is not SpriteTreeNodeViewModel node) return false;
         if (string.IsNullOrWhiteSpace(SearchText)) return true;
 
+        // Match both the localized name and the original English name for bilingual search.
+        static bool Matches(SpriteTreeNodeViewModel n, string query) =>
+            n.Name.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0 ||
+            (!string.IsNullOrEmpty(n.RawName) && n.RawName.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0);
+
         // Match root name or any child name
-        if (node.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+        if (Matches(node, SearchText))
             return true;
 
-        return node.Children.Any(c => c.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+        return node.Children.Any(c => Matches(c, SearchText));
     }
 
     private int CountSelectedNodes()
