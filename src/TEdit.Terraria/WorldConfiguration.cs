@@ -39,6 +39,7 @@ public class WorldConfiguration
     public static MorphConfiguration MorphSettings { get; private set; }
     public static MorphConfiguration DestructiveMorphSettings { get; private set; }
     public static BackgroundStyleConfiguration BackgroundStyles => _store?.BackgroundStyles;
+    public static IReadOnlyList<AnglerQuestProperty> AnglerQuests => _store?.AnglerQuests ?? [];
 
     // Tracks what we actually applied (handy for UI / warnings).
     public static uint ActiveWorldVersion  { get; private set; }

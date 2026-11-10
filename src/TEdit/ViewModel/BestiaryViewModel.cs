@@ -20,6 +20,9 @@ public partial class BestiaryItem : ReactiveObject
     [Reactive]
     private string _name;
 
+    /// <summary>Internal entity ID for world save serialization (e.g. "JungleSlime").</summary>
+    public string BestiaryId { get; set; } = string.Empty;
+
     /// <summary>NPC ID for preview icon lookup.</summary>
     public int NpcId { get; set; }
 
@@ -147,6 +150,7 @@ public partial class BestiaryViewModel : ReactiveObject
 
         if (!string.IsNullOrEmpty(FilterText) &&
             !item.Name.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
+            !item.BestiaryId.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
             !item.NpcId.ToString().Contains(FilterText, StringComparison.Ordinal) &&
             !item.BestiaryIndex.ToString().Contains(FilterText, StringComparison.Ordinal))
         {
@@ -185,7 +189,7 @@ public partial class BestiaryViewModel : ReactiveObject
 
         foreach (var item in BestiaryData)
         {
-            var bestiaryId = item.Name;
+            var bestiaryId = item.BestiaryId;
             if (WorldConfiguration.BestiaryData.NpcData.TryGetValue(bestiaryId, out var npcData) &&
                 _wvm.CurrentWorld.KilledMobs.Count > npcData.BannerId &&
                 npcData.BannerId >= 0)
@@ -215,11 +219,16 @@ public partial class BestiaryViewModel : ReactiveObject
             int npcId = 0;
             int bestiaryIndex = 0;
             int bestiaryStars = 1;
+            string displayName = entity;
             if (WorldConfiguration.BestiaryData.NpcData.TryGetValue(entity, out var npcData))
             {
                 npcId = npcData.Id;
                 bestiaryIndex = npcData.BestiaryDisplayIndex;
                 bestiaryStars = npcData.BestiaryStars;
+                if (!string.IsNullOrWhiteSpace(npcData.Name))
+                {
+                    displayName = npcData.Name;
+                }
             }
 
             BestiaryData.Add(new BestiaryItem
@@ -227,7 +236,8 @@ public partial class BestiaryViewModel : ReactiveObject
                 CanKill = WorldConfiguration.BestiaryData.BestiaryKilledIDs.Contains(entity),
                 CanNear = WorldConfiguration.BestiaryData.BestiaryNearIDs.Contains(entity),
                 CanTalk = WorldConfiguration.BestiaryData.BestiaryTalkedIDs.Contains(entity),
-                Name = entity,
+                BestiaryId = entity,
+                Name = displayName,
                 NpcId = npcId,
                 BestiaryIndex = bestiaryIndex,
                 BestiaryStars = bestiaryStars,
@@ -345,9 +355,9 @@ public partial class BestiaryViewModel : ReactiveObject
 
             foreach (var line in BestiaryData)
             {
-                if (line.Defeated > 0) { bestiaryEdits.NPCKills[line.Name] = line.Defeated; }
-                if (line.Talked) { bestiaryEdits.NPCChat.Add(line.Name); }
-                if (line.Near) { bestiaryEdits.NPCNear.Add(line.Name); }
+                if (line.Defeated > 0) { bestiaryEdits.NPCKills[line.BestiaryId] = line.Defeated; }
+                if (line.Talked) { bestiaryEdits.NPCChat.Add(line.BestiaryId); }
+                if (line.Near) { bestiaryEdits.NPCNear.Add(line.BestiaryId); }
             }
             _wvm.CurrentWorld.Bestiary = bestiaryEdits;
             LoadBestiary();

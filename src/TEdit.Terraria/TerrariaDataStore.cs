@@ -63,6 +63,9 @@ public class TerrariaDataStore
     // Dye color lookup (item ID → static tint color)
     public Dictionary<int, DyeProperty> DyeColorById { get; } = new();
 
+    // Angler Quest fish
+    public List<AnglerQuestProperty> AnglerQuests { get; } = new();
+
     // Localization
     public DataModel.LocalizationData? Localization { get; private set; }
     public string CurrentLocale { get; private set; } = "en-US";
@@ -344,9 +347,10 @@ public class TerrariaDataStore
             // Build reverse lookups: tile/wall → first item that places it
             if (item.CreateTile.HasValue && !TileItemLookup.ContainsKey(item.CreateTile.Value))
                 TileItemLookup[item.CreateTile.Value] = item.Id;
-            if (item.CreateWall.HasValue && !WallItemLookup.ContainsKey(item.CreateWall.Value))
-                WallItemLookup[item.CreateWall.Value] = item.Id;
+            if (item.CreateWall.HasValue && !WallItemLookup.ContainsKey(item.CreateWall.Value))
+                WallItemLookup[item.CreateWall.Value] = item.Id;
         }
+        PopulateAnglerQuests();
     }
 
     internal void PopulateDyes(List<DyeProperty> dyes)
@@ -358,6 +362,28 @@ public class TerrariaDataStore
         DyeItems.Clear();
         foreach (var item in Items)
             if (DyeColorById.ContainsKey(item.Id)) DyeItems[item.Id] = item;
+    }
+
+    /// <summary>
+    /// Item IDs for Angler quests, matching Terraria.Main.anglerQuestItemNetIDs (0..38: 2450..2488, 39: 4393, 40: 4394).
+    /// </summary>
+    private static readonly int[] AnglerQuestItemIds =
+        Enumerable.Range(2450, 39).Concat([4393, 4394]).ToArray();
+
+    internal void PopulateAnglerQuests()
+    {
+        AnglerQuests.Clear();
+        for (int i = 0; i < AnglerQuestItemIds.Length; i++)
+        {
+            int itemId = AnglerQuestItemIds[i];
+            ItemById.TryGetValue(itemId, out var item);
+            AnglerQuests.Add(new AnglerQuestProperty
+            {
+                QuestId = i,
+                ItemId = itemId,
+                Item = item
+            });
+        }
     }
 
     internal void PopulateNpcs(List<NpcData> npcs)
@@ -483,6 +509,18 @@ public class TerrariaDataStore
         foreach (var paint in Paints)
             if (paint.Key != null && data.Items.TryGetValue(paint.Key, out var paintName))
                 paint.Name = paintName;
+
+        // Apply bestiary NPC names
+        if (Bestiary != null)
+        {
+            foreach (var npc in Bestiary.NpcData)
+            {
+                if (data.Npcs.TryGetValue(npc.BestiaryId, out var localizedName))
+                {
+                    npc.Name = localizedName;
+                }
+            }
+        }
 
         // Apply NPC names (+ maintain reverse lookups)
         foreach (var kv in data.Npcs)
