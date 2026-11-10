@@ -465,6 +465,25 @@ public class TerrariaDataStore
             if (wallsByKey.TryGetValue(kv.Key, out var wall))
                 wall.Name = kv.Value;
 
+        // Fallback for walls not covered by data.Walls
+        foreach (var wall in Walls)
+        {
+            if (wall.Key != null && !data.Walls.ContainsKey(wall.Key))
+            {
+                if (data.Items.TryGetValue(wall.Key, out var wallName))
+                    wall.Name = wallName;
+                else if (data.Items.TryGetValue(wall.Key + "Wall", out var wallNameWall))
+                    wall.Name = wallNameWall;
+                else if (WallItemLookup.TryGetValue(wall.Id, out var itemId) && ItemById.TryGetValue(itemId, out var item))
+                    wall.Name = item.Name;
+            }
+        }
+
+        // Apply paint names
+        foreach (var paint in Paints)
+            if (paint.Key != null && data.Items.TryGetValue(paint.Key, out var paintName))
+                paint.Name = paintName;
+
         // Apply NPC names (+ maintain reverse lookups)
         foreach (var kv in data.Npcs)
         {
@@ -484,7 +503,7 @@ public class TerrariaDataStore
                 PrefixById[id] = kv.Value;
     }
 
-    private void RebuildFrameImportant()
+    private void RebuildFrameImportant()
     {
         var count = TileCount;
         var arr = new bool[count];
