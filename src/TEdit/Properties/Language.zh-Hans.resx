@@ -5232,4 +5232,25 @@ TEdit 支持最高世界版本：{1}
   <data name="world_size_custom" xml:space="preserve">
     <value>自定义</value>
   </data>
+  <data name="progress_verifying_file" xml:space="preserve">
+    <value>正在校验文件...</value>
+  </data>
+  <data name="progress_load_complete" xml:space="preserve">
+    <value>加载完成。</value>
+  </data>
+  <data name="progress_preparing_tmodloader_data" xml:space="preserve">
+    <value>正在准备 tModLoader 数据...</value>
+  </data>
+  <data name="progress_saving_tmodloader_data" xml:space="preserve">
+    <value>正在保存 tModLoader 数据...</value>
+  </data>
+  <data name="progress_loading_tmodloader_data" xml:space="preserve">
+    <value>正在加载 tModLoader 数据...</value>
+  </data>
+  <data name="progress_loaded_windows_phone_header" xml:space="preserve">
+    <value>已加载 Windows Phone 世界头信息。</value>
+  </data>
+  <data name="progress_converting_to_windows_phone" xml:space="preserve">
+    <value>正在转换为 Windows Phone 世界...</value>
+  </data>
 </root>
