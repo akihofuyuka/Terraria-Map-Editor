@@ -25,6 +25,12 @@ public class LocalizationData
 
     [JsonPropertyName("walls")]
     public Dictionary<string, string> Walls { get; set; } = new();
+
+    /// <summary>
+    /// Localized sprite style and uncovered tile frame names (merged at runtime from spriteFrames.{locale}.json; not part of the official mirror serialization).
+    /// </summary>
+    [JsonIgnore]
+    public Dictionary<string, string> SpriteFrames { get; set; } = new();
 }
 
 public class BuffLocalization
