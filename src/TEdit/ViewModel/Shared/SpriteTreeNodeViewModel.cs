@@ -16,6 +16,8 @@ public partial class SpriteTreeNodeViewModel
 {
     public int TileId { get; init; }
     public string Name { get; init; } = string.Empty;
+    /// <summary>Original unlocalized English name (used for bilingual search filtering).</summary>
+    public string? RawName { get; init; }
     public TEditColor Color { get; init; }
 
     /// <summary>
@@ -38,12 +40,13 @@ public partial class SpriteTreeNodeViewModel
 
     public SpriteTreeNodeViewModel() { }
 
-    public SpriteTreeNodeViewModel(int tileId, string name, TEditColor color, Vector2Short? uv = null)
+    public SpriteTreeNodeViewModel(int tileId, string name, TEditColor color, Vector2Short? uv = null, string? rawName = null)
     {
         TileId = tileId;
         Name = name;
         Color = color;
         UV = uv;
+        RawName = rawName;
     }
 
     /// <summary>
