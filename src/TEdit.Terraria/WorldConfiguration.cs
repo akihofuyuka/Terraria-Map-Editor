@@ -241,10 +241,12 @@ public class WorldConfiguration
             {
                 if (frame.Variety == "Flat" && seen.Add(frame.Name))
                 {
+                    // Resolve a name-only frame so the style shows just the material name,
+                    // without the "Flat" variety that GetLocalizedFrameName would otherwise append.
                     _platformProperties.Add(new FrameProperty
                     {
                         Id = frame.UV.Y / 18,
-                        Name = frame.Name,
+                        Name = store.GetLocalizedFrameName(_tileProperties[19], new FrameProperty { Name = frame.Name }),
                         Color = frame.Color
                     });
                 }
