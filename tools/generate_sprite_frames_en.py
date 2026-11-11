@@ -30,9 +30,9 @@ for tile in tiles:
     if isinstance(tile_key, str) and tile_key.strip():
         keys.add(tile_key.strip())
 
-    tile_name = tile.get('name')
-    if isinstance(tile_name, str) and tile_name.strip():
-        keys.add(tile_name.strip())
+    # tile.name is deliberately not collected: the runtime looks up tile.Key,
+    # frame.Name and frame.Variety, never the tile display name, so those entries
+    # would be dead weight in the Crowdin source.
 
     for frame in tile.get('frames', []):
         fn = frame.get('name')
