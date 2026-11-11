@@ -1082,6 +1082,15 @@
   <data name="newworld_cave_preset" xml:space="preserve">
     <value>洞穴预设</value>
   </data>
+  <data name="newworld_cave_preset_normal" xml:space="preserve">
+    <value>普通</value>
+  </data>
+  <data name="newworld_cave_preset_large" xml:space="preserve">
+    <value>大型</value>
+  </data>
+  <data name="newworld_cave_preset_labyrinth" xml:space="preserve">
+    <value>迷宫</value>
+  </data>
   <data name="newworld_create" xml:space="preserve">
     <value>创造世界</value>
   </data>
@@ -1447,6 +1456,9 @@
   </data>
   <data name="player_stats_team_red" xml:space="preserve">
     <value>红队</value>
+  </data>
+  <data name="player_stats_team_white" xml:space="preserve">
+    <value>白队</value>
   </data>
   <data name="player_stats_team_yellow" xml:space="preserve">
     <value>黄队</value>
@@ -2392,6 +2404,33 @@
   <data name="specialtile_label_pose" xml:space="preserve">
     <value>姿势</value>
   </data>
+  <data name="DisplayDollPoseID_Standing" xml:space="preserve">
+    <value>站立</value>
+  </data>
+  <data name="DisplayDollPoseID_Sitting" xml:space="preserve">
+    <value>坐姿</value>
+  </data>
+  <data name="DisplayDollPoseID_Jumping" xml:space="preserve">
+    <value>跳跃</value>
+  </data>
+  <data name="DisplayDollPoseID_Walking" xml:space="preserve">
+    <value>行走</value>
+  </data>
+  <data name="DisplayDollPoseID_Use1" xml:space="preserve">
+    <value>使用1</value>
+  </data>
+  <data name="DisplayDollPoseID_Use2" xml:space="preserve">
+    <value>使用2</value>
+  </data>
+  <data name="DisplayDollPoseID_Use3" xml:space="preserve">
+    <value>使用3</value>
+  </data>
+  <data name="DisplayDollPoseID_Use4" xml:space="preserve">
+    <value>使用4</value>
+  </data>
+  <data name="DisplayDollPoseID_Use5" xml:space="preserve">
+    <value>使用5</value>
+  </data>
   <data name="specialtile_label_signtext" xml:space="preserve">
     <value>标牌文字</value>
   </data>
@@ -2999,6 +3038,15 @@
   </data>
   <data name="tool_point_title" xml:space="preserve">
     <value>特殊地点</value>
+  </data>
+  <data name="tool_point_spawn" xml:space="preserve">
+    <value>出生点</value>
+  </data>
+  <data name="tool_point_dungeon" xml:space="preserve">
+    <value>地牢</value>
+  </data>
+  <data name="tool_point_team_format" xml:space="preserve">
+    <value>{0}</value>
   </data>
   <data name="tool_sprite2_title" xml:space="preserve">
     <value>物体放置器</value>
@@ -3695,6 +3743,21 @@
   </data>
   <data name="world_explorer_col_modified" xml:space="preserve">
     <value>修改时间</value>
+  </data>
+  <data name="world_explorer_modified_missing" xml:space="preserve">
+    <value>[缺失]</value>
+  </data>
+  <data name="world_explorer_modified_just_now" xml:space="preserve">
+    <value>刚刚</value>
+  </data>
+  <data name="world_explorer_modified_minutes_ago" xml:space="preserve">
+    <value>{0}分钟前</value>
+  </data>
+  <data name="world_explorer_modified_hours_ago" xml:space="preserve">
+    <value>{0}小时前</value>
+  </data>
+  <data name="world_explorer_modified_days_ago" xml:space="preserve">
+    <value>{0}天前</value>
   </data>
   <data name="world_explorer_col_size" xml:space="preserve">
     <value>大小</value>
