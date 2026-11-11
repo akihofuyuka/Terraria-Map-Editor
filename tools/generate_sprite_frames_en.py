@@ -52,6 +52,10 @@ result['Anchor.Left'] = '[Left]'
 result['Anchor.Right'] = '[Right]'
 result['Anchor.Top'] = '[Top]'
 
+# Suffix markers appended to natural/unused wall variants (see ApplyLocalization).
+result['Wall.Natural'] = '(natural)'
+result['Wall.Unused'] = '(unused)'
+
 sorted_result = dict(sorted(result.items()))
 
 with open(output_path, 'w', encoding='utf-8', newline='\n') as f:

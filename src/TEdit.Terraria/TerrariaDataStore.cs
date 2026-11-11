@@ -512,6 +512,10 @@ public class TerrariaDataStore
                 tile.Name = itemName;
         }
 
+        var wallEnglishNames = new Dictionary<int, string>();
+        foreach (var wall in Walls)
+            if (wall.Name != null) wallEnglishNames[wall.Id] = wall.Name;
+
         // Apply wall names
         foreach (var kv in data.Walls)
             if (wallsByKey.TryGetValue(kv.Key, out var wall))
@@ -529,6 +533,35 @@ public class TerrariaDataStore
                 wall.Name = wallNameWall;
             else if (GetPlacingItemName(WallItemLookup, wall.Id) is { } itemName)
                 wall.Name = itemName;
+        }
+
+        // Natural/unused variants have no game name; reuse the base wall's localized name + marker.
+        if (data.SpriteFrames.TryGetValue("Wall.Natural", out var naturalMarker)
+            && data.SpriteFrames.TryGetValue("Wall.Unused", out var unusedMarker))
+        {
+            var baseLocalizedByName = new Dictionary<string, string>();
+            foreach (var wall in Walls)
+                if (wall.Name != null && wallEnglishNames.TryGetValue(wall.Id, out var originalName))
+                    baseLocalizedByName.TryAdd(originalName, wall.Name);
+
+            foreach (var wall in Walls)
+            {
+                var name = wall.Name;
+                if (name == null)
+                    continue;
+
+                string marker;
+                if (name.EndsWith(" (natural)", StringComparison.Ordinal))
+                    marker = naturalMarker;
+                else if (name.EndsWith(" (unused)", StringComparison.Ordinal))
+                    marker = unusedMarker;
+                else
+                    continue;
+
+                var baseEnglish = name[..name.LastIndexOf('(')].TrimEnd();
+                if (baseLocalizedByName.TryGetValue(baseEnglish, out var baseLocalized) && baseLocalized != baseEnglish)
+                    wall.Name = baseLocalized + marker;
+            }
         }
 
         // Apply paint names
