@@ -86,25 +86,25 @@ public static class LocalizationLoader
             data = new LocalizationData();
         }
 
-        // Also load the split spriteFrames dictionary (silently ignored if the locale file is missing; the caller falls back to English).
-        LoadSpriteFrames(data, locale, dataPath);
+        // Also load the split supplementalNames dictionary (silently ignored if the locale file is missing; the caller falls back to English).
+        LoadSupplementalNames(data, locale, dataPath);
 
         return data;
     }
 
     /// <summary>
-    /// Loads the spriteFrames.{locale}.json dictionary from embedded resources and merges it into the data model.
+    /// Loads the supplementalNames.{locale}.json dictionary from embedded resources and merges it into the data model.
     /// </summary>
-    private static void LoadSpriteFrames(LocalizationData data, string locale, string? dataPath)
+    private static void LoadSupplementalNames(LocalizationData data, string locale, string? dataPath)
     {
         try
         {
-            using var stream = JsonDataLoader.GetDataStream($"Localization.spriteFrames.{locale}.json", dataPath);
+            using var stream = JsonDataLoader.GetDataStream($"Localization.supplementalNames.{locale}.json", dataPath);
             var frames = JsonSerializer.Deserialize<Dictionary<string, string>>(stream);
             if (frames != null)
             {
                 foreach (var kv in frames)
-                    data.SpriteFrames[kv.Key] = kv.Value;
+                    data.SupplementalNames[kv.Key] = kv.Value;
             }
         }
         catch (System.IO.FileNotFoundException) { }

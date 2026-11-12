@@ -21,6 +21,9 @@ public partial class EditableFrame : ReactiveObject
 {
     [Reactive] private string _name = Properties.Language.spriteeditor_frame_default;
     [Reactive] private string? _variety;
+
+    /// <summary>Localized display name for the frame (resolves base name / item / style). Not persisted.</summary>
+    public string LocalizedName { get; set; } = string.Empty;
     [Reactive] private short _uvX;
     [Reactive] private short _uvY;
     [Reactive] private short _sizeX = 1;
@@ -37,13 +40,14 @@ public partial class EditableFrame : ReactiveObject
     /// <summary>Pixel height on texture.</summary>
     public int PixelHeight { get; set; }
 
-    public static EditableFrame FromFrameProperty(FrameProperty fp, Vector2Short textureGrid, Vector2Short frameGap, Vector2Short defaultSize)
+    public static EditableFrame FromFrameProperty(FrameProperty fp, TileProperty tile, Vector2Short textureGrid, Vector2Short frameGap, Vector2Short defaultSize)
     {
         var size = (fp.Size.X > 0 && fp.Size.Y > 0) ? fp.Size : defaultSize;
         var ef = new EditableFrame
         {
             Name = fp.Name,
             Variety = fp.Variety,
+            LocalizedName = WorldConfiguration.GetLocalizedFrameName(tile, fp),
             UvX = fp.UV.X,
             UvY = fp.UV.Y,
             SizeX = size.X,
@@ -103,7 +107,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
     public WriteableBitmap? TileTexture { get; }
 
     /// <summary>Tile name displayed in title bar.</summary>
-    public string TileName => _tileProperty.Name;
+    public string TileName => _tileProperty.LocalizedName;
 
     /// <summary>Tile ID.</summary>
     public int TileId => _tileProperty.Id;
@@ -208,7 +212,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
             var defaultSize = new Vector2Short(FrameSizeX, FrameSizeY);
             foreach (var fp in over.Frames)
             {
-                Frames.Add(EditableFrame.FromFrameProperty(fp, grid, gap, defaultSize));
+                Frames.Add(EditableFrame.FromFrameProperty(fp, _tileProperty, grid, gap, defaultSize));
             }
         }
     }
@@ -223,7 +227,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
             var defaultSize = new Vector2Short(FrameSizeX, FrameSizeY);
             foreach (var fp in _tileProperty.Frames)
             {
-                Frames.Add(EditableFrame.FromFrameProperty(fp, grid, gap, defaultSize));
+                Frames.Add(EditableFrame.FromFrameProperty(fp, _tileProperty, grid, gap, defaultSize));
             }
         }
         StatusText = string.Format(Properties.Language.spriteeditor_status_loaded_frames, Frames.Count);
@@ -242,7 +246,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         {
             // For vanilla tiles, save under a "Vanilla" override file
             _configStore.SaveTile("Vanilla", _tileProperty.Name, over);
-            StatusText = string.Format(Properties.Language.spriteeditor_status_saved_vanilla, _tileProperty.Name);
+            StatusText = string.Format(Properties.Language.spriteeditor_status_saved_vanilla, _tileProperty.LocalizedName);
         }
 
         // Update in-memory TileProperty so RebuildSpriteForTile sees the new data

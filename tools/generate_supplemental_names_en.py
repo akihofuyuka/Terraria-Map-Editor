@@ -5,13 +5,13 @@ import re
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 tiles_path = os.path.join(repo_root, 'src', 'TEdit.Terraria', 'Data', 'tiles.json')
 loc_path = os.path.join(repo_root, 'src', 'TEdit.Terraria', 'Data', 'Localization', 'en-US.json')
-output_path = os.path.join(repo_root, 'src', 'TEdit.Terraria', 'Data', 'Localization', 'spriteFrames.en-US.json')
+output_path = os.path.join(repo_root, 'src', 'TEdit.Terraria', 'Data', 'Localization', 'supplementalNames.en-US.json')
 
 with open(tiles_path, 'r', encoding='utf-8') as f:
     tiles = json.load(f)
 
 # Names already resolved by the game data (item/tile keys and display names) are
-# looked up through data.Items / data.Tiles before spriteFrames is ever consulted,
+# looked up through data.Items / data.Tiles before supplementalNames is ever consulted,
 # so they do not belong in this file. Including them only bloats the Crowdin source.
 covered = set()
 if os.path.exists(loc_path):
@@ -42,13 +42,21 @@ for tile in tiles:
         if isinstance(fv, str) and fv.strip() and fv.strip() != 'None':
             keys.add(fv.strip())
 
+    # Biome-variant labels shown in the sprite picker dropdown (e.g. "Forest", "Beach Palm").
+    for variant in tile.get('biomeVariants', []):
+        vn = variant.get('name')
+        if isinstance(vn, str) and vn.strip() and vn.strip() != 'None':
+            keys.add(vn.strip())
+
 # Keep only the residual style names that need localization: exclude names already
 # covered by items/tiles and pure numeric frame tokens.
 result = {k: k for k in sorted(keys) if k not in covered and not numeric_only.match(k)}
 
 # Frame anchor suffixes shown as "[Left]" etc.
 result['Anchor.Bottom'] = '[Bottom]'
+result['Anchor.Center'] = '[Center]'
 result['Anchor.Left'] = '[Left]'
+result['Anchor.None'] = '[None]'
 result['Anchor.Right'] = '[Right]'
 result['Anchor.Top'] = '[Top]'
 

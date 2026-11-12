@@ -15,6 +15,9 @@ public partial class PickerItemViewModel
     public string Name { get; init; } = string.Empty;
     public TEditColor Color { get; init; }
 
+    /// <summary>Stable English identity name, kept for bilingual search in a localized UI.</summary>
+    public string RawName { get; init; } = string.Empty;
+
     /// <summary>
     /// The item ID whose icon to display (e.g. the item that places this tile/wall).
     /// For item pickers this equals Id; for tile/wall pickers it's the corresponding item.
@@ -26,12 +29,13 @@ public partial class PickerItemViewModel
 
     public PickerItemViewModel() { }
 
-    public PickerItemViewModel(int id, string name, TEditColor color, bool isChecked = false, int itemId = 0)
+    public PickerItemViewModel(int id, string name, TEditColor color, bool isChecked = false, int itemId = 0, string rawName = "")
     {
         Id = id;
         Name = name;
         Color = color;
         IsChecked = isChecked;
         ItemId = itemId;
+        RawName = rawName;
     }
 }

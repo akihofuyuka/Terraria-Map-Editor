@@ -278,8 +278,8 @@ public partial class WorldViewModel : ReactiveObject
                 var sprite = new SpriteSheet
                 {
                     Tile = (ushort)tile.Id,
-                    Name = tile.Name,
-                    RawName = tile.RawName ?? tile.Name,
+                    Name = tile.LocalizedName,
+                    RawName = tile.Name,
                     SizeTiles = tile.FrameSize,
                     SizePixelsRender = tile.TextureGrid,
                     SizePixelsInterval = tile.TextureGrid + tile.FrameGap,
@@ -330,8 +330,8 @@ public partial class WorldViewModel : ReactiveObject
         var newSprite = new SpriteSheet
         {
             Tile = (ushort)tile.Id,
-            Name = tile.Name,
-            RawName = tile.RawName ?? tile.Name,
+            Name = tile.LocalizedName,
+            RawName = tile.Name,
             SizeTiles = tile.FrameSize,
             SizePixelsRender = tile.TextureGrid,
             SizePixelsInterval = tile.TextureGrid + tile.FrameGap,
@@ -1943,7 +1943,7 @@ public partial class WorldViewModel : ReactiveObject
             {
                 foreach (var variant in tileProperty.BiomeVariants)
                 {
-                    names.Add(variant.Name);
+                    names.Add(WorldConfiguration.GetLocalizedSpriteStyle(variant.Name));
                 }
             }
             return names;
@@ -2298,7 +2298,7 @@ public partial class WorldViewModel : ReactiveObject
     {
         if (obj is not NpcListItem item) return false;
         if (string.IsNullOrWhiteSpace(NpcSearchText)) return true;
-        return item.DefaultName.Contains(NpcSearchText, StringComparison.OrdinalIgnoreCase)
+        return TEdit.Helper.LocalizedSearch.Matches(item.DefaultName, item.RawName, NpcSearchText)
             || (item.WorldNpc?.DisplayName?.Contains(NpcSearchText, StringComparison.OrdinalIgnoreCase) ?? false);
     }
 
@@ -2360,13 +2360,15 @@ public partial class WorldViewModel : ReactiveObject
 
         if (_allNpcs.Count == 0)
         {
-            foreach (var kvp in WorldConfiguration.NpcNames.OrderBy(x => x.Value))
+            foreach (var kvp in WorldConfiguration.NpcNames
+                .OrderBy(x => WorldConfiguration.NpcById.TryGetValue(x.Key, out var n) ? n.LocalizedName : x.Value))
             {
                 WorldConfiguration.NpcById.TryGetValue(kvp.Key, out var npcData);
                 _allNpcs.Add(new NpcListItem(
-                    kvp.Key, kvp.Value,
+                    kvp.Key, npcData?.LocalizedName ?? kvp.Value,
                     npcData?.Variants,
-                    npcData?.CanShimmer ?? false));
+                    npcData?.CanShimmer ?? false,
+                    rawName: kvp.Value));
             }
         }
 
@@ -2388,7 +2390,8 @@ public partial class WorldViewModel : ReactiveObject
                         item.SpriteId, item.DefaultName,
                         npcData?.Variants,
                         npcData?.CanShimmer ?? false,
-                        instanceIndex: i);
+                        instanceIndex: i,
+                        rawName: item.RawName);
                     dupItem.World = CurrentWorld;
                     dupItem.WorldNpc = worldNpcs[i];
                     _allNpcs.Insert(insertIndex + i, dupItem);

@@ -742,7 +742,7 @@
     <TextBlock />
     <CheckBox IsChecked="{Binding CurrentWorld.SavedGolfer}" Content="{x:Static p:Language.tool_wp_npc_golfer}" VerticalAlignment="Center" VerticalContentAlignment="Center" />
     <TextBlock Text="{x:Static p:Language.tool_wp_npc_angler_mission}" HorizontalAlignment="Right" />
-    <ComboBox Height="20" ItemsSource="{Binding Source={x:Static Terraria:WorldConfiguration.AnglerQuests}, Mode=OneTime}" SelectedValue="{Binding CurrentWorld.AnglerQuest, Mode=TwoWay}" SelectedValuePath="QuestId" DisplayMemberPath="Name" />
+    <ComboBox Height="20" ItemsSource="{Binding Source={x:Static Terraria:WorldConfiguration.AnglerQuests}, Mode=OneTime}" SelectedValue="{Binding CurrentWorld.AnglerQuest, Mode=TwoWay}" SelectedValuePath="QuestId" DisplayMemberPath="LocalizedName" />
 
     <Separator Grid.ColumnSpan="2" />
     <TextBlock Text="{x:Static p:Language.tool_wp_npc_spawn_unlocked}" HorizontalAlignment="Right" TextWrapping="Wrap"/>

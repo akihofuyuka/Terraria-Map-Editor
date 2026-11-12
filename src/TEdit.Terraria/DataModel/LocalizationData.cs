@@ -27,10 +27,11 @@ public class LocalizationData
     public Dictionary<string, string> Walls { get; set; } = new();
 
     /// <summary>
-    /// Localized sprite style and uncovered tile frame names (merged at runtime from spriteFrames.{locale}.json; not part of the official mirror serialization).
+    /// Supplemental localized names not covered by the official mirror sections: frame style / variety names,
+    /// frame anchors, wall natural/unused markers, and biome-variant labels (merged at runtime from supplementalNames.{locale}.json).
     /// </summary>
     [JsonIgnore]
-    public Dictionary<string, string> SpriteFrames { get; set; } = new();
+    public Dictionary<string, string> SupplementalNames { get; set; } = new();
 }
 
 public class BuffLocalization

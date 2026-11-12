@@ -5,7 +5,7 @@ namespace TEdit.Terraria.Objects;
 
 public class PaintProperty
 {
-    public override string ToString() => Name;
+    public override string ToString() => LocalizedName;
 
     public PaintProperty()
     {
@@ -26,6 +26,16 @@ public class PaintProperty
 
     [JsonPropertyOrder(1)]
     public string Name { get; set; } = "UNKNOWN";
+
+    private string? _localizedName;
+
+    /// <summary>Localized display name. Falls back to the stable identity <see cref="Name"/> when no translation is applied.</summary>
+    [JsonIgnore]
+    public string LocalizedName
+    {
+        get => _localizedName ?? Name;
+        set => _localizedName = value;
+    }
 
     [JsonPropertyOrder(2)]
     public string? Key { get; set; }

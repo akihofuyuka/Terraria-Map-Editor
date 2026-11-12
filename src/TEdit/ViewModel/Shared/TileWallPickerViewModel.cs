@@ -65,26 +65,26 @@ public partial class TileWallPickerViewModel
         switch (dataSource)
         {
             case PickerDataSource.Items:
-                foreach (var item in WorldConfiguration.ItemProperties.OrderBy(x => x.Name))
+                foreach (var item in WorldConfiguration.ItemProperties.OrderBy(x => x.LocalizedName))
                 {
                     // Items don't have a color property, use a default
-                    AllItems.Add(new PickerItemViewModel(item.Id, item.Name, TEditColor.White, itemId: item.Id));
+                    AllItems.Add(new PickerItemViewModel(item.Id, item.LocalizedName, TEditColor.White, itemId: item.Id, rawName: item.Name));
                 }
                 break;
 
             case PickerDataSource.TileBricks:
-                foreach (var tile in WorldConfiguration.TileBricks.OrderBy(x => x.Name))
+                foreach (var tile in WorldConfiguration.TileBricks.OrderBy(x => x.LocalizedName))
                 {
                     WorldConfiguration.TileItemLookup.TryGetValue(tile.Id, out int tileItemId);
-                    AllItems.Add(new PickerItemViewModel(tile.Id, tile.Name, tile.Color, itemId: tileItemId));
+                    AllItems.Add(new PickerItemViewModel(tile.Id, tile.LocalizedName, tile.Color, itemId: tileItemId, rawName: tile.Name));
                 }
                 break;
 
             case PickerDataSource.Walls:
-                foreach (var wall in WorldConfiguration.WallProperties.OrderBy(x => x.Name))
+                foreach (var wall in WorldConfiguration.WallProperties.OrderBy(x => x.LocalizedName))
                 {
                     WorldConfiguration.WallItemLookup.TryGetValue(wall.Id, out int wallItemId);
-                    AllItems.Add(new PickerItemViewModel(wall.Id, wall.Name, wall.Color, itemId: wallItemId));
+                    AllItems.Add(new PickerItemViewModel(wall.Id, wall.LocalizedName, wall.Color, itemId: wallItemId, rawName: wall.Name));
                 }
                 break;
 
@@ -120,7 +120,7 @@ public partial class TileWallPickerViewModel
     {
         if (obj is not PickerItemViewModel item) return false;
         if (string.IsNullOrWhiteSpace(SearchText)) return true;
-        return item.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+        return TEdit.Helper.LocalizedSearch.Matches(item.Name, item.RawName, SearchText)
             || item.Id.ToString().Contains(SearchText, StringComparison.Ordinal);
     }
 

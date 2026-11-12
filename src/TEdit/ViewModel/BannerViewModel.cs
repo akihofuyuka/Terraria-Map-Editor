@@ -126,7 +126,7 @@ public partial class BannerViewModel : ReactiveObject
         foreach (var kvp in WorldConfiguration.TallyNames.OrderBy(k => k.Key))
         {
             int tallyIndex = kvp.Key;
-            string bannerName = kvp.Value;
+            string bannerName = WorldConfiguration.TallyLocalizedNames.TryGetValue(tallyIndex, out var localizedBanner) ? localizedBanner : kvp.Value;
 
             // Get category, NPC ID, and bestiary index from bestiary data
             string category = "";

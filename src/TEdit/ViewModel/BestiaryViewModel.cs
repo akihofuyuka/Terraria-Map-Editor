@@ -225,9 +225,9 @@ public partial class BestiaryViewModel : ReactiveObject
                 npcId = npcData.Id;
                 bestiaryIndex = npcData.BestiaryDisplayIndex;
                 bestiaryStars = npcData.BestiaryStars;
-                if (!string.IsNullOrWhiteSpace(npcData.Name))
+                if (!string.IsNullOrWhiteSpace(npcData.LocalizedName))
                 {
-                    displayName = npcData.Name;
+                    displayName = npcData.LocalizedName;
                 }
             }
 

@@ -484,19 +484,15 @@ public class TerrariaDataStore
             .Where(p => p.Key != null)
             .ToDictionary(p => p.Key!, p => (byte)p.Id);
 
-        // Apply item names
+        // Apply item names (display only; Name stays the English identity)
         foreach (var kv in data.Items)
             if (itemsByKey.TryGetValue(kv.Key, out var item))
-                item.Name = kv.Value;
+                item.LocalizedName = kv.Value;
 
-        // Preserve original tile names for bilingual search before localization overwrites them
-        foreach (var tile in Tiles)
-            tile.RawName ??= tile.Name;
-
-        // Apply tile names
+        // Apply tile names (display only; Name stays the English identity)
         foreach (var kv in data.Tiles)
             if (tilesByKey.TryGetValue(kv.Key, out var tile))
-                tile.Name = kv.Value;
+                tile.LocalizedName = kv.Value;
 
         // Fallback for tiles not covered by data.Tiles
         foreach (var tile in Tiles)
@@ -505,21 +501,17 @@ public class TerrariaDataStore
                 continue;
 
             if (tile.Key != null && data.Items.TryGetValue(tile.Key, out var tileName))
-                tile.Name = tileName;
-            else if (tile.Key != null && data.SpriteFrames.TryGetValue(tile.Key, out var frameTileName))
-                tile.Name = frameTileName;
+                tile.LocalizedName = tileName;
+            else if (tile.Key != null && data.SupplementalNames.TryGetValue(tile.Key, out var frameTileName))
+                tile.LocalizedName = frameTileName;
             else if (GetPlacingItemName(TileItemLookup, tile.Id) is { } itemName)
-                tile.Name = itemName;
+                tile.LocalizedName = itemName;
         }
 
-        var wallEnglishNames = new Dictionary<int, string>();
-        foreach (var wall in Walls)
-            if (wall.Name != null) wallEnglishNames[wall.Id] = wall.Name;
-
-        // Apply wall names
+        // Apply wall names (display only; Name stays the English identity)
         foreach (var kv in data.Walls)
             if (wallsByKey.TryGetValue(kv.Key, out var wall))
-                wall.Name = kv.Value;
+                wall.LocalizedName = kv.Value;
 
         // Fallback for walls not covered by data.Walls
         foreach (var wall in Walls)
@@ -528,21 +520,21 @@ public class TerrariaDataStore
                 continue;
 
             if (data.Items.TryGetValue(wall.Key, out var wallName))
-                wall.Name = wallName;
+                wall.LocalizedName = wallName;
             else if (data.Items.TryGetValue(wall.Key + "Wall", out var wallNameWall))
-                wall.Name = wallNameWall;
+                wall.LocalizedName = wallNameWall;
             else if (GetPlacingItemName(WallItemLookup, wall.Id) is { } itemName)
-                wall.Name = itemName;
+                wall.LocalizedName = itemName;
         }
 
-        // Natural/unused variants have no game name; reuse the base wall's localized name + marker.
-        if (data.SpriteFrames.TryGetValue("Wall.Natural", out var naturalMarker)
-            && data.SpriteFrames.TryGetValue("Wall.Unused", out var unusedMarker))
+        // Natural/unused variants have no game name of their own; reuse the base wall's localized
+        // name + marker. Judged on the stable English Name, result written to LocalizedName.
+        if (data.SupplementalNames.TryGetValue("Wall.Natural", out var naturalMarker)
+            && data.SupplementalNames.TryGetValue("Wall.Unused", out var unusedMarker))
         {
             var baseLocalizedByName = new Dictionary<string, string>();
             foreach (var wall in Walls)
-                if (wall.Name != null && wallEnglishNames.TryGetValue(wall.Id, out var originalName))
-                    baseLocalizedByName.TryAdd(originalName, wall.Name);
+                baseLocalizedByName.TryAdd(wall.Name, wall.LocalizedName);
 
             foreach (var wall in Walls)
             {
@@ -560,14 +552,14 @@ public class TerrariaDataStore
 
                 var baseEnglish = name[..name.LastIndexOf('(')].TrimEnd();
                 if (baseLocalizedByName.TryGetValue(baseEnglish, out var baseLocalized) && baseLocalized != baseEnglish)
-                    wall.Name = baseLocalized + marker;
+                    wall.LocalizedName = baseLocalized + marker;
             }
         }
 
         // Apply paint names
         foreach (var paint in Paints)
             if (paint.Key != null && data.Items.TryGetValue(paint.Key, out var paintName))
-                paint.Name = paintName;
+                paint.LocalizedName = paintName;
 
         // Apply bestiary NPC names
         if (Bestiary != null)
@@ -576,23 +568,16 @@ public class TerrariaDataStore
             {
                 if (data.Npcs.TryGetValue(npc.BestiaryId, out var localizedName))
                 {
-                    npc.Name = localizedName;
+                    npc.LocalizedName = localizedName;
                 }
             }
         }
 
-        // Apply NPC names (+ maintain reverse lookups)
+        // Apply NPC display names only. Name stays the English identity, so NpcIdByName /
+        // NpcNameById (identity lookups used by save files and scripts) are left untouched.
         foreach (var kv in data.Npcs)
-        {
             if (npcsByKey.TryGetValue(kv.Key, out var npc))
-            {
-                var oldName = npc.Name;
-                npc.Name = kv.Value;
-                NpcNameById[npc.Id] = kv.Value;
-                if (NpcIdByName.Remove(oldName))
-                    NpcIdByName[kv.Value] = npc.Id;
-            }
-        }
+                npc.LocalizedName = kv.Value;
 
         // Apply prefix names
         foreach (var kv in data.Prefixes)
@@ -603,7 +588,7 @@ public class TerrariaDataStore
     /// <summary>Gets the display name of the item that places a tile or wall, if any.</summary>
     private string? GetPlacingItemName(Dictionary<int, int> lookup, int tileOrWallId) =>
         lookup.TryGetValue(tileOrWallId, out var itemId) && ItemById.TryGetValue(itemId, out var item)
-            ? item.Name
+            ? item.LocalizedName
             : null;
 
     private void RebuildFrameImportant()
@@ -634,14 +619,31 @@ public class TerrariaDataStore
     /// <summary>Gets the localized suffix for a frame anchor (e.g. [Left], [Right], [Top], [Bottom]).</summary>
     public string GetLocalizedAnchor(FrameAnchor anchor)
     {
-        if (anchor == FrameAnchor.None)
-            return string.Empty;
-
         var key = $"Anchor.{anchor}";
-        if (Localization?.SpriteFrames.TryGetValue(key, out var locAnchor) == true)
+        if (Localization?.SupplementalNames.TryGetValue(key, out var locAnchor) == true)
             return locAnchor;
 
-        return $"[{anchor}]";
+        return anchor == FrameAnchor.None ? string.Empty : $"[{anchor}]";
+    }
+
+    /// <summary>
+    /// Resolves a supplemental sprite-style / biome-variant label using the same order as
+    /// <see cref="GetLocalizedFrameName"/>: item name, then tile name, then the supplemental
+    /// supplementalNames.{locale}.json dictionary, falling back to the original key when unmatched.
+    /// </summary>
+    public string GetLocalizedSpriteStyle(string name)
+    {
+        if (Localization == null || string.IsNullOrEmpty(name))
+            return name;
+
+        if (TryResolveItemName(name, out var locItemName))
+            return locItemName!;
+        if (Localization.Tiles.TryGetValue(name, out var locTileName))
+            return locTileName;
+        if (Localization.SupplementalNames.TryGetValue(name, out var locStyle))
+            return locStyle;
+
+        return name;
     }
 
     /// <summary>Builds the full localized name for a tile frame style (base name, variant and anchor suffix).</summary>
@@ -650,17 +652,17 @@ public class TerrariaDataStore
         if (Localization == null)
             return frame.ToString();
 
-        // 1. Resolve the base name (item name, tile name, spriteFrames style name, then tile default name).
+        // 1. Resolve the base name (item name, tile name, supplementalNames style name, then tile default name).
         string baseName = frame.Name;
         if (TryResolveItemName(frame.Name, out var locItemName))
             baseName = locItemName!;
         else if (Localization.Tiles.TryGetValue(frame.Name, out var locTileName))
             baseName = locTileName;
-        else if (Localization.SpriteFrames.TryGetValue(frame.Name, out var locStyleName))
+        else if (Localization.SupplementalNames.TryGetValue(frame.Name, out var locStyleName))
             baseName = locStyleName;
         else if ((string.IsNullOrWhiteSpace(frame.Name) || frame.Name == "Default")
-                 && tile.Name != "Default" && !string.IsNullOrWhiteSpace(tile.Name))
-            baseName = tile.Name;
+                 && tile.LocalizedName != "Default" && !string.IsNullOrWhiteSpace(tile.LocalizedName))
+            baseName = tile.LocalizedName;
 
         // 2. Resolve the variant/style name (banners, paintings, trophies, direct style lookup and suffix variants).
         string? localizedVariety = null;
@@ -685,8 +687,8 @@ public class TerrariaDataStore
                     return trophyItem!;
                 localizedVariety = trophyItem;
             }
-            // Look up the style name directly in the spriteFrames dictionary.
-            else if (Localization.SpriteFrames.TryGetValue(frame.Variety, out var styleVal))
+            // Look up the style name directly in the supplementalNames dictionary.
+            else if (Localization.SupplementalNames.TryGetValue(frame.Variety, out var styleVal))
             {
                 localizedVariety = styleVal;
             }
@@ -756,7 +758,7 @@ public class TerrariaDataStore
             string basePart = variety[..lastSpace];
             string suffixPart = variety[lastSpace..];
 
-            if (Localization.SpriteFrames.TryGetValue(basePart, out var baseVal))
+            if (Localization.SupplementalNames.TryGetValue(basePart, out var baseVal))
             {
                 result = $"{baseVal}{suffixPart}";
                 return true;
