@@ -11,13 +11,14 @@ public class BestiaryNpcData
 
     private string? _localizedName;
 
-    /// <summary>Localized display name. Falls back to the stable identity <see cref="Name"/>.</summary>
+    /// <summary>Localized display name; falls back to <see cref="Name"/>.</summary>
     [JsonIgnore]
     public string LocalizedName
     {
         get => _localizedName ?? Name;
         set => _localizedName = value;
     }
+
     public string BestiaryId { get; set; } = "";
     public bool CanTalk { get; set; }
     public bool IsCritter { get; set; }

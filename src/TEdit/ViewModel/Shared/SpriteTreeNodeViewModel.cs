@@ -16,8 +16,7 @@ public partial class SpriteTreeNodeViewModel
 {
     public int TileId { get; init; }
     public string Name { get; init; } = string.Empty;
-    /// <summary>Original unlocalized English name (used for bilingual search filtering).</summary>
-    public string? RawName { get; init; }
+    public string LocalizedName { get; init; } = string.Empty;
     public TEditColor Color { get; init; }
 
     /// <summary>
@@ -40,17 +39,17 @@ public partial class SpriteTreeNodeViewModel
 
     public SpriteTreeNodeViewModel() { }
 
-    public SpriteTreeNodeViewModel(int tileId, string name, TEditColor color, Vector2Short? uv = null, string? rawName = null)
+    public SpriteTreeNodeViewModel(int tileId, string name, string localizedName, TEditColor color, Vector2Short? uv = null)
     {
         TileId = tileId;
         Name = name;
+        LocalizedName = localizedName;
         Color = color;
         UV = uv;
-        RawName = rawName;
     }
 
     /// <summary>
     /// Display text for the node.
     /// </summary>
-    public string DisplayText => UV.HasValue ? $"{Name} ({UV.Value.X}, {UV.Value.Y})" : Name;
+    public string DisplayText => UV.HasValue ? $"{LocalizedName} ({UV.Value.X}, {UV.Value.Y})" : LocalizedName;
 }

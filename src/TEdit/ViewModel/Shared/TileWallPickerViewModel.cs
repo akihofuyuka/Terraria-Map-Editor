@@ -68,7 +68,7 @@ public partial class TileWallPickerViewModel
                 foreach (var item in WorldConfiguration.ItemProperties.OrderBy(x => x.LocalizedName))
                 {
                     // Items don't have a color property, use a default
-                    AllItems.Add(new PickerItemViewModel(item.Id, item.LocalizedName, TEditColor.White, itemId: item.Id, rawName: item.Name));
+                    AllItems.Add(new PickerItemViewModel(item.Id, item.Name, item.LocalizedName, TEditColor.White, itemId: item.Id));
                 }
                 break;
 
@@ -76,7 +76,7 @@ public partial class TileWallPickerViewModel
                 foreach (var tile in WorldConfiguration.TileBricks.OrderBy(x => x.LocalizedName))
                 {
                     WorldConfiguration.TileItemLookup.TryGetValue(tile.Id, out int tileItemId);
-                    AllItems.Add(new PickerItemViewModel(tile.Id, tile.LocalizedName, tile.Color, itemId: tileItemId, rawName: tile.Name));
+                    AllItems.Add(new PickerItemViewModel(tile.Id, tile.Name, tile.LocalizedName, tile.Color, itemId: tileItemId));
                 }
                 break;
 
@@ -84,7 +84,7 @@ public partial class TileWallPickerViewModel
                 foreach (var wall in WorldConfiguration.WallProperties.OrderBy(x => x.LocalizedName))
                 {
                     WorldConfiguration.WallItemLookup.TryGetValue(wall.Id, out int wallItemId);
-                    AllItems.Add(new PickerItemViewModel(wall.Id, wall.LocalizedName, wall.Color, itemId: wallItemId, rawName: wall.Name));
+                    AllItems.Add(new PickerItemViewModel(wall.Id, wall.Name, wall.LocalizedName, wall.Color, itemId: wallItemId));
                 }
                 break;
 
@@ -107,20 +107,21 @@ public partial class TileWallPickerViewModel
     private void AddLiquid(LiquidType type, string name, string colorKey)
     {
         var color = WorldConfiguration.GlobalColors.TryGetValue(colorKey, out var c) ? c : TEditColor.Magenta;
-        AllItems.Add(new PickerItemViewModel((int)type, name, color));
+        AllItems.Add(new PickerItemViewModel((int)type, name, name, color));
     }
 
     private void AddWire(int id, string name, string colorKey)
     {
         var color = WorldConfiguration.GlobalColors.TryGetValue(colorKey, out var c) ? c : TEditColor.Magenta;
-        AllItems.Add(new PickerItemViewModel(id, name, color));
+        AllItems.Add(new PickerItemViewModel(id, name, name, color));
     }
 
     private bool FilterItem(object obj)
     {
         if (obj is not PickerItemViewModel item) return false;
         if (string.IsNullOrWhiteSpace(SearchText)) return true;
-        return TEdit.Helper.LocalizedSearch.Matches(item.Name, item.RawName, SearchText)
+        return item.LocalizedName.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
+            || item.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase)
             || item.Id.ToString().Contains(SearchText, StringComparison.Ordinal);
     }
 

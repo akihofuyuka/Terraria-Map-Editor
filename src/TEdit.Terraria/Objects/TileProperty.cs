@@ -88,7 +88,7 @@ public class TileProperty : ITile
 
     private string? _localizedName;
 
-    /// <summary>Localized display name. Falls back to the stable identity <see cref="Name"/> when no translation is applied.</summary>
+    /// <summary>Localized display name; falls back to <see cref="Name"/>.</summary>
     [JsonIgnore]
     public string LocalizedName
     {
@@ -98,10 +98,6 @@ public class TileProperty : ITile
 
     [JsonPropertyOrder(2)]
     public string? Key { get; set; }
-
-    /// <summary>Original (unlocalized) display name, captured before localization is applied.</summary>
-    [JsonIgnore]
-    public string? RawName { get; set; }
 
     [JsonPropertyOrder(3)]
     public TEditColor Color { get; set; }

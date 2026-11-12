@@ -40,7 +40,6 @@
                 </DrawingGroup>
             </DrawingBrush.Drawing>
         </DrawingBrush>
-        <conv:FrameAnchorToLocalizedNameConverter x:Key="FrameAnchorToLocalizedNameConverter" />
     </ui:FluentWindow.Resources>
 
     <Grid Margin="8">
@@ -272,14 +271,9 @@
 
                         <TextBlock Grid.Row="6" Grid.Column="0" Text="{x:Static p:Language.spriteeditor_anchor_label}" VerticalAlignment="Center" Margin="0,0,8,4"/>
                         <ComboBox Grid.Row="6" Grid.Column="1" Margin="0,0,0,4"
-                                  SelectedValue="{Binding Anchor}"
-                                  ItemsSource="{Binding Source={x:Static vm:SpriteSheetEditorViewModel.AnchorValues}}">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Converter={StaticResource FrameAnchorToLocalizedNameConverter}}" />
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
+                                  SelectedValue="{Binding Anchor}" SelectedValuePath="Value"
+                                  ItemsSource="{Binding Source={x:Static vm:SpriteSheetEditorViewModel.AnchorOptions}}"
+                                  DisplayMemberPath="Label"/>
                     </Grid>
                 </StackPanel>
 

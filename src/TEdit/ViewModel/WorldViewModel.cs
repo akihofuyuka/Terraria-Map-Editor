@@ -278,8 +278,8 @@ public partial class WorldViewModel : ReactiveObject
                 var sprite = new SpriteSheet
                 {
                     Tile = (ushort)tile.Id,
-                    Name = tile.LocalizedName,
-                    RawName = tile.Name,
+                    Name = tile.Name,
+                    LocalizedName = tile.LocalizedName,
                     SizeTiles = tile.FrameSize,
                     SizePixelsRender = tile.TextureGrid,
                     SizePixelsInterval = tile.TextureGrid + tile.FrameGap,
@@ -294,8 +294,8 @@ public partial class WorldViewModel : ReactiveObject
                     {
                         Tile = sprite.Tile,
                         Style = styleIndex++,
-                        Name = WorldConfiguration.GetLocalizedFrameName(tile, frame),
-                        RawName = frame.ToString(),
+                        Name = frame.ToString(),
+                        LocalizedName = WorldConfiguration.GetLocalizedFrameName(tile, frame),
                         UV = frame.UV,
                         SizeTiles = frame.Size.X > 0 && frame.Size.Y > 0 ? frame.Size : tile.FrameSize[0],
                         SizePixelsInterval = sprite.SizePixelsInterval,
@@ -330,8 +330,8 @@ public partial class WorldViewModel : ReactiveObject
         var newSprite = new SpriteSheet
         {
             Tile = (ushort)tile.Id,
-            Name = tile.LocalizedName,
-            RawName = tile.Name,
+            Name = tile.Name,
+            LocalizedName = tile.LocalizedName,
             SizeTiles = tile.FrameSize,
             SizePixelsRender = tile.TextureGrid,
             SizePixelsInterval = tile.TextureGrid + tile.FrameGap,
@@ -345,8 +345,8 @@ public partial class WorldViewModel : ReactiveObject
             {
                 Tile = newSprite.Tile,
                 Style = styleIndex++,
-                Name = WorldConfiguration.GetLocalizedFrameName(tile, frame),
-                RawName = frame.ToString(),
+                Name = frame.ToString(),
+                LocalizedName = WorldConfiguration.GetLocalizedFrameName(tile, frame),
                 UV = frame.UV,
                 SizeTiles = frame.Size.X > 0 && frame.Size.Y > 0 ? frame.Size : tile.FrameSize[0],
                 SizePixelsInterval = newSprite.SizePixelsInterval,
@@ -564,7 +564,7 @@ public partial class WorldViewModel : ReactiveObject
                         Tile = virtualId,
                         Style = styleIndex++,
                         Name = frame.ToString(),
-                        RawName = frame.ToString(),
+                        LocalizedName = frame.ToString(),
                         UV = frame.UV,
                         SizeTiles = frame.Size,
                         SizePixelsInterval = interval,
@@ -710,7 +710,7 @@ public partial class WorldViewModel : ReactiveObject
                     {
                         Tile = virtualId,
                         Name = entry.FullName,
-                        RawName = entry.FullName,
+                        LocalizedName = entry.FullName,
                         SizeTiles = tileOverride.FrameSize ?? [new Geometry.Vector2Short(1, 1)],
                         SizePixelsRender = tileOverride.TextureGrid,
                         SizePixelsInterval = tileOverride.TextureGrid + tileOverride.FrameGap,
@@ -729,7 +729,7 @@ public partial class WorldViewModel : ReactiveObject
                             Tile = virtualId,
                             Style = styleIndex++,
                             Name = frame.ToString(),
-                            RawName = frame.ToString(),
+                            LocalizedName = frame.ToString(),
                             UV = frame.UV,
                             SizeTiles = sizeTiles,
                             SizePixelsInterval = sprite.SizePixelsInterval,
@@ -753,7 +753,7 @@ public partial class WorldViewModel : ReactiveObject
                         Tile = virtualId,
                         Style = 0,
                         Name = entry.FullName,
-                        RawName = entry.FullName,
+                        LocalizedName = entry.FullName,
                         UV = new Geometry.Vector2Short(0, 0),
                         SizeTiles = new Geometry.Vector2Short(1, 1),
                         SizeTexture = new Geometry.Vector2Short(16, 16),
@@ -765,7 +765,7 @@ public partial class WorldViewModel : ReactiveObject
                     {
                         Tile = virtualId,
                         Name = entry.FullName,
-                        RawName = entry.FullName,
+                        LocalizedName = entry.FullName,
                         SizeTiles = new[] { new Geometry.Vector2Short(1, 1) },
                         SizePixelsRender = new Geometry.Vector2Short(16, 16),
                         SizePixelsInterval = new Geometry.Vector2Short(18, 18),
@@ -1676,14 +1676,14 @@ public partial class WorldViewModel : ReactiveObject
                 if (sprite.Tile.ToString().StartsWith(term)) return true;
 
                 // Case-insensitive name and raw name match
+                if (sprite.LocalizedName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
                 if (sprite.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
-                if (sprite.RawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
 
                 // Match against any child style name or raw name
                 foreach (var style in sprite.Styles)
                 {
+                    if (style.LocalizedName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
                     if (style.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
-                    if (style.RawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0) return true;
                 }
             }
             return false;
@@ -1720,9 +1720,9 @@ public partial class WorldViewModel : ReactiveObject
                     foreach (string term in filterTerms)
                     {
                         // If parent name or raw name matches, show all its styles
-                        if (parentSheet.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (parentSheet.LocalizedName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                             return true;
-                        if (parentSheet.RawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+                        if (parentSheet.Name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                             return true;
                         // Also check if tile ID matches
                         if (parentSheet.Tile.ToString() == term.Trim())
@@ -1731,11 +1731,11 @@ public partial class WorldViewModel : ReactiveObject
                 }
 
                 // Otherwise, filter by style's own name and raw name
-                return MatchesSpriteFilter(sprite.Name, _spriteFilter, sprite.RawName);
+                return MatchesSpriteFilter(sprite.LocalizedName, _spriteFilter, sprite.Name);
             }
 
             // No tile filter - only show if text filter matches style name, raw name or tile ID
-            return MatchesSpriteFilter(sprite.Name, _spriteFilter, sprite.RawName) ||
+            return MatchesSpriteFilter(sprite.LocalizedName, _spriteFilter, sprite.Name) ||
                    sprite.Tile.ToString() == _spriteFilter.Trim();
         };
 
@@ -1747,7 +1747,7 @@ public partial class WorldViewModel : ReactiveObject
     /// <summary>
     /// Helper method to check if a name matches the sprite filter terms.
     /// </summary>
-    private bool MatchesSpriteFilter(string? name, string filter, string? rawName = null)
+    private bool MatchesSpriteFilter(string? name, string filter, string? identityName)
     {
         if (string.IsNullOrWhiteSpace(filter))
             return false;
@@ -1757,7 +1757,7 @@ public partial class WorldViewModel : ReactiveObject
         {
             if (name?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                 return true;
-            if (rawName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
+            if (identityName?.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                 return true;
         }
         return false;
@@ -2277,7 +2277,7 @@ public partial class WorldViewModel : ReactiveObject
             {
                 _allNpcsView = CollectionViewSource.GetDefaultView(_allNpcs);
                 _allNpcsView.SortDescriptions.Add(new SortDescription(nameof(NpcListItem.IsOnMap), ListSortDirection.Descending));
-                _allNpcsView.SortDescriptions.Add(new SortDescription(nameof(NpcListItem.DefaultName), ListSortDirection.Ascending));
+                _allNpcsView.SortDescriptions.Add(new SortDescription(nameof(NpcListItem.LocalizedName), ListSortDirection.Ascending));
                 _allNpcsView.Filter = FilterNpc;
             }
             return _allNpcsView;
@@ -2298,7 +2298,8 @@ public partial class WorldViewModel : ReactiveObject
     {
         if (obj is not NpcListItem item) return false;
         if (string.IsNullOrWhiteSpace(NpcSearchText)) return true;
-        return TEdit.Helper.LocalizedSearch.Matches(item.DefaultName, item.RawName, NpcSearchText)
+        return item.LocalizedName.Contains(NpcSearchText, StringComparison.OrdinalIgnoreCase)
+            || item.Name.Contains(NpcSearchText, StringComparison.OrdinalIgnoreCase)
             || (item.WorldNpc?.DisplayName?.Contains(NpcSearchText, StringComparison.OrdinalIgnoreCase) ?? false);
     }
 
@@ -2365,10 +2366,9 @@ public partial class WorldViewModel : ReactiveObject
             {
                 WorldConfiguration.NpcById.TryGetValue(kvp.Key, out var npcData);
                 _allNpcs.Add(new NpcListItem(
-                    kvp.Key, npcData?.LocalizedName ?? kvp.Value,
+                    kvp.Key, kvp.Value, npcData?.LocalizedName ?? kvp.Value,
                     npcData?.Variants,
-                    npcData?.CanShimmer ?? false,
-                    rawName: kvp.Value));
+                    npcData?.CanShimmer ?? false));
             }
         }
 
@@ -2387,11 +2387,10 @@ public partial class WorldViewModel : ReactiveObject
                 for (int i = 1; i < worldNpcs.Count; i++)
                 {
                     var dupItem = new NpcListItem(
-                        item.SpriteId, item.DefaultName,
+                        item.SpriteId, item.Name, item.LocalizedName,
                         npcData?.Variants,
                         npcData?.CanShimmer ?? false,
-                        instanceIndex: i,
-                        rawName: item.RawName);
+                        instanceIndex: i);
                     dupItem.World = CurrentWorld;
                     dupItem.WorldNpc = worldNpcs[i];
                     _allNpcs.Insert(insertIndex + i, dupItem);

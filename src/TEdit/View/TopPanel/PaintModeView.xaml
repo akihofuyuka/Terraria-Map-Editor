@@ -491,8 +491,8 @@
                         ItemTemplate="{StaticResource TileColorTintTemplate}"
                         SelectedValue="{Binding Path=TilePicker.PlatformStyle, Mode=TwoWay}"
                         SelectedValuePath="Id"
-                        DisplayMemberPath="Name"
-                        FilterMemberPath="Name"
+                        DisplayMemberPath="LocalizedName"
+                        FilterMemberPath="LocalizedName"
                         FilterIdMemberPath="Id"
                         Placeholder="{x:Static p:Language.picker_search_platforms_placeholder}"
                         Width="200" />

@@ -14,7 +14,7 @@ public class ItemProperty : ITile
 
     private string? _localizedName;
 
-    /// <summary>Localized display name. Falls back to the stable identity <see cref="Name"/> when no translation is applied.</summary>
+    /// <summary>Localized display name; falls back to <see cref="Name"/>.</summary>
     [JsonIgnore]
     public string LocalizedName
     {

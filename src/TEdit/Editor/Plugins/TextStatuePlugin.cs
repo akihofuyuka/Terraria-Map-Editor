@@ -147,8 +147,8 @@ public partial class TextStatuePlugin : BasePlugin
 
             foreach (var frame in sprite.Styles)
             {
-                // Name is localized for display; the glyph is the raw "Text Statue: X Statue" character.
-                var raw = frame.RawName ?? frame.Name;
+                // The glyph is the raw "Text Statue: X Statue" character from the English name.
+                var raw = frame.Name;
                 if (raw.Length > 13)
                     _textFrames[raw[13]] = frame;
             }

@@ -247,11 +247,11 @@ public class WorldConfiguration
             {
                 if (frame.Variety == "Flat" && seen.Add(frame.Name))
                 {
-                    // Name-only frame so GetLocalizedFrameName returns the material name without the "Flat" variety.
                     _platformProperties.Add(new FrameProperty
                     {
                         Id = frame.UV.Y / 18,
-                        Name = store.GetLocalizedFrameName(_tileProperties[19], new FrameProperty { Name = frame.Name }),
+                        Name = frame.Name,
+                        LocalizedName = store.GetLocalizedSpriteStyle(frame.Name),
                         Color = frame.Color
                     });
                 }
@@ -679,8 +679,8 @@ public class WorldConfiguration
     /// <summary>Gets the localized display name for a tile frame style.</summary>
     public static string GetLocalizedFrameName(TileProperty tile, FrameProperty frame) => _store?.GetLocalizedFrameName(tile, frame) ?? frame.ToString();
 
-    /// <summary>Gets the localized frame-anchor suffix (e.g. "[左]") from localization data.</summary>
-    public static string GetLocalizedAnchor(FrameAnchor anchor) => _store?.GetLocalizedAnchor(anchor) ?? $"[{anchor}]";
+    /// <summary>Gets the localized frame-anchor name (e.g. "左") from localization data.</summary>
+    public static string GetLocalizedAnchor(FrameAnchor anchor) => _store?.GetLocalizedAnchor(anchor) ?? anchor.ToString();
 
     /// <summary>Resolves a supplemental sprite-style / biome-variant label from localization data, falling back to the key.</summary>
     public static string GetLocalizedSpriteStyle(string name) => _store?.GetLocalizedSpriteStyle(name) ?? name;

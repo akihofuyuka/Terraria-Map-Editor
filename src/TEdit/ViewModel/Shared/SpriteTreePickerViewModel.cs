@@ -61,7 +61,7 @@ public partial class SpriteTreePickerViewModel
 
         foreach (var tile in framedTiles)
         {
-            var rootNode = new SpriteTreeNodeViewModel(tile.Id, tile.LocalizedName, tile.Color, rawName: tile.Name);
+            var rootNode = new SpriteTreeNodeViewModel(tile.Id, tile.Name, tile.LocalizedName, tile.Color);
 
             // Add variant children from Frames
             if (tile.Frames != null)
@@ -70,10 +70,10 @@ public partial class SpriteTreePickerViewModel
                 {
                     var childNode = new SpriteTreeNodeViewModel(
                         tile.Id,
+                        frame.ToString(),
                         WorldConfiguration.GetLocalizedFrameName(tile, frame),
                         tile.Color,
-                        frame.UV,
-                        rawName: frame.ToString()
+                        frame.UV
                     );
                     rootNode.Children.Add(childNode);
                 }
@@ -88,11 +88,11 @@ public partial class SpriteTreePickerViewModel
         if (obj is not SpriteTreeNodeViewModel node) return false;
         if (string.IsNullOrWhiteSpace(SearchText)) return true;
 
-        // Match both the localized name and the original English name for bilingual search.
+        // Match the localized or the English name, on the node itself or any child.
         static bool Matches(SpriteTreeNodeViewModel n, string query) =>
-            TEdit.Helper.LocalizedSearch.Matches(n.Name, n.RawName, query);
+            n.LocalizedName.Contains(query, StringComparison.OrdinalIgnoreCase)
+            || n.Name.Contains(query, StringComparison.OrdinalIgnoreCase);
 
-        // Match root name or any child name
         if (Matches(node, SearchText))
             return true;
 

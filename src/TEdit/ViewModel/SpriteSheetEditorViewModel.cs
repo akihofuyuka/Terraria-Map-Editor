@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -22,14 +23,15 @@ public partial class EditableFrame : ReactiveObject
     [Reactive] private string _name = Properties.Language.spriteeditor_frame_default;
     [Reactive] private string? _variety;
 
-    /// <summary>Localized display name for the frame (resolves base name / item / style). Not persisted.</summary>
-    public string LocalizedName { get; set; } = string.Empty;
     [Reactive] private short _uvX;
     [Reactive] private short _uvY;
     [Reactive] private short _sizeX = 1;
     [Reactive] private short _sizeY = 1;
     [Reactive] private FrameAnchor _anchor = FrameAnchor.None;
     [Reactive] private bool _isSelected;
+
+    /// <summary>Localized display name for the frame (resolves base name / item / style). Not persisted.</summary>
+    public string LocalizedName { get; set; } = string.Empty;
 
     /// <summary>Pixel X position on texture.</summary>
     public int PixelX { get; set; }
@@ -158,8 +160,11 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         ZoomOutCommand = ReactiveCommand.Create(() => ZoomLevel = Math.Max(ZoomLevel / 1.5, 0.25));
     }
 
-    /// <summary>Available FrameAnchor values for ComboBox binding.</summary>
-    public static FrameAnchor[] AnchorValues { get; } = Enum.GetValues<FrameAnchor>();
+    /// <summary>Anchor choices with localized labels for the combo box.</summary>
+    public static IReadOnlyList<AnchorOption> AnchorOptions { get; } =
+        Enum.GetValues<FrameAnchor>()
+            .Select(a => new AnchorOption(a, WorldConfiguration.GetLocalizedAnchor(a)))
+            .ToArray();
 
     public ICommand SaveCommand { get; }
     public ICommand ResetCommand { get; }
@@ -642,3 +647,6 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         return null;
     }
 }
+
+/// <summary>Anchor value with its localized label, for combo box binding.</summary>
+public sealed record AnchorOption(FrameAnchor Value, string Label);

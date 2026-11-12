@@ -77,6 +77,7 @@ public partial class BannerViewModel : ReactiveObject
         }
 
         if (!string.IsNullOrEmpty(FilterText) &&
+            !item.LocalizedName.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
             !item.Name.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
             !item.Category.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
             !item.RawCategory.Contains(FilterText, StringComparison.OrdinalIgnoreCase) &&
@@ -126,7 +127,8 @@ public partial class BannerViewModel : ReactiveObject
         foreach (var kvp in WorldConfiguration.TallyNames.OrderBy(k => k.Key))
         {
             int tallyIndex = kvp.Key;
-            string bannerName = WorldConfiguration.TallyLocalizedNames.TryGetValue(tallyIndex, out var localizedBanner) ? localizedBanner : kvp.Value;
+            string bannerName = kvp.Value;
+            string displayName = WorldConfiguration.TallyLocalizedNames.TryGetValue(tallyIndex, out var localizedBanner) ? localizedBanner : bannerName;
 
             // Get category, NPC ID, and bestiary index from bestiary data
             string category = "";
@@ -157,6 +159,7 @@ public partial class BannerViewModel : ReactiveObject
             {
                 TallyIndex = tallyIndex,
                 Name = bannerName,
+                LocalizedName = displayName,
                 Category = GetCategoryDisplayName(rawCategory),
                 RawCategory = rawCategory,
                 NpcId = npcId,
