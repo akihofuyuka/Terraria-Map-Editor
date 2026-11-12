@@ -4059,6 +4059,30 @@
   <data name="spriteeditor_status_ready" xml:space="preserve">
     <value>就绪</value>
   </data>
+  <data name="spriteeditor_status_loaded_frames" xml:space="preserve">
+    <value>已从图格数据加载 {0} 帧</value>
+  </data>
+  <data name="spriteeditor_status_saved_mod" xml:space="preserve">
+    <value>已保存到 {0} 覆盖文件</value>
+  </data>
+  <data name="spriteeditor_status_saved_vanilla" xml:space="preserve">
+    <value>已保存 {0} 的原版覆盖</value>
+  </data>
+  <data name="spriteeditor_status_auto" xml:space="preserve">
+    <value>自动：{0}x{1} 帧，共 {2} 帧（{3}）</value>
+  </data>
+  <data name="spriteeditor_status_single_frame" xml:space="preserve">
+    <value>单帧：{0}x{1} 图格</value>
+  </data>
+  <data name="spriteeditor_status_added_frame" xml:space="preserve">
+    <value>已添加帧（共 {0}）</value>
+  </data>
+  <data name="spriteeditor_status_removed_frame" xml:space="preserve">
+    <value>已删除帧（剩余 {0}）</value>
+  </data>
+  <data name="spriteeditor_status_added_selection" xml:space="preserve">
+    <value>已在 ({0},{1}) 添加选区帧 {2}x{3}（共 {4}）</value>
+  </data>
   <data name="spriteeditor_status_override_loaded" xml:space="preserve">
     <value>已从用户自定义项加载</value>
   </data>

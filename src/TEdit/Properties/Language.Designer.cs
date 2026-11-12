@@ -11945,6 +11945,46 @@ namespace TEdit.Properties {
                 return ResourceManager.GetString("spriteeditor_status_ready", resourceCulture);
             }
         }
+        public static string spriteeditor_status_loaded_frames {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_loaded_frames", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_saved_mod {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_saved_mod", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_saved_vanilla {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_saved_vanilla", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_auto {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_auto", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_single_frame {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_single_frame", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_added_frame {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_added_frame", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_removed_frame {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_removed_frame", resourceCulture);
+            }
+        }
+        public static string spriteeditor_status_added_selection {
+            get {
+                return ResourceManager.GetString("spriteeditor_status_added_selection", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Loaded from user override.

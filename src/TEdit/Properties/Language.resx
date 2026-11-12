@@ -4117,6 +4117,30 @@ Please check that this folder exists and TEdit has read access.
   <data name="spriteeditor_status_ready" xml:space="preserve">
     <value>Ready</value>
   </data>
+  <data name="spriteeditor_status_loaded_frames" xml:space="preserve">
+    <value>Loaded {0} frames from tile data</value>
+  </data>
+  <data name="spriteeditor_status_saved_mod" xml:space="preserve">
+    <value>Saved to {0} override file</value>
+  </data>
+  <data name="spriteeditor_status_saved_vanilla" xml:space="preserve">
+    <value>Saved vanilla override for {0}</value>
+  </data>
+  <data name="spriteeditor_status_auto" xml:space="preserve">
+    <value>Auto: {0}x{1} frame, {2} frames ({3})</value>
+  </data>
+  <data name="spriteeditor_status_single_frame" xml:space="preserve">
+    <value>Single frame: {0}x{1} tiles</value>
+  </data>
+  <data name="spriteeditor_status_added_frame" xml:space="preserve">
+    <value>Added frame ({0} total)</value>
+  </data>
+  <data name="spriteeditor_status_removed_frame" xml:space="preserve">
+    <value>Removed frame ({0} remaining)</value>
+  </data>
+  <data name="spriteeditor_status_added_selection" xml:space="preserve">
+    <value>Added selection frame at ({0},{1}) {2}x{3} ({4} total)</value>
+  </data>
   <data name="spriteeditor_status_override_loaded" xml:space="preserve">
     <value>Loaded from user override</value>
   </data>

@@ -226,7 +226,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
                 Frames.Add(EditableFrame.FromFrameProperty(fp, grid, gap, defaultSize));
             }
         }
-        StatusText = $"Loaded {Frames.Count} frames from tile data";
+        StatusText = string.Format(Properties.Language.spriteeditor_status_loaded_frames, Frames.Count);
     }
 
     private void ExecuteSave()
@@ -236,13 +236,13 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         if (IsModTile)
         {
             _configStore.SaveTile(ModName, ShortTileName, over);
-            StatusText = $"Saved to {ModName} override file";
+            StatusText = string.Format(Properties.Language.spriteeditor_status_saved_mod, ModName);
         }
         else
         {
             // For vanilla tiles, save under a "Vanilla" override file
             _configStore.SaveTile("Vanilla", _tileProperty.Name, over);
-            StatusText = $"Saved vanilla override for {_tileProperty.Name}";
+            StatusText = string.Format(Properties.Language.spriteeditor_status_saved_vanilla, _tileProperty.Name);
         }
 
         // Update in-memory TileProperty so RebuildSpriteForTile sees the new data
@@ -318,7 +318,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         FrameSizeY = fh;
 
         RegenerateFramesFromGrid();
-        StatusText = $"Auto: {fw}x{fh} frame, {Frames.Count} frames ({reason})";
+        StatusText = string.Format(Properties.Language.spriteeditor_status_auto, fw, fh, Frames.Count, reason);
     }
 
     /// <summary>
@@ -478,7 +478,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
             PixelHeight = frameH,
         });
 
-        StatusText = $"Single frame: {FrameSizeX}x{FrameSizeY} tiles";
+        StatusText = string.Format(Properties.Language.spriteeditor_status_single_frame, FrameSizeX, FrameSizeY);
     }
 
     public void RegenerateFramesFromGrid()
@@ -553,7 +553,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         };
         Frames.Add(frame);
         SelectedFrame = frame;
-        StatusText = $"Added frame ({Frames.Count} total)";
+        StatusText = string.Format(Properties.Language.spriteeditor_status_added_frame, Frames.Count);
     }
 
     private void ExecuteRemoveFrame()
@@ -562,7 +562,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         var frame = SelectedFrame;
         SelectedFrame = null;
         Frames.Remove(frame);
-        StatusText = $"Removed frame ({Frames.Count} remaining)";
+        StatusText = string.Format(Properties.Language.spriteeditor_status_removed_frame, Frames.Count);
     }
 
     public ModTileOverride BuildOverride()
@@ -619,7 +619,7 @@ public partial class SpriteSheetEditorViewModel : ReactiveObject
         };
         Frames.Add(frame);
         SelectedFrame = frame;
-        StatusText = $"Added selection frame at ({uvX},{uvY}) {sizeX}x{sizeY} ({Frames.Count} total)";
+        StatusText = string.Format(Properties.Language.spriteeditor_status_added_selection, uvX, uvY, sizeX, sizeY, Frames.Count);
     }
 
     /// <summary>
