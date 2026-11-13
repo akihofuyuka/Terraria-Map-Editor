@@ -5340,4 +5340,16 @@ TEdit 支持最高世界版本：{1}
   <data name="progress_converting_to_windows_phone" xml:space="preserve">
     <value>正在转换为 Windows Phone 世界...</value>
   </data>
+  <data name="LiquidLevelMaskMode_Ignore" xml:space="preserve">
+    <value>忽略</value>
+  </data>
+  <data name="LiquidLevelMaskMode_GreaterThan" xml:space="preserve">
+    <value>大于</value>
+  </data>
+  <data name="LiquidLevelMaskMode_LessThan" xml:space="preserve">
+    <value>小于</value>
+  </data>
+  <data name="LiquidLevelMaskMode_Equal" xml:space="preserve">
+    <value>等于</value>
+  </data>
 </root>

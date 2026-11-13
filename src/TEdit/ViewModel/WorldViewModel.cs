@@ -46,7 +46,7 @@ public partial class WorldViewModel : ReactiveObject
     private readonly Stopwatch _loadTimer = new Stopwatch();
     private readonly MouseTile _mouseOverTile = new MouseTile();
     private readonly ObservableCollection<IPlugin> _plugins = new ObservableCollection<IPlugin>();
-    private readonly ObservableCollection<string> _points = new ObservableCollection<string>();
+    private readonly ObservableCollection<PointItem> _points = new ObservableCollection<PointItem>();
     private readonly ObservableCollection<NpcListItem> _allNpcs = new ObservableCollection<NpcListItem>();
     private string _npcSearchText = string.Empty;
     private readonly Timer _saveTimer = new Timer();
@@ -2258,7 +2258,7 @@ public partial class WorldViewModel : ReactiveObject
         set { this.RaiseAndSetIfChanged(ref _showTextures, value); }
     }
 
-    public ObservableCollection<string> Points
+    public ObservableCollection<PointItem> Points
     {
         get { return _points; }
     }
@@ -2312,14 +2312,15 @@ public partial class WorldViewModel : ReactiveObject
     private void RefreshPoints()
     {
         Points.Clear();
-        Points.Add(Properties.Language.tool_point_spawn);
-        Points.Add(Properties.Language.tool_point_dungeon);
+        Points.Add(new PointItem(Properties.Language.tool_point_spawn, Properties.Language.tool_point_spawn));
+        Points.Add(new PointItem(Properties.Language.tool_point_dungeon, Properties.Language.tool_point_dungeon));
 
         if (CurrentWorld?.TeamBasedSpawnsSeed == true)
         {
             for (int i = 0; i < World.TeamNames.Length; i++)
             {
-                Points.Add(GetTeamPointName(i));
+                var team = GetTeamPointName(i);
+                Points.Add(new PointItem(team, team));
             }
         }
 
@@ -2327,7 +2328,8 @@ public partial class WorldViewModel : ReactiveObject
         {
             foreach (NPC npc in CurrentWorld.NPCs)
             {
-                Points.Add(npc.Name);
+                var label = WorldConfiguration.NpcById.TryGetValue(npc.SpriteId, out var npcData) ? npcData.LocalizedName : npc.Name;
+                Points.Add(new PointItem(npc.Name, label));
             }
         }
 
