@@ -5352,4 +5352,16 @@ TEdit 支持最高世界版本：{1}
   <data name="LiquidLevelMaskMode_Equal" xml:space="preserve">
     <value>等于</value>
   </data>
+  <data name="Bitmap1" xml:space="preserve">
+    <value>[base64 mime encoded serialized .NET Framework object]</value>
+  </data>
+  <data name="Color1" xml:space="preserve">
+    <value>Blue</value>
+  </data>
+  <data name="Icon1" xml:space="preserve">
+    <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+  </data>
+  <data name="Name1" xml:space="preserve">
+    <value>this is my long string</value>
+  </data>
 </root>
