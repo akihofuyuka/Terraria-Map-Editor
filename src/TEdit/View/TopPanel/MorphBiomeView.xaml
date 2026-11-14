@@ -18,8 +18,7 @@
              d:DataContext="{d:DesignInstance Type=viewModel:WorldViewModel}"
              mc:Ignorable="d" >
     <UserControl.Resources>
-        <converters:MorphBiomeDisplayNameConverter x:Key="MorphBiomeDisplayNameConverter" />
-        <converters:MorphMossDisplayNameConverter x:Key="MorphMossDisplayNameConverter" />
+        <converters:LocalizedKeyConverter x:Key="LocalizedKey" />
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <StackPanel Orientation="Vertical" Margin="2">
@@ -40,7 +39,7 @@
                   SelectedValue="{Binding MorphToolOptions.TargetBiome}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Converter={StaticResource MorphBiomeDisplayNameConverter}}" />
+                        <TextBlock Text="{Binding Converter={StaticResource LocalizedKey}, ConverterParameter=MorphBiome_}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -51,7 +50,7 @@
                   SelectedValue="{Binding MorphToolOptions.MossType}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Key, Converter={StaticResource MorphMossDisplayNameConverter}}" />
+                        <TextBlock Text="{Binding Key, Converter={StaticResource LocalizedKey}, ConverterParameter=morph_moss_}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>

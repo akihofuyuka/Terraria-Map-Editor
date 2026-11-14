@@ -567,7 +567,7 @@ public class SettingEnumValueConverter : IValueConverter
         if (value is Enum e)
         {
             string key = $"enum_{e.GetType().Name}_{e}";
-            return Properties.Language.ResourceManager.GetString(key) ?? value.ToString()!;
+            return Properties.Language.ResourceManager.GetString(key, CultureInfo.CurrentUICulture) ?? value.ToString()!;
         }
         return value?.ToString() ?? string.Empty;
     }

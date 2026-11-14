@@ -5201,7 +5201,7 @@ The error is :
   <data name="statusbar_paint_unknown" xml:space="preserve">
     <value>Unknown ({0})</value>
   </data>
-  <data name="MorphBiome_Mushroom" xml:space="preserve">
+  <data name="MorphBiome_GlowingMushroom" xml:space="preserve">
     <value>Glowing Mushroom</value>
   </data>
   <data name="MorphBiome_Forest" xml:space="preserve">
@@ -5210,43 +5210,43 @@ The error is :
   <data name="MorphBiome_Snow" xml:space="preserve">
     <value>Snow</value>
   </data>
-  <data name="morph_moss_none" xml:space="preserve">
+  <data name="morph_moss_None" xml:space="preserve">
     <value>None (Remove)</value>
   </data>
-  <data name="morph_moss_grass" xml:space="preserve">
+  <data name="morph_moss_Grass" xml:space="preserve">
     <value>Grass</value>
   </data>
-  <data name="morph_moss_green" xml:space="preserve">
+  <data name="morph_moss_Green" xml:space="preserve">
     <value>Green Moss</value>
   </data>
-  <data name="morph_moss_yellow" xml:space="preserve">
+  <data name="morph_moss_Yellow" xml:space="preserve">
     <value>Yellow Moss</value>
   </data>
-  <data name="morph_moss_red" xml:space="preserve">
+  <data name="morph_moss_Red" xml:space="preserve">
     <value>Red Moss</value>
   </data>
-  <data name="morph_moss_blue" xml:space="preserve">
+  <data name="morph_moss_Blue" xml:space="preserve">
     <value>Blue Moss</value>
   </data>
-  <data name="morph_moss_purple" xml:space="preserve">
+  <data name="morph_moss_Purple" xml:space="preserve">
     <value>Purple Moss</value>
   </data>
-  <data name="morph_moss_lava" xml:space="preserve">
+  <data name="morph_moss_Lava" xml:space="preserve">
     <value>Lava Moss</value>
   </data>
-  <data name="morph_moss_krypton" xml:space="preserve">
+  <data name="morph_moss_Krypton" xml:space="preserve">
     <value>Krypton Moss</value>
   </data>
-  <data name="morph_moss_xenon" xml:space="preserve">
+  <data name="morph_moss_Xenon" xml:space="preserve">
     <value>Xenon Moss</value>
   </data>
-  <data name="morph_moss_argon" xml:space="preserve">
+  <data name="morph_moss_Argon" xml:space="preserve">
     <value>Argon Moss</value>
   </data>
-  <data name="morph_moss_neon" xml:space="preserve">
+  <data name="morph_moss_Neon" xml:space="preserve">
     <value>Neon Moss</value>
   </data>
-  <data name="morph_moss_helium" xml:space="preserve">
+  <data name="morph_moss_Helium" xml:space="preserve">
     <value>Helium Moss</value>
   </data>
   <data name="bg_tree_oak" xml:space="preserve">

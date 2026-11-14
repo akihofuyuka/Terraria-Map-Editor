@@ -5118,7 +5118,7 @@ TEdit 支持最高世界版本：{1}
   <data name="statusbar_paint_unknown" xml:space="preserve">
     <value>未知 ({0})</value>
   </data>
-  <data name="MorphBiome_Mushroom" xml:space="preserve">
+  <data name="MorphBiome_GlowingMushroom" xml:space="preserve">
     <value>发光蘑菇</value>
   </data>
   <data name="MorphBiome_Forest" xml:space="preserve">
@@ -5127,43 +5127,43 @@ TEdit 支持最高世界版本：{1}
   <data name="MorphBiome_Snow" xml:space="preserve">
     <value>雪原</value>
   </data>
-  <data name="morph_moss_none" xml:space="preserve">
+  <data name="morph_moss_None" xml:space="preserve">
     <value>无 (移除)</value>
   </data>
-  <data name="morph_moss_grass" xml:space="preserve">
+  <data name="morph_moss_Grass" xml:space="preserve">
     <value>普通草</value>
   </data>
-  <data name="morph_moss_green" xml:space="preserve">
+  <data name="morph_moss_Green" xml:space="preserve">
     <value>绿色苔藓</value>
   </data>
-  <data name="morph_moss_yellow" xml:space="preserve">
+  <data name="morph_moss_Yellow" xml:space="preserve">
     <value>黄色苔藓</value>
   </data>
-  <data name="morph_moss_red" xml:space="preserve">
+  <data name="morph_moss_Red" xml:space="preserve">
     <value>红色苔藓</value>
   </data>
-  <data name="morph_moss_blue" xml:space="preserve">
+  <data name="morph_moss_Blue" xml:space="preserve">
     <value>蓝色苔藓</value>
   </data>
-  <data name="morph_moss_purple" xml:space="preserve">
+  <data name="morph_moss_Purple" xml:space="preserve">
     <value>紫色苔藓</value>
   </data>
-  <data name="morph_moss_lava" xml:space="preserve">
+  <data name="morph_moss_Lava" xml:space="preserve">
     <value>熔岩苔藓</value>
   </data>
-  <data name="morph_moss_krypton" xml:space="preserve">
+  <data name="morph_moss_Krypton" xml:space="preserve">
     <value>氪苔藓</value>
   </data>
-  <data name="morph_moss_xenon" xml:space="preserve">
+  <data name="morph_moss_Xenon" xml:space="preserve">
     <value>氙苔藓</value>
   </data>
-  <data name="morph_moss_argon" xml:space="preserve">
+  <data name="morph_moss_Argon" xml:space="preserve">
     <value>氩苔藓</value>
   </data>
-  <data name="morph_moss_neon" xml:space="preserve">
+  <data name="morph_moss_Neon" xml:space="preserve">
     <value>氖苔藓</value>
   </data>
-  <data name="morph_moss_helium" xml:space="preserve">
+  <data name="morph_moss_Helium" xml:space="preserve">
     <value>氦苔藓</value>
   </data>
   <data name="bg_tree_oak" xml:space="preserve">

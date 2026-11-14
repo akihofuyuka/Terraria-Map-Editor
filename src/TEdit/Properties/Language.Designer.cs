@@ -15001,9 +15001,9 @@ namespace TEdit.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Glowing Mushroom.
         /// </summary>
-        public static string MorphBiome_Mushroom {
+        public static string MorphBiome_GlowingMushroom {
             get {
-                return ResourceManager.GetString("MorphBiome_Mushroom", resourceCulture);
+                return ResourceManager.GetString("MorphBiome_GlowingMushroom", resourceCulture);
             }
         }
 
@@ -15028,117 +15028,117 @@ namespace TEdit.Properties {
         /// <summary>
         ///   Looks up a localized string similar to None (Remove).
         /// </summary>
-        public static string morph_moss_none {
+        public static string morph_moss_None {
             get {
-                return ResourceManager.GetString("morph_moss_none", resourceCulture);
+                return ResourceManager.GetString("morph_moss_None", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Grass.
         /// </summary>
-        public static string morph_moss_grass {
+        public static string morph_moss_Grass {
             get {
-                return ResourceManager.GetString("morph_moss_grass", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Grass", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Green Moss.
         /// </summary>
-        public static string morph_moss_green {
+        public static string morph_moss_Green {
             get {
-                return ResourceManager.GetString("morph_moss_green", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Green", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Yellow Moss.
         /// </summary>
-        public static string morph_moss_yellow {
+        public static string morph_moss_Yellow {
             get {
-                return ResourceManager.GetString("morph_moss_yellow", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Yellow", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Red Moss.
         /// </summary>
-        public static string morph_moss_red {
+        public static string morph_moss_Red {
             get {
-                return ResourceManager.GetString("morph_moss_red", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Red", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Blue Moss.
         /// </summary>
-        public static string morph_moss_blue {
+        public static string morph_moss_Blue {
             get {
-                return ResourceManager.GetString("morph_moss_blue", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Blue", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Purple Moss.
         /// </summary>
-        public static string morph_moss_purple {
+        public static string morph_moss_Purple {
             get {
-                return ResourceManager.GetString("morph_moss_purple", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Purple", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Lava Moss.
         /// </summary>
-        public static string morph_moss_lava {
+        public static string morph_moss_Lava {
             get {
-                return ResourceManager.GetString("morph_moss_lava", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Lava", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Krypton Moss.
         /// </summary>
-        public static string morph_moss_krypton {
+        public static string morph_moss_Krypton {
             get {
-                return ResourceManager.GetString("morph_moss_krypton", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Krypton", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Xenon Moss.
         /// </summary>
-        public static string morph_moss_xenon {
+        public static string morph_moss_Xenon {
             get {
-                return ResourceManager.GetString("morph_moss_xenon", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Xenon", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Argon Moss.
         /// </summary>
-        public static string morph_moss_argon {
+        public static string morph_moss_Argon {
             get {
-                return ResourceManager.GetString("morph_moss_argon", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Argon", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Neon Moss.
         /// </summary>
-        public static string morph_moss_neon {
+        public static string morph_moss_Neon {
             get {
-                return ResourceManager.GetString("morph_moss_neon", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Neon", resourceCulture);
             }
         }
 
         /// <summary>
         ///   Looks up a localized string similar to Helium Moss.
         /// </summary>
-        public static string morph_moss_helium {
+        public static string morph_moss_Helium {
             get {
-                return ResourceManager.GetString("morph_moss_helium", resourceCulture);
+                return ResourceManager.GetString("morph_moss_Helium", resourceCulture);
             }
         }
 
