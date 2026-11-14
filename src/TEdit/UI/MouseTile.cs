@@ -55,7 +55,7 @@ public partial class MouseTile : ReactiveObject
     {
         if (colorId == 0) return null;
         if (colorId < WorldConfiguration.PaintProperties.Count)
-            return WorldConfiguration.PaintProperties[colorId].Name;
+            return WorldConfiguration.PaintProperties[colorId].LocalizedName;
         return string.Format(Language.statusbar_paint_unknown, colorId);
     }
 
@@ -65,7 +65,7 @@ public partial class MouseTile : ReactiveObject
         if (WorldConfiguration.TileProperties.Count > tile.Type)
         {
             var tileProperty = WorldConfiguration.TileProperties[tile.Type];
-            TileName = tile.IsActive ? $"{tileProperty.Name} ({tile.Type})" : Language.statusbar_tile_empty;
+            TileName = tile.IsActive ? $"{tileProperty.LocalizedName} ({tile.Type})" : Language.statusbar_tile_empty;
         }
         else
         {
@@ -74,7 +74,7 @@ public partial class MouseTile : ReactiveObject
 
         // Wall name
         if (WorldConfiguration.WallProperties.Count > tile.Wall)
-            WallName = $"{WorldConfiguration.WallProperties[tile.Wall].Name} ({tile.Wall})";
+            WallName = $"{WorldConfiguration.WallProperties[tile.Wall].LocalizedName} ({tile.Wall})";
         else
             WallName = string.Format(Language.statusbar_wall_invalid, tile.Wall);
 
