@@ -203,8 +203,8 @@
 
         <Border Grid.Row="2" Padding="12,8,12,14" Background="{DynamicResource ControlBackgroundBrush}">
             <Grid Width="264" HorizontalAlignment="Center">
-                <Button Content="{x:Static p:Language.common_cancel}" HorizontalAlignment="Left" VerticalAlignment="Center" Click="CancelButtonClick" Height="26" MinWidth="80" TabIndex="41"/>
-                <Button Content="{x:Static p:Language.common_generate}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OkButtonClick" Height="26" MinWidth="80" TabIndex="42"/>
+                <Button Content="{x:Static p:Language.common_cancel}" HorizontalAlignment="Left" VerticalAlignment="Center" Click="CancelButtonClick" MinWidth="80" TabIndex="41"/>
+                <Button Content="{x:Static p:Language.common_generate}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OkButtonClick" MinWidth="80" TabIndex="42"/>
             </Grid>
         </Border>
     </Grid>

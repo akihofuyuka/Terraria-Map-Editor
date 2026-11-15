@@ -21,6 +21,14 @@ public partial class BlockShufflePluginView : FluentWindow
     public BlockShufflePluginView(bool activeSelection)
     {
         InitializeComponent();
+        // ExtendsContentIntoTitleBar causes SizeToContent to allocate non-client margin
+        // without rendering into it, leaving white unpainted borders on right and bottom.
+        // Size window from content desired size instead.
+        var root = (FrameworkElement)Content;
+        root.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        var natural = root.DesiredSize;
+        Width = Math.Min(Math.Max(natural.Width, MinWidth), SystemParameters.WorkArea.Width);
+        Height = Math.Min(Math.Max(natural.Height, MinHeight), SystemParameters.WorkArea.Height);
         if (activeSelection)
             SelectionRadio.IsChecked = true;
         else
